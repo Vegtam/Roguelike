@@ -15,7 +15,7 @@ private:
 
 public:
     Creature();                 // Construct Creature Object
-    ~Creature();                // Destruct Creature Object
+    virtual ~Creature();                // Destruct Creature Object
 
 int GetHealth();                // Returns Health
 int GetMana();                  // Returns Mana

@@ -6,7 +6,7 @@ class Player : public Creature
 {
 public:
     Player();       // Construct Player
-    ~Player();      // Destruct Player
+    virtual ~Player();      // Destruct Player
     void Init();    // Initialize Player
 };
 

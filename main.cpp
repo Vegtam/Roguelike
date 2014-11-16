@@ -1,16 +1,14 @@
 #include <iostream>
 #include <cstdlib>
 #include "Player.hpp"
-
+using namespace std;
 
 int main()
 {
-    using namespace std;
-    Player* player=new Player();
-    player -> Init();
-    cout << player->GetAttribute(0) << endl;
-    cout << player->GetChar() << endl;
-    system("PAUSE");
-    delete player;
+    
+    Player player;
+    player.Init();
+    cout << player.GetAttribute(0) << endl;
+    cout << player.GetChar() << endl;
     return 0;
 }

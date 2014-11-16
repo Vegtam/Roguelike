@@ -12,7 +12,7 @@ private:
 
 public:
     Object(); //Constructor of Object
-    ~Object(); //Destructor of Object
+    virtual ~Object(); //Destructor of Object
     void Init(int x, int y, int color, char character); //Initializes object
 
     int GetX(); // Returns X position of object
