@@ -1,3 +1,3 @@
-Roguelike
+Dead On Survival
 =========
-A text based survival rpg.
+A text based zombie apocalypse survival rpg.
