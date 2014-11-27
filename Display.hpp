@@ -28,6 +28,7 @@ public:
 	void clear(ALLEGRO_COLOR);
 	void render (std::vector<Displayable*>&);
 	void handler(ALLEGRO_EVENT*);
+	void resize(uint32_t w, uint32_t h);
 	ALLEGRO_EVENT_SOURCE* getEventSource();
 };
 

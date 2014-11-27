@@ -18,7 +18,9 @@ Display::Display(uint32_t w, uint32_t h):width(w),height(h),
 
 bool Display::init()
 {
+	al_set_new_display_flags(ALLEGRO_RESIZABLE|ALLEGRO_OPENGL);
 	display = al_create_display(width,height);
+	
 	is_init = (display != NULL);
 	return is_init;
 }
@@ -69,6 +71,11 @@ ALLEGRO_EVENT_SOURCE* Display::getEventSource()
 		return al_get_display_event_source(display);
 	}
 	return NULL;
+}
+
+void Display::resize(uint32_t w, uint32_t h)
+{
+	al_resize_display(display, w, h);
 }
 
 void Display::handler(ALLEGRO_EVENT* ev)
