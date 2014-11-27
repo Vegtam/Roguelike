@@ -4,12 +4,15 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>Allegro.hpp</itemPath>
       <itemPath>Creature.hpp</itemPath>
-      <itemPath>MapController.hpp</itemPath>
-      <itemPath>MapModel.hpp</itemPath>
+      <itemPath>Display.hpp</itemPath>
+      <itemPath>Displayable.hpp</itemPath>
+      <itemPath>Font.hpp</itemPath>
+      <itemPath>FontSet.hpp</itemPath>
       <itemPath>Object.hpp</itemPath>
       <itemPath>Player.hpp</itemPath>
-      <itemPath>RegionMap.hpp</itemPath>
+      <itemPath>Text.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -18,12 +21,14 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>Allegro.cpp</itemPath>
       <itemPath>Creature.cpp</itemPath>
-      <itemPath>MapController.cpp</itemPath>
-      <itemPath>MapModel.cpp</itemPath>
+      <itemPath>Display.cpp</itemPath>
+      <itemPath>Font.cpp</itemPath>
+      <itemPath>FontSet.cpp</itemPath>
       <itemPath>Object.cpp</itemPath>
       <itemPath>Player.cpp</itemPath>
-      <itemPath>RegionMap.cpp</itemPath>
+      <itemPath>Text.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -37,6 +42,8 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <itemPath>Makefile</itemPath>
+    <itemPath>README.md</itemPath>
   </logicalFolder>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -47,18 +54,49 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
+        <ccTool>
+          <standard>8</standard>
+        </ccTool>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibLibItem>allegro</linkerLibLibItem>
+            <linkerLibLibItem>allegro_acodec</linkerLibLibItem>
+            <linkerLibLibItem>allegro_audio</linkerLibLibItem>
+            <linkerLibLibItem>allegro_color</linkerLibLibItem>
+            <linkerLibLibItem>allegro_dialog</linkerLibLibItem>
+            <linkerLibLibItem>allegro_font</linkerLibLibItem>
+            <linkerLibLibItem>allegro_image</linkerLibLibItem>
+            <linkerLibLibItem>allegro_main</linkerLibLibItem>
+            <linkerLibLibItem>allegro_memfile</linkerLibLibItem>
+            <linkerLibLibItem>allegro_physfs</linkerLibLibItem>
+            <linkerLibLibItem>allegro_primitives</linkerLibLibItem>
+            <linkerLibLibItem>allegro_ttf</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
+      <item path="Allegro.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Allegro.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Creature.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Creature.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="MapController.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Display.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="MapController.hpp" ex="false" tool="3" flavor2="0">
+      <item path="Display.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="MapModel.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Displayable.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="MapModel.hpp" ex="false" tool="3" flavor2="0">
+      <item path="Font.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Font.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FontSet.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FontSet.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Makefile" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Object.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -68,9 +106,11 @@
       </item>
       <item path="Player.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="RegionMap.cpp" ex="false" tool="1" flavor2="0">
+      <item path="README.md" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="RegionMap.hpp" ex="false" tool="3" flavor2="0">
+      <item path="Text.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Text.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -95,17 +135,29 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="Allegro.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Allegro.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Creature.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Creature.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="MapController.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Display.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="MapController.hpp" ex="false" tool="3" flavor2="0">
+      <item path="Display.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="MapModel.cpp" ex="false" tool="1" flavor2="0">
+      <item path="Displayable.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="MapModel.hpp" ex="false" tool="3" flavor2="0">
+      <item path="Font.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Font.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="FontSet.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="FontSet.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Makefile" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Object.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -115,9 +167,11 @@
       </item>
       <item path="Player.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="RegionMap.cpp" ex="false" tool="1" flavor2="0">
+      <item path="README.md" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="RegionMap.hpp" ex="false" tool="3" flavor2="0">
+      <item path="Text.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Text.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>

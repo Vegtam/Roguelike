@@ -1,4 +1,6 @@
+#include "allegro5/allegro.h"
 #include "RegionMap.hpp"
+
 
 RegionMap::RegionMap() {
 }

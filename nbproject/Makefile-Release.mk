@@ -35,12 +35,14 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/Allegro.o \
 	${OBJECTDIR}/Creature.o \
-	${OBJECTDIR}/MapController.o \
-	${OBJECTDIR}/MapModel.o \
+	${OBJECTDIR}/Display.o \
+	${OBJECTDIR}/Font.o \
+	${OBJECTDIR}/FontSet.o \
 	${OBJECTDIR}/Object.o \
 	${OBJECTDIR}/Player.o \
-	${OBJECTDIR}/RegionMap.o \
+	${OBJECTDIR}/Text.o \
 	${OBJECTDIR}/main.o
 
 
@@ -68,20 +70,30 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/roguelike: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/roguelike ${OBJECTFILES} ${LDLIBSOPTIONS}
 
+${OBJECTDIR}/Allegro.o: Allegro.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Allegro.o Allegro.cpp
+
 ${OBJECTDIR}/Creature.o: Creature.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Creature.o Creature.cpp
 
-${OBJECTDIR}/MapController.o: MapController.cpp 
+${OBJECTDIR}/Display.o: Display.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MapController.o MapController.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Display.o Display.cpp
 
-${OBJECTDIR}/MapModel.o: MapModel.cpp 
+${OBJECTDIR}/Font.o: Font.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MapModel.o MapModel.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Font.o Font.cpp
+
+${OBJECTDIR}/FontSet.o: FontSet.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/FontSet.o FontSet.cpp
 
 ${OBJECTDIR}/Object.o: Object.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -93,10 +105,10 @@ ${OBJECTDIR}/Player.o: Player.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Player.o Player.cpp
 
-${OBJECTDIR}/RegionMap.o: RegionMap.cpp 
+${OBJECTDIR}/Text.o: Text.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/RegionMap.o RegionMap.cpp
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Text.o Text.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
