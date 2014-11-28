@@ -24,7 +24,6 @@ FRAMEWORKS = -framework Allegro-5.0 \
 
 LIB_SRC = $(LIB_CODE)/Allegro.cpp \
 	$(LIB_CODE)/Display.cpp \
-	$(LIB_CODE)/FontSet.cpp \
 	$(LIB_CODE)/Font.cpp \
 	$(LIB_CODE)/Text.cpp \
 

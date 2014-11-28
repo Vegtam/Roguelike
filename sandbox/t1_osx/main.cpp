@@ -4,7 +4,7 @@
 #include "Allegro.hpp"
 #include "Display.hpp"
 #include "Displayable.hpp"
-#include "FontSet.hpp"
+#include "ResourceSet.hpp"
 #include "Font.hpp"
 #include "Text.hpp"
 
@@ -24,17 +24,17 @@ int main(int argc, char **argv)
 	{
 		al_register_event_source(evq, disp.getEventSource());
 
-		FontSet fs("../../fonts/");
+		ResourceSet<Font> fs ("../../fonts/");
 		bloodred = al_map_rgb(210,15,0);
 
-		Text title (fs.getFont("Roboto-Black.ttf"), 
+		Text title (fs.get("Roboto-Black.ttf"), 
 			        bloodred,
 			        "Dead On Survival");
 		title.setPos(25,345);
 		title.setSize(30);
 		to_draw.push_back(&title);
 
-		Text subtitle (fs.getFont("Roboto-MediumItalic.ttf"),
+		Text subtitle (fs.get("Roboto-MediumItalic.ttf"),
 			           bloodred,
 			           "the rottening");
 		subtitle.setPos(40,385);
