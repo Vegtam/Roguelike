@@ -19,6 +19,7 @@ Font::~Font()
 
 ALLEGRO_FONT* Font::get(uint32_t size)
 {
+	/* if we don't have the font loaded at this size yet then load it */
 	if(fonts.find(size) == fonts.end())
 	{
 		// We don't currently support font flags
@@ -26,5 +27,6 @@ ALLEGRO_FONT* Font::get(uint32_t size)
 			                       size, 
 			                       0);
 	}
+	/* returns null if the font fails to load */
 	return fonts[size];
 }

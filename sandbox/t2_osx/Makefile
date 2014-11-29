@@ -24,8 +24,8 @@ FRAMEWORKS = -framework Allegro-5.0 \
 
 LIB_SRC = $(LIB_CODE)/Allegro.cpp \
 	$(LIB_CODE)/Display.cpp \
-	$(LIB_CODE)/Font.cpp \
-	$(LIB_CODE)/Text.cpp \
+	$(LIB_CODE)/TileSet.cpp \
+	$(LIB_CODE)/TileMap.cpp \
 
 test: main.cpp $(LIB_SRC)
 	clang++ $(CPP_FLAGS) $(FRAMEWORKS) $(INCLUDE) -o test main.cpp $(LIB_SRC)

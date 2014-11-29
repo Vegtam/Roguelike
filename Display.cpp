@@ -20,6 +20,8 @@ bool Display::init()
 {
 	al_set_new_display_flags(ALLEGRO_RESIZABLE|ALLEGRO_OPENGL);
 	display = al_create_display(width,height);
+	al_set_blender(ALLEGRO_ADD, ALLEGRO_ALPHA, ALLEGRO_INVERSE_ALPHA);
+	al_set_new_bitmap_flags(al_get_new_bitmap_flags()|ALLEGRO_NO_PREMULTIPLIED_ALPHA);
 	
 	is_init = (display != NULL);
 	return is_init;
