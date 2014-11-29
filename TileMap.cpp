@@ -1,0 +1,113 @@
+#include <stdint.h>
+
+#include <iostream>
+
+#include "TileSet.hpp"
+#include "TileMap.hpp"
+
+bool TileMap::init(uint32_t xpos, 
+		      uint32_t ypos,
+		      uint32_t w,
+		      uint32_t h,
+		      uint32_t tiles_w,
+		      uint32_t tiles_h,
+		      TileSet* tls)
+{
+	bool result = false;
+
+	if( w && h && tiles_w && tiles_h)
+	{
+		x = xpos;
+		y = ypos;
+		wind_w = w;
+		wind_h = h;
+		map_w = tiles_w;
+		map_h = tiles_h;
+		t_set = tls;
+		tiles.resize(map_w * map_h);
+		dirty=true;
+		is_init = true;
+	}
+
+	return result;
+}
+
+bool TileMap::render()
+{
+	if (dirty)
+	{
+		if(backing_bmap==NULL)
+		{
+			al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP);
+			backing_bmap = al_create_bitmap(map_w*t_set->getTileWidth(), 
+										    map_h*t_set->getTileHeight());
+		}
+		if(backing_bmap)
+		{
+			uint32_t index = 0;
+			/* set the target for draw operations to the backing bitmap */
+			al_set_target_bitmap(backing_bmap);
+			al_clear_to_color(al_map_rgb(255,255,255));
+
+			al_lock_bitmap(backing_bmap,ALLEGRO_PIXEL_FORMAT_ANY,ALLEGRO_LOCK_WRITEONLY);
+
+			for (auto& tile: tiles)
+			{
+				if(tile.isDirty())
+				{
+					float r = 0;
+					float g = 0;
+					float b = 0;
+					/* calculate upper left position of tile to be drawn */
+					uint32_t tile_x = (index%map_w)*t_set->getTileWidth();
+					uint32_t tile_y = (index/map_w)*t_set->getTileHeight();
+
+					for(uint32_t i = 0; i<t_set->getTileWidth();i++)
+					{
+						for(uint32_t j = 0; j< t_set->getTileHeight(); j++)
+						{
+							ALLEGRO_COLOR pix = al_get_pixel(t_set->get(tile.getIndex()),i,j);
+							al_unmap_rgb_f(pix,&r,&g,&b);
+							if(r==1 && b == 1 && g == 1)
+							{
+								pix = tile.getFore();
+							}
+							else
+							{
+								pix = tile.getBack();
+							}
+							al_put_pixel(tile_x+i, tile_y+j, pix);
+						}
+					}
+
+					tile.clearDirty();
+				}
+				//std::cout<<(char)tile.getIndex();
+				index++;
+				/*if( index%map_w == 0)
+				{
+					std::cout<<std::endl;
+				}*/
+			}
+			al_unlock_bitmap(backing_bmap);
+			dirty = false;
+		}
+
+	}
+	return !dirty;
+}
+
+void TileMap::draw(float xscale, float yscale)
+{
+	/* no flags */
+	al_draw_scaled_bitmap(backing_bmap, 
+		                  0, 
+		                  0,
+		                  al_get_bitmap_width(backing_bmap),
+		                  al_get_bitmap_height(backing_bmap),
+		                  (float)x*xscale,
+		                  (float)y*yscale,
+		                  (float)wind_w*xscale,
+		                  (float)wind_h*yscale,
+		                  0);
+}
