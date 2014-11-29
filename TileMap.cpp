@@ -55,9 +55,12 @@ bool TileMap::render()
 			{
 				if(tile.isDirty())
 				{
-					float r = 0;
-					float g = 0;
-					float b = 0;
+					uint8_t r = 0;
+					uint8_t g = 0;
+					uint8_t b = 0;
+					uint8_t o_r = 0;
+					uint8_t o_g = 0;
+					uint8_t o_b = 0; 
 					/* calculate upper left position of tile to be drawn */
 					uint32_t tile_x = (index%map_w)*t_set->getTileWidth();
 					uint32_t tile_y = (index/map_w)*t_set->getTileHeight();
@@ -67,14 +70,16 @@ bool TileMap::render()
 						for(uint32_t j = 0; j< t_set->getTileHeight(); j++)
 						{
 							ALLEGRO_COLOR pix = al_get_pixel(t_set->get(tile.getIndex()),i,j);
-							al_unmap_rgb_f(pix,&r,&g,&b);
-							if(r==1 && b == 1 && g == 1)
+							al_unmap_rgb(pix,&r,&g,&b);
+							if(r==255 && b == 255 && g == 0)
 							{
-								pix = tile.getFore();
+								pix = tile.getBack();
 							}
 							else
 							{
-								pix = tile.getBack();
+								al_unmap_rgb(tile.getFore(),&o_r,&o_g,&o_b);
+								//std::cout<<(int)r<<' '<<(int)g<<' '<<(int)b<<std::endl;
+								pix = al_map_rgb((r*o_r)/256,(g*o_g)/256,(b*o_b)/256);
 							}
 							al_put_pixel(tile_x+i, tile_y+j, pix);
 						}
