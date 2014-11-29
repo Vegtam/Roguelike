@@ -76,6 +76,8 @@ int main(int argc, char **argv)
 			for(auto& chr: line)
 			{
 				empty_line = false;
+				if (chr == '<') chr=0x1f;
+				if (chr == '>') chr = 0x1e;
 				(*tile_array)[index].setIndex((uint32_t)chr);
 				(*tile_array)[index].setFore(bloodred);
 				(*tile_array)[index].setBack(limegreen);
