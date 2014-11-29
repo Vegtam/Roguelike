@@ -9,10 +9,12 @@
       <itemPath>Display.hpp</itemPath>
       <itemPath>Displayable.hpp</itemPath>
       <itemPath>Font.hpp</itemPath>
-      <itemPath>FontSet.hpp</itemPath>
       <itemPath>Object.hpp</itemPath>
       <itemPath>Player.hpp</itemPath>
       <itemPath>Text.hpp</itemPath>
+      <itemPath>Tile.hpp</itemPath>
+      <itemPath>TileMap.hpp</itemPath>
+      <itemPath>TileSet.hpp</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -25,10 +27,11 @@
       <itemPath>Creature.cpp</itemPath>
       <itemPath>Display.cpp</itemPath>
       <itemPath>Font.cpp</itemPath>
-      <itemPath>FontSet.cpp</itemPath>
       <itemPath>Object.cpp</itemPath>
       <itemPath>Player.cpp</itemPath>
       <itemPath>Text.cpp</itemPath>
+      <itemPath>TileMap.cpp</itemPath>
+      <itemPath>TileSet.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -92,10 +95,6 @@
       </item>
       <item path="Font.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="FontSet.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="FontSet.hpp" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Makefile" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Object.cpp" ex="false" tool="1" flavor2="0">
@@ -111,6 +110,16 @@
       <item path="Text.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Text.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tile.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TileMap.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TileMap.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TileSet.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TileSet.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -153,10 +162,6 @@
       </item>
       <item path="Font.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="FontSet.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="FontSet.hpp" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="Makefile" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Object.cpp" ex="false" tool="1" flavor2="0">
@@ -172,6 +177,16 @@
       <item path="Text.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Text.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tile.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TileMap.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TileMap.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TileSet.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TileSet.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>

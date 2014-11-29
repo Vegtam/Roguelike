@@ -39,10 +39,11 @@ OBJECTFILES= \
 	${OBJECTDIR}/Creature.o \
 	${OBJECTDIR}/Display.o \
 	${OBJECTDIR}/Font.o \
-	${OBJECTDIR}/FontSet.o \
 	${OBJECTDIR}/Object.o \
 	${OBJECTDIR}/Player.o \
 	${OBJECTDIR}/Text.o \
+	${OBJECTDIR}/TileMap.o \
+	${OBJECTDIR}/TileSet.o \
 	${OBJECTDIR}/main.o
 
 
@@ -90,11 +91,6 @@ ${OBJECTDIR}/Font.o: Font.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Font.o Font.cpp
 
-${OBJECTDIR}/FontSet.o: FontSet.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/FontSet.o FontSet.cpp
-
 ${OBJECTDIR}/Object.o: Object.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -109,6 +105,16 @@ ${OBJECTDIR}/Text.o: Text.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Text.o Text.cpp
+
+${OBJECTDIR}/TileMap.o: TileMap.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TileMap.o TileMap.cpp
+
+${OBJECTDIR}/TileSet.o: TileSet.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TileSet.o TileSet.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
