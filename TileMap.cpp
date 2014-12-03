@@ -14,7 +14,6 @@ bool TileMap::init(uint32_t xpos,
 		      TileSet* tls)
 {
 	bool result = false;
-
 	if( w && h && tiles_w && tiles_h)
 	{
 		x = xpos;
@@ -25,8 +24,7 @@ bool TileMap::init(uint32_t xpos,
 		map_h = tiles_h;
 		t_set = tls;
 		tiles.resize(map_w * map_h);
-		dirty=true;
-		is_init = true;
+		result = dirty = is_init = true;
 	}
 
 	return result;
@@ -49,6 +47,7 @@ bool TileMap::render()
 			al_set_target_bitmap(backing_bmap);
 			al_clear_to_color(al_map_rgb(255,255,255));
 
+			/* @todo consider checking this lock */
 			al_lock_bitmap(backing_bmap,ALLEGRO_PIXEL_FORMAT_ANY,ALLEGRO_LOCK_WRITEONLY);
 
 			for (auto& tile: tiles)
@@ -64,21 +63,22 @@ bool TileMap::render()
 					/* calculate upper left position of tile to be drawn */
 					uint32_t tile_x = (index%map_w)*t_set->getTileWidth();
 					uint32_t tile_y = (index/map_w)*t_set->getTileHeight();
-
+					/* Get the foreground color as components */
+					al_unmap_rgb(tile.getFore(),&o_r,&o_g,&o_b);
+								
 					for(uint32_t i = 0; i<t_set->getTileWidth();i++)
 					{
 						for(uint32_t j = 0; j< t_set->getTileHeight(); j++)
 						{
 							ALLEGRO_COLOR pix = al_get_pixel(t_set->get(tile.getIndex()),i,j);
 							al_unmap_rgb(pix,&r,&g,&b);
+							/* magenta is the background color 255, 0, 255 in rgb */
 							if(r==255 && b == 255 && g == 0)
 							{
 								pix = tile.getBack();
 							}
 							else
 							{
-								al_unmap_rgb(tile.getFore(),&o_r,&o_g,&o_b);
-								//std::cout<<(int)r<<' '<<(int)g<<' '<<(int)b<<std::endl;
 								pix = al_map_rgb((r*o_r)/256,(g*o_g)/256,(b*o_b)/256);
 							}
 							al_put_pixel(tile_x+i, tile_y+j, pix);
@@ -87,12 +87,7 @@ bool TileMap::render()
 
 					tile.clearDirty();
 				}
-				//std::cout<<(char)tile.getIndex();
 				index++;
-				/*if( index%map_w == 0)
-				{
-					std::cout<<std::endl;
-				}*/
 			}
 			al_unlock_bitmap(backing_bmap);
 			dirty = false;
@@ -104,15 +99,18 @@ bool TileMap::render()
 
 void TileMap::draw(float xscale, float yscale)
 {
-	/* no flags */
-	al_draw_scaled_bitmap(backing_bmap, 
-		                  0, 
-		                  0,
-		                  al_get_bitmap_width(backing_bmap),
-		                  al_get_bitmap_height(backing_bmap),
-		                  (float)x*xscale,
-		                  (float)y*yscale,
-		                  (float)wind_w*xscale,
-		                  (float)wind_h*yscale,
-		                  0);
+	if (is_init && backing_bmap)
+	{
+		/* no flags */
+		al_draw_scaled_bitmap(backing_bmap, 
+			                  0, 
+		    	              0,
+		        	          al_get_bitmap_width(backing_bmap),
+		            	      al_get_bitmap_height(backing_bmap),
+		                	  (float)x*xscale,
+		                  	  (float)y*yscale,
+		                  	  (float)wind_w*xscale,
+		                  	  (float)wind_h*yscale,
+		                  	  0);
+	}
 }
