@@ -6,17 +6,6 @@
     </data>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/luke/NetBeansProjects/Roguelike/Display.cpp</file>
-            <file>file:/home/luke/NetBeansProjects/Roguelike/Display.hpp</file>
-            <file>file:/home/luke/NetBeansProjects/Roguelike/Displayable.hpp</file>
-            <file>file:/home/luke/NetBeansProjects/Roguelike/FontSet.cpp</file>
-            <file>file:/home/luke/NetBeansProjects/Roguelike/FontSet.hpp</file>
-            <file>file:/home/luke/NetBeansProjects/Roguelike/Font.cpp</file>
-            <file>file:/home/luke/NetBeansProjects/Roguelike/Font.hpp</file>
-            <file>file:/home/luke/NetBeansProjects/Roguelike/Allegro.cpp</file>
-            <file>file:/home/luke/NetBeansProjects/Roguelike/Allegro.hpp</file>
-            <file>file:/home/luke/NetBeansProjects/Roguelike/main.cpp</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

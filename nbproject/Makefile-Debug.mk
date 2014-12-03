@@ -39,8 +39,10 @@ OBJECTFILES= \
 	${OBJECTDIR}/Creature.o \
 	${OBJECTDIR}/Display.o \
 	${OBJECTDIR}/Font.o \
+	${OBJECTDIR}/MapGenerator.o \
 	${OBJECTDIR}/Object.o \
 	${OBJECTDIR}/Player.o \
+	${OBJECTDIR}/TerrainGenerator.o \
 	${OBJECTDIR}/Text.o \
 	${OBJECTDIR}/TileMap.o \
 	${OBJECTDIR}/TileSet.o \
@@ -91,6 +93,11 @@ ${OBJECTDIR}/Font.o: Font.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Font.o Font.cpp
 
+${OBJECTDIR}/MapGenerator.o: MapGenerator.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MapGenerator.o MapGenerator.cpp
+
 ${OBJECTDIR}/Object.o: Object.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -100,6 +107,11 @@ ${OBJECTDIR}/Player.o: Player.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Player.o Player.cpp
+
+${OBJECTDIR}/TerrainGenerator.o: TerrainGenerator.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TerrainGenerator.o TerrainGenerator.cpp
 
 ${OBJECTDIR}/Text.o: Text.cpp 
 	${MKDIR} -p ${OBJECTDIR}
