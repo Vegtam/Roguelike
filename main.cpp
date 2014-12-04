@@ -1,6 +1,8 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <vector>
+#include <string>
 
 #include <allegro5/allegro.h> //for al_rest
 
@@ -8,9 +10,8 @@
 #include "Display.hpp"
 #include "Displayable.hpp"
 #include "ResourceSet.hpp"
-#include "TileSet.hpp"
-#include "TileMap.hpp"
-#include "Tile.hpp"
+#include "Font.hpp"
+#include "TextPane.hpp"
 
 int main(int argc, char **argv)
 {
@@ -20,89 +21,52 @@ int main(int argc, char **argv)
 	ALLEGRO_COLOR limegreen;
 	ALLEGRO_EVENT_QUEUE* evq;
 	ALLEGRO_EVENT ev;
+	ALLEGRO_TIMER* tmr;  
 	std::vector<Displayable*> to_draw;
 
-	std::ifstream ifs ("USMap.txt");
 	int tick = 1;
 
 	if(alg.init() && 
 	   disp.init() &&
 	   (evq = al_create_event_queue()) != NULL)
 	{
+		tmr = al_create_timer(1); //once per second
 		al_register_event_source(evq, disp.getEventSource());
+		al_register_event_source(evq, al_get_timer_event_source(tmr));
 
-		ResourceSet<TileSet> fs ("tileset/");
-		TileSet& ts = fs.get("Anikki_sq_10x10.bmp"); 
-
-		ts.init(10,10);
+		ResourceSet<Font> fs ("fonts/");
+		Font& fnt = fs.get("Roboto-Bold.ttf"); 
 
 		//std::cout<<"Tiles in set: "<<ts.numTiles()<<std::endl;
 		bloodred = al_map_rgb(210,15,0);
 		limegreen = al_map_rgb(153,255,0);
 
-		std::vector<std::string> map;
-		std::string line;
-		uint32_t max_len;
+		std::vector <std::string> mytxt {"Domo arigato", 
+		                       "Mr Roboto", 
+		                       "Allons enfants de la Patrie", 
+		                       "I wouldn't do that if I were you"};
 
-		while(!ifs.eof())
-		{
-			getline(ifs,line);
-			map.push_back(line);
-			if(line.size()>max_len)
-			{
-				max_len = line.size();
-			}
-		}
+		TextPane pane;
+		TextPane pane2;
+		TextPane pane3;
 
-		TileMap tmap;
+		pane.init(fnt.get(12), 200,200, 100,100);
+		pane2.init(fnt.get(16), 300,300, 100,100);
+		pane3.init(fnt.get(20), 400,400, 100,100);
 
-		tmap.init(200,
-			      200,
-			      max_len*10,
-			      map.size()*10,
-			      max_len,
-			      map.size(),
-			      &ts);
+		pane.write(mytxt[0]);
+		pane2.write(mytxt[0]);
+		pane3.write(mytxt[0]);
+		pane.render();
+		pane2.render();
+		pane3.render();
+		to_draw.push_back(&pane);
+		to_draw.push_back(&pane2);
+		to_draw.push_back(&pane3);
 
-		std::vector<Tile>* tile_array = tmap.getTiles();
-		//std::cout <<"Num lines: "<<map.size()<<std::endl;
-		//std::cout <<"Max Len: "<<max_len<<std::endl;
+		uint32_t idx = 1;
 
-		uint32_t index = 0;
-		for(auto& line: map)
-		{
-			bool empty_line = true;
-			//std::cout<<line<<std::endl;
-			for(auto& chr: line)
-			{
-				empty_line = false;
-				if (chr == '<') chr=0x1f;
-				if (chr == '>') chr = 0x1e;
-				(*tile_array)[index].setIndex((uint32_t)chr);
-				(*tile_array)[index].setFore(bloodred);
-				(*tile_array)[index].setBack(limegreen);
-				index++;
-			}
-			//std::cout <<"line "<<index<<std::endl;
-			while(index%max_len != 0 || empty_line)
-			{
-				empty_line=false;
-				(*tile_array)[index].setIndex((uint32_t)' ');
-				(*tile_array)[index].setFore(bloodred);
-				(*tile_array)[index].setBack(limegreen);
-				index++;
-			}
-			//std::cout <<"pad "<<index<<std::endl;
-		}
-
-		if(index != (max_len*map.size()))
-		{
-			std::cout<<"Wtf"<<index<<" "<<max_len<<" "<<map.size()<<std::endl;
-			return -1;
-		}
-
-		tmap.render();
-		to_draw.push_back(&tmap);
+		al_start_timer(tmr);
 
 		while(1)
 		{
@@ -113,6 +77,18 @@ int main(int argc, char **argv)
 			if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
 			{
 				break;
+			}
+			else if( ev.type == ALLEGRO_EVENT_TIMER)
+			{
+				//std::cout<<"tick"<<std::endl;
+				pane.write(mytxt[idx]);
+				pane.render();
+				pane2.write(mytxt[idx]);
+				pane2.render();
+				pane3.write(mytxt[idx]);
+				pane3.render();
+				
+				idx = (idx+1)%mytxt.size();
 			}
 
 		}		

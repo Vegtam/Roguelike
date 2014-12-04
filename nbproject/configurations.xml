@@ -14,6 +14,7 @@
       <itemPath>Player.hpp</itemPath>
       <itemPath>TerrainGenerator.hpp</itemPath>
       <itemPath>Text.hpp</itemPath>
+      <itemPath>TextPane.hpp</itemPath>
       <itemPath>Tile.hpp</itemPath>
       <itemPath>TileMap.hpp</itemPath>
       <itemPath>TileSet.hpp</itemPath>
@@ -21,6 +22,13 @@
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
+      <logicalFolder name="viewDisplayDrafts"
+                     displayName="viewDisplayDrafts"
+                     projectFiles="true">
+        <itemPath>viewDisplayDrafts/localCharacterView.png</itemPath>
+        <itemPath>viewDisplayDrafts/statusMenu.png</itemPath>
+        <itemPath>viewDisplayDrafts/title.png</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -34,6 +42,7 @@
       <itemPath>Player.cpp</itemPath>
       <itemPath>TerrainGenerator.cpp</itemPath>
       <itemPath>Text.cpp</itemPath>
+      <itemPath>TextPane.cpp</itemPath>
       <itemPath>TileMap.cpp</itemPath>
       <itemPath>TileSet.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -52,6 +61,9 @@
     <itemPath>Makefile</itemPath>
     <itemPath>README.md</itemPath>
   </logicalFolder>
+  <sourceRootList>
+    <Elem>viewDisplayDrafts</Elem>
+  </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
     <conf name="Debug" type="1">
@@ -123,6 +135,10 @@
       </item>
       <item path="Text.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="TextPane.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TextPane.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Tile.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TileMap.cpp" ex="false" tool="1" flavor2="0">
@@ -134,6 +150,15 @@
       <item path="TileSet.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="viewDisplayDrafts/localCharacterView.png"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="viewDisplayDrafts/statusMenu.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="viewDisplayDrafts/title.png" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -198,6 +223,10 @@
       </item>
       <item path="Text.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="TextPane.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TextPane.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Tile.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TileMap.cpp" ex="false" tool="1" flavor2="0">
@@ -209,6 +238,15 @@
       <item path="TileSet.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="viewDisplayDrafts/localCharacterView.png"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="viewDisplayDrafts/statusMenu.png" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="viewDisplayDrafts/title.png" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>

@@ -44,6 +44,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Player.o \
 	${OBJECTDIR}/TerrainGenerator.o \
 	${OBJECTDIR}/Text.o \
+	${OBJECTDIR}/TextPane.o \
 	${OBJECTDIR}/TileMap.o \
 	${OBJECTDIR}/TileSet.o \
 	${OBJECTDIR}/main.o
@@ -117,6 +118,11 @@ ${OBJECTDIR}/Text.o: Text.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Text.o Text.cpp
+
+${OBJECTDIR}/TextPane.o: TextPane.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TextPane.o TextPane.cpp
 
 ${OBJECTDIR}/TileMap.o: TileMap.cpp 
 	${MKDIR} -p ${OBJECTDIR}
