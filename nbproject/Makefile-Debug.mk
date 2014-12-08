@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Allegro.o \
+	${OBJECTDIR}/Biome.o \
 	${OBJECTDIR}/Creature.o \
 	${OBJECTDIR}/Display.o \
 	${OBJECTDIR}/Font.o \
@@ -47,6 +48,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/TextPane.o \
 	${OBJECTDIR}/TileMap.o \
 	${OBJECTDIR}/TileSet.o \
+	${OBJECTDIR}/World.o \
 	${OBJECTDIR}/main.o
 
 
@@ -78,6 +80,11 @@ ${OBJECTDIR}/Allegro.o: Allegro.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Allegro.o Allegro.cpp
+
+${OBJECTDIR}/Biome.o: Biome.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Biome.o Biome.cpp
 
 ${OBJECTDIR}/Creature.o: Creature.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -133,6 +140,11 @@ ${OBJECTDIR}/TileSet.o: TileSet.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TileSet.o TileSet.cpp
+
+${OBJECTDIR}/World.o: World.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/World.o World.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
