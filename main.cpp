@@ -8,10 +8,10 @@
 
 #include "Allegro.hpp"
 #include "Display.hpp"
-#include "Displayable.hpp"
 #include "ResourceSet.hpp"
 #include "Font.hpp"
-#include "TextPane.hpp"
+#include "TileSet.hpp"
+#include "Image.hpp"
 
 int main(int argc, char **argv)
 {
