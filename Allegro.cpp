@@ -25,6 +25,10 @@ bool Allegro::init()
 	{
 		result = al_install_mouse();
 	}
+	if(result)
+	{
+		result = al_install_keyboard();
+	}
 	
 	is_init = result;
 	
@@ -34,6 +38,7 @@ bool Allegro::init()
 Allegro::~Allegro()
 {
 	is_init = false;
+	al_uninstall_keyboard();
 	al_uninstall_mouse();
 	al_shutdown_primitives_addon();
 	al_shutdown_image_addon();

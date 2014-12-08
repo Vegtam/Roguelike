@@ -10,8 +10,6 @@ int main(int argc, char** argv) {
     
     newWorld.buildBiomes();
     
-    for(int i = 0; i < newWorld.baseMap.size(); i++)
-    
     return 0;
 }
 
