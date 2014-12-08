@@ -15,6 +15,7 @@
 
 #include "TitleView.hpp"
 #include "CreditsView.hpp"
+#include "WorldView.hpp"
 
 #define FPS 60
 
@@ -26,8 +27,7 @@ int main(int argc, char **argv)
 	ALLEGRO_EVENT ev;
 	ALLEGRO_TIMER* tmr;
 	std::map<DefinedViews, View*> viewMap;
-	Model model;
-
+	
 	DefinedViews currentView = DefinedViews::TITLE_VIEW;
 
 	
@@ -41,24 +41,31 @@ int main(int argc, char **argv)
 		al_register_event_source(evq, al_get_timer_event_source(tmr));
 		al_register_event_source(evq, al_get_keyboard_event_source());
 
+		Model model;
+
 		ResourceSet<Font> fs ("../../fonts/");
 		ResourceSet<TileSet> ts ("../../tileset/");
 		ResourceSet<Image> is ("../../image/");
 
+		/* @todo could check return values of init calls */
 		TitleView titleview(&model, &is);
 		titleview.init();
 
 		CreditsView creditView(&model, &fs);
 		creditView.init();
 
+		WorldView worldview(&model, &fs,&ts);
+		worldview.init();
+
 		viewMap[DefinedViews::TITLE_VIEW] = &titleview;
 		viewMap[DefinedViews::CREDITS_VIEW] = &creditView;
+		viewMap[DefinedViews::WORLD_VIEW] = &worldview;
 
 		al_start_timer(tmr);
 
 		while(1)
 		{
-			disp.clear(al_map_rgba_f(1,1,0,0));
+			disp.clear(model.getThemeBackground());
 			disp.render(viewMap[currentView]->draw());
 			al_wait_for_event(evq, &ev);
 			

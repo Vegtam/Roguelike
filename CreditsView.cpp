@@ -11,8 +11,8 @@ bool CreditsView::init()
 	if( model && fontset) 
 	{
 		credits.init(fontset->get("Roboto-Bold.ttf").get(50), 380,150,450,450);
-		credits.setFore(al_map_rgb(210,15,0)); /*blood red*/
-		credits.setBack(al_map_rgba_f(1,1,0,0));/*yellow*/
+		credits.setFore(model->getThemeFont()); /*blood red*/
+		credits.setBack(model->getThemeBackground());/*yellow*/
 		credits.write("Creator:");
 		credits.write("    Vegtam");
 		credits.write(" ");
@@ -44,7 +44,6 @@ DefinedViews CreditsView::handleKeyPress(ALLEGRO_EVENT* ev)
 
 DefinedViews CreditsView::handleEvent(ALLEGRO_EVENT* ev)
 {
-	/* for now just handle start and quit */
 	DefinedViews dv = DefinedViews::CREDITS_VIEW;
 
 	if( ev )

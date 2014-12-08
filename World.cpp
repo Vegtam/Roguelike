@@ -15,7 +15,7 @@ Tile World::getTile(int xPos, int yPos)
 {
     int displayId = baseMap[xPos][yPos].getDisplayID();
     
-    return Tile(displayId, al_map_rgb(20,30,40), al_map_rgb(40,30,20));
+    return Tile(displayId, al_map_rgb(120,130,140), al_map_rgb(40,30,20));
     
 }
 

@@ -31,6 +31,14 @@ LIB_SRC = $(LIB_CODE)/Allegro.cpp \
 	$(LIB_CODE)/TileSet.cpp \
 	$(LIB_CODE)/TitleView.cpp \
 	$(LIB_CODE)/CreditsView.cpp \
+	$(LIB_CODE)/WorldView.cpp \
+	$(LIB_CODE)/Player.cpp \
+	$(LIB_CODE)/Creature.cpp \
+	$(LIB_CODE)/Object.cpp \
+	$(LIB_CODE)/TerrainGenerator.cpp \
+	$(LIB_CODE)/World.cpp \
+	$(LIB_CODE)/Model.cpp \
+	$(LIB_CODE)/Biome.cpp \
 	$(LIB_CODE)/main2.cpp \
 
 game: $(LIB_SRC)
