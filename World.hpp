@@ -14,6 +14,8 @@ public:
     Tile getTile(int xPos, int yPos);
     void buildBiomes();
 private:
+    bool isElevationSpike();
+    int getElevation();
 
 };
 

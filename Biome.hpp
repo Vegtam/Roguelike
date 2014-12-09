@@ -7,13 +7,14 @@ public:
     Biome();
     Biome(const Biome& orig);
     virtual ~Biome();
+    int elevation;
     void setBiomeAttributes(int biomeType);
     Tile getTile();
     
 private:
     int displayID;
-    int r1, g1, b1; /*background*/
-    int r2, g2, b2; /*foreground*/
+    int backgroundR, backgroundG, backgroundB; /*background*/
+    int foregroundR, foregroundG, foregroundB; /*foreground*/
 
 };
 

@@ -36,16 +36,16 @@ void Biome::setBiomeAttributes(int biomeType)
                 
                 displayID = 247; /* ~ */
                 
-                /* light blue green */
-                r1 = 0;
-                g1 = 225;
-                b1 = 225;
+                /* blue */            
+                backgroundR = 1;
+                backgroundG = 100;
+                backgroundB = 255;
                 
-                /* dark blue*/            
-                r2 = 0;
-                g2 = 255;
-                b2 = 255;
-
+                /* light blue */
+                foregroundR = 175;
+                foregroundG = 230;
+                foregroundB = 245;
+                
                 break;
         
             case 1: /* Tropical moist forests */
@@ -53,14 +53,14 @@ void Biome::setBiomeAttributes(int biomeType)
                 displayID = 5; /* deciduous tree */
                 
                 /* dark green */
-                r1 = 0;
-                g1 = 100;
-                b1 = 0;
+                backgroundR = 1;
+                backgroundG = 100;
+                backgroundB = 1;
                 
                 /* medium green */
-                r2 = 0;
-                g2 = 150;
-                b2 = 0;
+                foregroundR = 1;
+                foregroundG = 150;
+                foregroundB = 1;
                 
                 break;
                 
@@ -69,14 +69,14 @@ void Biome::setBiomeAttributes(int biomeType)
                 displayID = 5; /* deciduous tree */
                 
                 /* dark brown */
-                r1 = 125;
-                g1 = 75;
-                b1 = 0;
+                backgroundR = 125;
+                backgroundG = 75;
+                backgroundB = 1;
                 
                 /* medium green */
-                r2 = 0;
-                g2 = 150;
-                b2 = 0;
+                foregroundR = 1;
+                foregroundG = 150;
+                foregroundB = 1;
                 
                 break;
                 
@@ -85,14 +85,14 @@ void Biome::setBiomeAttributes(int biomeType)
                 displayID = 6; /* coniferous tree */
                 
                 /* dark brown */
-                r1 = 125;
-                g1 = 75;
-                b1 = 0;
+                backgroundR = 125;
+                backgroundG = 75;
+                backgroundB = 1;
                 
                 /* dark green */
-                r2 = 0;
-                g2 = 100;
-                b2 = 0;
+                foregroundR = 1;
+                foregroundG = 100;
+                foregroundB = 1;
                 
                 break;
                 
@@ -101,14 +101,14 @@ void Biome::setBiomeAttributes(int biomeType)
                 displayID = 23; /* coneiduous tree (yes I made that up) */
                 
                 /* medium brown */
-                r1 = 150;
-                g1 = 100;
-                b1 = 0;
+                backgroundR = 150;
+                backgroundG = 100;
+                backgroundB = 1;
                 
                 /* medium green */
-                r2 = 0;
-                g2 = 150;
-                b2 = 0;
+                foregroundR = 1;
+                foregroundG = 150;
+                foregroundB = 1;
                 
                 break;
                 
@@ -117,14 +117,14 @@ void Biome::setBiomeAttributes(int biomeType)
                 displayID = 6; /* coniferous tree */
                 
                 /* medium brown */
-                r1 = 150;
-                g1 = 100;
-                b1 = 0;
+                backgroundR = 150;
+                backgroundG = 100;
+                backgroundB = 1;
                 
                 /* medium green */
-                r2 = 0;
-                g2 = 150;
-                b2 = 0;
+                foregroundR = 1;
+                foregroundG = 150;
+                foregroundB = 1;
                 
                 break;
                 
@@ -133,94 +133,94 @@ void Biome::setBiomeAttributes(int biomeType)
                 displayID = 6; /* coniferous tree */ 
                 
                 /* light green */
-                r1 = 0;
-                g1 = 200;
-                b1 = 0;
+                backgroundR = 1;
+                backgroundG = 200;
+                backgroundB = 1;
                 
                 /* medium green */
-                r2 = 0;
-                g2 = 150;
-                b2 = 0;
+                foregroundR = 1;
+                foregroundG = 150;
+                foregroundB = 1;
                 
                 break;
                 
             case 7: /* Tropical grasslands, savannas, and shrublands */
                 
-                displayID = 170; /* grass curled to left */ 
+                displayID = 177; /* tiny checkerboard */ 
                 
                 /* dark brown */
-                r1 = 125;
-                g1 = 75;
-                b1 = 0;
+                backgroundR = 125;
+                backgroundG = 75;
+                backgroundB = 1;
                 
                 /* dark green */
-                r2 = 0;
-                g2 = 100;
-                b2 = 0;
+                foregroundR = 1;
+                foregroundG = 100;
+                foregroundB = 1;
                 
                 break;
                 
             case 8: /* Temperate grasslands, savannas, and shrublands */
                 
-                displayID = 170; /* grass curled to left */ 
+                displayID = 177; /* tiny checkerboard */ 
                 
                 /* medium brown */
-                r1 = 150;
-                g1 = 100;
-                b1 = 0;
+                backgroundR = 150;
+                backgroundG = 100;
+                backgroundB = 1;
                 
                 /* medium green */
-                r2 = 0;
-                g2 = 150;
-                b2 = 0;
+                foregroundR = 1;
+                foregroundG = 150;
+                foregroundB = 1;
                 
                 break;
                 
             case 9: /* Flooded grasslands and savannas */
                 
-                displayID = 170; /* grass curled to left */
+                displayID = 176; /* thin diagonal lines */
+                
+                /* brownish grey */
+                backgroundR = 130;
+                backgroundG = 100;
+                backgroundB = 75;
                 
                 /* medium blue */
-                r1 = 0;
-                g1 = 125;
-                b1 = 255;
-                
-                /* medium green */
-                r2 = 0;
-                g2 = 150;
-                b2 = 0;
+                foregroundR = 125;
+                foregroundG = 135;
+                foregroundB = 75;
                 
                 break;
                 
             case 10: /* Montane grasslands and shrublands */
                 
-                displayID = 170;
+                displayID = 94; /* pointed arch */
                 
-                /* light brown */
-                r1 = 200;
-                g1 = 175;
-                b1 = 0;
+                /* light green */
+                backgroundR = 115;
+                backgroundG = 185;
+                backgroundB = 1;
                 
-                /* medium green */
-                r2 = 0;
-                g2 = 150;
-                b2 = 0;
+                /* dark gray */
+                foregroundR = 135;
+                foregroundG = 130;
+                foregroundB = 120;
                 
                 break;
                 
             case 11: /* Tundra (Arctic) */
                 
-                displayID = 236; /* filled small circle */
+                displayID = 177; /* tiny checkerboard, prev 236 filled small circle */
                 
-                /* light brown */
-                r1 = 200;
-                g1 = 175;
-                b1 = 0;
+                /* white */
+                backgroundR = 255;
+                backgroundG = 245;
+                backgroundB = 245;
                 
                 /* gray */
-                r2 = 175;
-                g2 = 175;
-                b2 = 125;
+                foregroundR = 175;
+                foregroundG = 175;
+                foregroundB = 150;
                 
                 break;
                 
@@ -229,46 +229,46 @@ void Biome::setBiomeAttributes(int biomeType)
                 displayID = 23; /*coneiduous tree */
                 
                 /* medium green */
-                r1 = 0;
-                g1 = 150;
-                b1 = 0;
+                backgroundR = 1;
+                backgroundG = 150;
+                backgroundB = 1;
                 
                 /* light green */
-                r2 = 0;
-                g2 = 200;
-                b2 = 0;
+                foregroundR = 1;
+                foregroundG = 200;
+                foregroundB = 1;
                 
                 break;
                 
-            case 13: /* Deserts */
+            case 13: /* Desert */
                 
-                displayID = 247; /* ~ */
+                displayID = 15; /* sun */
                 
-                /* light brown */
-                r1 = 200;
-                g1 = 175;
-                b1 = 0;
+                /* tan */
+                backgroundR = 250;
+                backgroundG = 225;
+                backgroundB = 160;
                 
                 /* orange */
-                r2 = 255;
-                g2 = 175;
-                b2 = 0;
+                foregroundR = 255;
+                foregroundG = 185;
+                foregroundB = 1;
                 
                 break;
                 
             case 14: /* Mangrove */
                 
-                displayID = 5;
+                displayID = 244; /* big tree */
                 
-                /* light blue */
-                r1 = 0;
-                g1 = 175;
-                b1 = 200;
+                /* medium blue */
+                backgroundR = 1;
+                backgroundG = 125;
+                backgroundB = 255;
                 
                 /* dark green */
-                r2 = 0;
-                g2 = 100;
-                b2 = 0;        
+                foregroundR = 1;
+                foregroundG = 100;
+                foregroundB = 1;        
                 
                 
     }
@@ -277,6 +277,6 @@ void Biome::setBiomeAttributes(int biomeType)
  
 Tile Biome::getTile()
 {
-    return Tile(displayID, al_map_rgb(r1,g1,b1), al_map_rgb(r2,g2,b2));
+    return Tile(displayID, al_map_rgb(backgroundR,backgroundG,backgroundB), al_map_rgb(foregroundR,foregroundG,foregroundB));
 }
 

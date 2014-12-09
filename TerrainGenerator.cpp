@@ -1,5 +1,4 @@
 #include <cstdlib>
-#include <ctime>
 #include "TerrainGenerator.hpp"
 using namespace std;
 
