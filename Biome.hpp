@@ -1,5 +1,6 @@
 #ifndef BIOME_HPP
 #define	BIOME_HPP
+#include "Tile.hpp"
 
 class Biome {
 public:
@@ -7,7 +8,7 @@ public:
     Biome(const Biome& orig);
     virtual ~Biome();
     void setBiomeAttributes(int biomeType);
-    int getDisplayID();
+    Tile getTile();
     
 private:
     int displayID;

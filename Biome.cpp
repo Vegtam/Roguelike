@@ -146,7 +146,7 @@ void Biome::setBiomeAttributes(int biomeType)
                 
             case 7: /* Tropical grasslands, savannas, and shrublands */
                 
-                displayID = 171; /* grass curled to left */ 
+                displayID = 170; /* grass curled to left */ 
                 
                 /* dark brown */
                 r1 = 125;
@@ -162,7 +162,7 @@ void Biome::setBiomeAttributes(int biomeType)
                 
             case 8: /* Temperate grasslands, savannas, and shrublands */
                 
-                displayID = 171; /* grass curled to left */ 
+                displayID = 170; /* grass curled to left */ 
                 
                 /* medium brown */
                 r1 = 150;
@@ -178,7 +178,7 @@ void Biome::setBiomeAttributes(int biomeType)
                 
             case 9: /* Flooded grasslands and savannas */
                 
-                displayID = 171; /* grass curled to left */
+                displayID = 170; /* grass curled to left */
                 
                 /* medium blue */
                 r1 = 0;
@@ -194,7 +194,7 @@ void Biome::setBiomeAttributes(int biomeType)
                 
             case 10: /* Montane grasslands and shrublands */
                 
-                displayID = 171;
+                displayID = 170;
                 
                 /* light brown */
                 r1 = 200;
@@ -252,7 +252,7 @@ void Biome::setBiomeAttributes(int biomeType)
                 /* orange */
                 r2 = 255;
                 g2 = 175;
-                b2 = 0s;
+                b2 = 0;
                 
                 break;
                 
@@ -272,11 +272,11 @@ void Biome::setBiomeAttributes(int biomeType)
                 
                 
     }
-    displayID = biomeType;
+    
 }
  
-int Biome::getDisplayID()
+Tile Biome::getTile()
 {
-    return displayID;
+    return Tile(displayID, al_map_rgb(r1,g1,b1), al_map_rgb(r2,g2,b2));
 }
 
