@@ -15,6 +15,6 @@ TerrainGenerator::~TerrainGenerator() {
 int TerrainGenerator::generateRandomTerrain()
 {
     
-    terrain = rand() % 9 + 1;
+    terrain = rand() % 15;
     return terrain;
 }

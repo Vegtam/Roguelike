@@ -9,13 +9,9 @@
         <group>
             <file>file:/home/luke/NetBeansProjects/Roguelike/Tile.hpp</file>
             <file>file:/home/luke/NetBeansProjects/Roguelike/TerrainGenerator.cpp</file>
-            <file>file:/home/luke/NetBeansProjects/Roguelike/World.cpp</file>
-            <file>file:/home/luke/NetBeansProjects/Roguelike/Biome.hpp</file>
-            <file>file:/home/luke/NetBeansProjects/Roguelike/Biome.cpp</file>
             <file>file:/home/luke/NetBeansProjects/Roguelike/main.cpp</file>
-            <file>file:/home/luke/NetBeansProjects/Roguelike/World.hpp</file>
             <file>file:/home/luke/NetBeansProjects/Roguelike/TileMap.hpp</file>
-            <file>file:/home/luke/NetBeansProjects/Roguelike/.git/config</file>
+            <file>file:/home/luke/NetBeansProjects/Roguelike/World.hpp</file>
         </group>
     </open-files>
 </project-private>

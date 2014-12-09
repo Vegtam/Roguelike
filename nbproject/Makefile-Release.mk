@@ -38,9 +38,12 @@ OBJECTFILES= \
 	${OBJECTDIR}/Allegro.o \
 	${OBJECTDIR}/Biome.o \
 	${OBJECTDIR}/Creature.o \
+	${OBJECTDIR}/CreditsView.o \
 	${OBJECTDIR}/Display.o \
 	${OBJECTDIR}/Font.o \
+	${OBJECTDIR}/Image.o \
 	${OBJECTDIR}/MapGenerator.o \
+	${OBJECTDIR}/Model.o \
 	${OBJECTDIR}/Object.o \
 	${OBJECTDIR}/Player.o \
 	${OBJECTDIR}/TerrainGenerator.o \
@@ -48,7 +51,9 @@ OBJECTFILES= \
 	${OBJECTDIR}/TextPane.o \
 	${OBJECTDIR}/TileMap.o \
 	${OBJECTDIR}/TileSet.o \
+	${OBJECTDIR}/TitleView.o \
 	${OBJECTDIR}/World.o \
+	${OBJECTDIR}/WorldView.o \
 	${OBJECTDIR}/main.o
 
 
@@ -91,6 +96,11 @@ ${OBJECTDIR}/Creature.o: Creature.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Creature.o Creature.cpp
 
+${OBJECTDIR}/CreditsView.o: CreditsView.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/CreditsView.o CreditsView.cpp
+
 ${OBJECTDIR}/Display.o: Display.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -101,10 +111,20 @@ ${OBJECTDIR}/Font.o: Font.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Font.o Font.cpp
 
+${OBJECTDIR}/Image.o: Image.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Image.o Image.cpp
+
 ${OBJECTDIR}/MapGenerator.o: MapGenerator.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/MapGenerator.o MapGenerator.cpp
+
+${OBJECTDIR}/Model.o: Model.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Model.o Model.cpp
 
 ${OBJECTDIR}/Object.o: Object.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -141,10 +161,20 @@ ${OBJECTDIR}/TileSet.o: TileSet.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TileSet.o TileSet.cpp
 
+${OBJECTDIR}/TitleView.o: TitleView.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TitleView.o TitleView.cpp
+
 ${OBJECTDIR}/World.o: World.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/World.o World.cpp
+
+${OBJECTDIR}/WorldView.o: WorldView.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/WorldView.o WorldView.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}

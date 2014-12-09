@@ -27,7 +27,7 @@ void World::buildBiomes()
     {
         for(int y = 0; y < baseMap[x].size(); y++)
         {
-            baseMap[x][y].setDisplayID(tGen.generateRandomTerrain());
+            baseMap[x][y].setBiomeAttributes(tGen.generateRandomTerrain());
         }
             
     }
