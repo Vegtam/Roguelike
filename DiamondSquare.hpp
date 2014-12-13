@@ -47,9 +47,8 @@ public:
     DiamondSquare();
     DiamondSquare(const DiamondSquare& orig) ;
     virtual ~DiamondSquare();  
-    //static const 
-    static const unsigned hgrid = 513;
-    static const unsigned vgrid = 513;
+    static const unsigned hgrid = 65;
+    static const unsigned vgrid = 65;
     float map[hgrid][vgrid];//make the empty array
     float min, max;       
    

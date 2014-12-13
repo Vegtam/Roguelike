@@ -11,6 +11,7 @@
             <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>viewDisplayDrafts</sourceRootElem>
+                <sourceRootElem>viewDisplayDrafts</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

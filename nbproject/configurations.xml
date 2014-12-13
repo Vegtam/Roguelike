@@ -77,10 +77,22 @@
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
     </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
     <itemPath>Makefile</itemPath>
     <itemPath>README.md</itemPath>
   </logicalFolder>
   <sourceRootList>
+    <Elem>viewDisplayDrafts</Elem>
     <Elem>viewDisplayDrafts</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
