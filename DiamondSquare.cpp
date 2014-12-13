@@ -49,6 +49,12 @@ DiamondSquare::DiamondSquare() {
 DiamondSquare::DiamondSquare(const DiamondSquare& orig) {
 }
 
+void DiamondSquare::generateMap(){
+    makeBlankMap();
+    fillMap();
+    
+}
+
 void DiamondSquare::makeBlankMap() {
     
     int i,j,sgrid = ((hgrid<vgrid) ? hgrid : vgrid)-1;
@@ -182,10 +188,10 @@ void DiamondSquare::fillMap(){
 
 }
 
-void DiamondSquare::printMap() {
+void DiamondSquare::printMap(int mapType) {
     
     //set up some variables
-        char oname[16]="test.bmp";
+        
 	float diff = max-min,
 		  flood=0.5f,//flood level
 		  mount=0.85f;//mountain level
@@ -196,14 +202,18 @@ void DiamondSquare::printMap() {
 	int i,j,k;
 	
 	char c;
-	
+        
 	//these can be changed for interesting results
-	color landlow(0,64,0),
-		  landhigh(116,182,133),
-		  waterlow(55,0,0),
-		  waterhigh(106,53,0),
-		  mountlow(147,157,167),
-		  mounthigh(226,223,216);
+         //elevation -Vegtam
+        char oname[16]="elevation.bmp";
+        
+            
+        color landlow(0,64,0),
+              landhigh(116,182,133),
+              waterlow(55,0,0),
+              waterhigh(106,53,0),
+              mountlow(147,157,167),
+              mounthigh(226,223,216);
 
 //3.0 output to file
 	//3.1 Begin the file

@@ -53,15 +53,16 @@ public:
     float map[hgrid][vgrid];//make the empty array
     float min, max;       
    
-    void makeBlankMap();
     
-    void fillMap();
-    
-    void printMap();    
+    void generateMap();
+    void printMap(int type);  
     
     
     
 private:
+    void makeBlankMap();
+    
+    void fillMap();
     float random(float max);
    
     struct color{
