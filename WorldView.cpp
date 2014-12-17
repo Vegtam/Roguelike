@@ -7,7 +7,6 @@
 #include "Displayable.hpp"
 #include "View.hpp"
 #include "World.hpp"
-#include "DiamondSquare.hpp"
 
 
 bool WorldView::init()

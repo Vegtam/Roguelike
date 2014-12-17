@@ -8,7 +8,7 @@ public:
     Biome(const Biome& orig);
     virtual ~Biome();
     int elevation;
-    void setBiomeAttributes(int biomeType);
+    void setBiomeAttributes(float biomeType);
     Tile getTile();
     
 private:

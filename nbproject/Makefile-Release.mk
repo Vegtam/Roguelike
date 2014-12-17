@@ -39,7 +39,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/Biome.o \
 	${OBJECTDIR}/Creature.o \
 	${OBJECTDIR}/CreditsView.o \
-	${OBJECTDIR}/DiamondSquare.o \
 	${OBJECTDIR}/Display.o \
 	${OBJECTDIR}/Font.o \
 	${OBJECTDIR}/Image.o \
@@ -101,11 +100,6 @@ ${OBJECTDIR}/CreditsView.o: CreditsView.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/CreditsView.o CreditsView.cpp
-
-${OBJECTDIR}/DiamondSquare.o: DiamondSquare.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/DiamondSquare.o DiamondSquare.cpp
 
 ${OBJECTDIR}/Display.o: Display.cpp 
 	${MKDIR} -p ${OBJECTDIR}
