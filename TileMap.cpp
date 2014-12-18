@@ -39,14 +39,15 @@ bool TileMap::render()
 			al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP);
 			backing_bmap = al_create_bitmap(map_w*t_set->getTileWidth(), 
 										    map_h*t_set->getTileHeight());
+			al_clear_to_color(al_map_rgb(255,255,255));
+
 		}
 		if(backing_bmap)
 		{
 			uint32_t index = 0;
 			/* set the target for draw operations to the backing bitmap */
 			al_set_target_bitmap(backing_bmap);
-			al_clear_to_color(al_map_rgb(255,255,255));
-
+			
 			/* @todo consider checking this lock */
 			al_lock_bitmap(backing_bmap,ALLEGRO_PIXEL_FORMAT_ANY,ALLEGRO_LOCK_WRITEONLY);
 
