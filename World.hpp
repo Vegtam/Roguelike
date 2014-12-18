@@ -16,7 +16,8 @@ public:
     
     World(int width, int height);
     virtual ~World();
-    std::vector <std::vector<float> > baseMap;
+    std::vector <std::vector<std::vector<float> > > maps;
+    std::vector<std::vector<float> > baseMap;
     std::vector <std::vector<Biome> > worldMap;
     Tile getTile(int xPos, int yPos);
     void buildBiomes();

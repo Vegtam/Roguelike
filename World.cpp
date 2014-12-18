@@ -41,9 +41,9 @@ World::color World::lerp(color c1, color c2, float value){
 
 void World::fillMap(){
     
-    std::cout << "filling map" << std::endl;
+    
 //set up some variable
-    std::cout << "xSize = " << xSize << " ySize = " << ySize << std::endl;
+    
 	unsigned sgrid=((xSize<ySize) ? xSize : ySize)-1;//whichever is smaller (minus 1)
 	
 	int	i,j,k,//iterators
@@ -101,42 +101,34 @@ void World::fillMap(){
 				if (x==0)//left edge
                                 {
 					total+=baseMap[(ySize-1)-(offset/2)][y];
-                                        std::cout << total << std::endl;
                                 }
 				else
                                 {
 					total+=baseMap[x-(offset/2)][y];
-                                        std::cout << total << std::endl;
                                 }
 				if (x==(xSize-1))//right edge
                                 {
 					total+=baseMap[(offset/2)][y];
-                                        std::cout << total << std::endl;
                                 }
 				else
                                 {
 					total+=baseMap[x+(offset/2)][y];
-                                        std::cout << total << std::endl;
                                 }
 				if (y==0)//top edge
                                 {
 					total+=baseMap[x][(ySize-1)-(offset/2)];
-                                        std::cout << total << std::endl;
                                 }
 				else
                                 {
 					total+=baseMap[x][y-(offset/2)];
-                                        std::cout << total << std::endl;
                                 }
 				if (y==(ySize-1))//bottom edge
                                 {
 					total+=baseMap[x][(offset/2)];
-                                        std::cout << total << std::endl;
                                 }
 				else
                                 {
 					total+=baseMap[x][y+(offset/2)];
-                                        std::cout << total << std::endl;
                                 }
 				
 				total/=4;

@@ -2,7 +2,7 @@
 #include <allegro5/allegro.h>
 
 #include "Model.hpp"
-Model::Model():world(33,33)
+Model::Model():world(257,257)
 {
 	themeFont = al_map_rgb(210,15,0); /* blood red */
 	themeBackground = al_map_rgb(255,255,0); /* yellow */
