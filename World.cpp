@@ -336,9 +336,8 @@ void World::buildBiomes()
             worldMap[x][y].setRainfall(rainfallMap[x][y]);
            
             worldMap[x][y].setTemperature(temperatureMap[x][y]);
-            std::cout << "Setting Biome Type for Biome:" << x << " " << y <<
-                    std::endl;
             worldMap[x][y].setBiomeType();
+            
         }
             
     }

@@ -20,8 +20,9 @@ public:
     virtual ~Biome();
 
     void setBiomeType();
-    
+    inline int getBiomeType(){return biomeType;};
     Tile getTile();
+    void debugBiome();
     inline void setElevation(float wGenElevation){elevation = wGenElevation;};
     inline void setRainfall(float wGenRainfall){rainfall = wGenRainfall;};
     inline void setTemperature(int wGenTemperature){temperature = (wGenTemperature - (elevation * 2));};

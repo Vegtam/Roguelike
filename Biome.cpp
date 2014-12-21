@@ -162,13 +162,6 @@ void Biome::setBiomeType()
     }
     
     
-    
-    std::cout << "Setting Elevation for Biome: " << elevation << std::endl;
-    std::cout << "Setting Rainfall for Biome: " << rainfall << std::endl;
-    std::cout << "Setting Temperature for Biome: " << temperature << std::endl;
-    
-    
-    
     switch(biomeType)
     {
             case 0: // ocean 
@@ -409,7 +402,9 @@ void Biome::setBiomeType()
                 foregroundG = 100;
                 foregroundB = 1;
                 
-            case 15: // Not Set!!!!
+                break;
+                
+            case 15: // Not Set!!!! For debugging purposes
                 
                 displayID = 33; // !
                 
@@ -423,6 +418,7 @@ void Biome::setBiomeType()
                 foregroundG = 125;
                 foregroundB = 1;
                 
+                break;
                 
                 
                 
@@ -508,6 +504,22 @@ void Biome::setBiomeType()
     
 } 
 
+
+void Biome::debugBiome()
+{
+    if(displayID == 33)
+    {
+        
+        std::cout << "Setting Elevation for Biome: " << elevation << std::endl;
+        std::cout << "Setting Rainfall for Biome: " << rainfall << std::endl;
+        std::cout << "Setting Temperature for Biome: " << temperature << std::endl;
+        std::cout << "Setting Biome Type as: " << biomeType << std::endl;
+    }
+    else
+    {
+        
+    }
+}
 
 Tile Biome::getTile()
 {
