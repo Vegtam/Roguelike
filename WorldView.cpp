@@ -23,8 +23,8 @@ bool WorldView::init()
 		ts.init(std::get<1>(worldTileSet), 
 			    std::get<2>(worldTileSet));
 
-		int worldMapWidth = world.baseMap.size();
-		int worldMapHeight = world.baseMap[0].size();
+		int worldMapWidth = world.worldMap.size();
+		int worldMapHeight = world.worldMap[0].size();
 
 		biomeDisplay.init(0,
 			      		  0,
@@ -64,8 +64,8 @@ DefinedViews WorldView::handleKeyPress(ALLEGRO_EVENT* ev)
 	DefinedViews dv = DefinedViews::WORLD_VIEW;
 	std::vector<Tile>* tile_array = biomeDisplay.getTiles();
 	World& world = model->getWorld();
-	int worldMapWidth = world.baseMap.size();
-	int worldMapHeight = world.baseMap[0].size();
+	int worldMapWidth = world.worldMap.size();
+	int worldMapHeight = world.worldMap[0].size();
 
 	Player& player = model->getPlayer();
 	int playerX = player.GetX();

@@ -7,8 +7,13 @@
 
 
 
-World::World(int width, int height) : baseMap(width, std::vector<float>(height)),
-worldMap(width, std::vector<Biome>(height)), xSize(width), ySize(height){
+World::World(int width, int height) : 
+        worldMap(width, std::vector<Biome>(height)), 
+        fillerMap(width, std::vector<float>(height)),
+        elevationMap(width, std::vector<float>(height)),
+        temperatureMap(width, std::vector<int>(height)),
+        rainfallMap(width, std::vector<float>(height)),
+        xSize(width), ySize(height){
     
 }
 
@@ -39,6 +44,31 @@ World::color World::lerp(color c1, color c2, float value){
 	return (tcolor);
 }
 
+void World::buildMaps()
+{
+    
+    
+    std::cout << "Generated Filler Map" << std::endl;
+    fillMap();    
+    fillerMap.swap(elevationMap);
+    std::cout << "Generated Elevation Map" << std::endl;
+    fillMap();
+    fillerMap.swap(rainfallMap);
+    std::cout << "Generated Rainfall Map" << std::endl;
+    generateBaseTemperature();
+    std::cout << "Generated Base Temperatures" << std::endl;
+
+        
+}
+
+void World::clearMaps()
+{    
+    elevationMap.clear();
+    rainfallMap.clear();
+    temperatureMap.clear();
+    fillerMap.clear();
+}
+
 void World::fillMap(){
     
     
@@ -52,7 +82,7 @@ void World::fillMap(){
 		
 	
 	float range=10.0f,//range for random numbers
-		  rangeModifier=0.65f,//the range is multipiled by this number each pass, making the map smoother
+		  rangeModifier=0.65f,//the range is multiplied by this number each pass, making the map smoother
 		  total,//variable for storing a mean value
 		  temp;//stores the new value for a slot so more calculations can be done
 
@@ -70,14 +100,14 @@ void World::fillMap(){
 			x=0;
 			while (x<(xSize-1)){
 				//set the proper map location to the proper value: the mean of it's 4 corners+a random value (minus half the range, so it generates a random number that can be negative
-				temp=(baseMap[x][y]+baseMap[x+offset][y]+baseMap[x][y+offset]+baseMap[x+offset][y+offset])/4 + random(range)-(range/2);
+				temp=(fillerMap[x][y]+fillerMap[x+offset][y]+fillerMap[x][y+offset]+fillerMap[x+offset][y+offset])/4 + random(range)-(range/2);
 				
                                 if (temp<min)
 					min=temp;
 				if (temp>max)
 					max=temp;
 				
-				baseMap[x+(offset/2)][y+(offset/2)]=temp;
+				fillerMap[x+(offset/2)][y+(offset/2)]=temp;
 				
 				//advance x
 				x+=offset;
@@ -100,35 +130,35 @@ void World::fillMap(){
 				//wrapping exceptions
 				if (x==0)//left edge
                                 {
-					total+=baseMap[(ySize-1)-(offset/2)][y];
+					total+=fillerMap[(ySize-1)-(offset/2)][y];
                                 }
 				else
                                 {
-					total+=baseMap[x-(offset/2)][y];
+					total+=fillerMap[x-(offset/2)][y];
                                 }
 				if (x==(xSize-1))//right edge
                                 {
-					total+=baseMap[(offset/2)][y];
+					total+=fillerMap[(offset/2)][y];
                                 }
 				else
                                 {
-					total+=baseMap[x+(offset/2)][y];
+					total+=fillerMap[x+(offset/2)][y];
                                 }
 				if (y==0)//top edge
                                 {
-					total+=baseMap[x][(ySize-1)-(offset/2)];
+					total+=fillerMap[x][(ySize-1)-(offset/2)];
                                 }
 				else
                                 {
-					total+=baseMap[x][y-(offset/2)];
+					total+=fillerMap[x][y-(offset/2)];
                                 }
 				if (y==(ySize-1))//bottom edge
                                 {
-					total+=baseMap[x][(offset/2)];
+					total+=fillerMap[x][(offset/2)];
                                 }
 				else
                                 {
-					total+=baseMap[x][y+(offset/2)];
+					total+=fillerMap[x][y+(offset/2)];
                                 }
 				
 				total/=4;
@@ -138,7 +168,7 @@ void World::fillMap(){
 					min=temp;
 				if (temp>max)
 					max=temp;
-				baseMap[x][y]=temp;
+				fillerMap[x][y]=temp;
 				
 				//advance x
 				x+=offset;
@@ -152,7 +182,7 @@ void World::fillMap(){
 		range*=rangeModifier;
 		offset/=2;//shrink the square/diamond width
 	}
-
+    
 }
 
 void World::printMap(int mapType) {
@@ -243,29 +273,29 @@ void World::printMap(int mapType) {
 	color newcolor(0,0,0);
 	for (i=(ySize-1);i>=0;i--){//bitmaps start with the bottom row, and work their way up...
 		for (j=0;j<xSize;j++){//...but still go left to right
-			baseMap[j][i]-=min;
+			fillerMap[j][i]-=min;
 			//if this point is below the floodline...
-			if (baseMap[j][i]<flood){
-				newcolor=lerp(waterlow,waterhigh,baseMap[j][i]/flood);
+			if (fillerMap[j][i]<flood){
+				newcolor=lerp(waterlow,waterhigh,fillerMap[j][i]/flood);
                                 std::cout << "j = " << j << std::endl;
                                 std::cout << "i = " << i << std::endl;
                                 
-                                std::cout << "value = " << baseMap[j][i] << " is water." << std::endl;
+                                std::cout << "value = " << fillerMap[j][i] << " is water." << std::endl;
                         }
 			
 			//if this is above the mountain line...
-			else if (baseMap[j][i]>mount){
-				newcolor=lerp(mountlow,mounthigh,(baseMap[j][i]-mount)/(diff-mount));
+			else if (fillerMap[j][i]>mount){
+				newcolor=lerp(mountlow,mounthigh,(fillerMap[j][i]-mount)/(diff-mount));
                                 std::cout << "j = " << j << std::endl;
                                 std::cout << "i = " << i << std::endl;
-                                std::cout << "value = " << baseMap[j][i] << " is mountain." << std::endl;
+                                std::cout << "value = " << fillerMap[j][i] << " is mountain." << std::endl;
 			}
 			//if this is regular land
 			else {
-				newcolor=lerp(landlow,landhigh,(baseMap[j][i]-flood)/(mount-flood));
+				newcolor=lerp(landlow,landhigh,(fillerMap[j][i]-flood)/(mount-flood));
                                 std::cout << "j = " << j << std::endl;
                                 std::cout << "i = " << i << std::endl;
-                                std::cout << "value = " << baseMap[j][i] << " is land." << std::endl;
+                                std::cout << "value = " << fillerMap[j][i] << " is land." << std::endl;
                         }
 			
 			out.put(char(newcolor.v[0]));//blue
@@ -294,17 +324,63 @@ Tile World::getTile(int xPos, int yPos)
 void World::buildBiomes()
 {
     
-    fillMap();
-    //printMap(0);
+    buildMaps();
+    
     for(int x = 0; x < worldMap.size(); x++)
     {
         for(int y = 0; y < worldMap[x].size(); y++)
         {
             
-            worldMap[x][y].setBiomeAttributes(baseMap[x][y]);
+            worldMap[x][y].setElevation(elevationMap[x][y]);
+            
+            worldMap[x][y].setRainfall(rainfallMap[x][y]);
+           
+            worldMap[x][y].setTemperature(temperatureMap[x][y]);
+            std::cout << "Setting Biome Type for Biome:" << x << " " << y <<
+                    std::endl;
+            worldMap[x][y].setBiomeType();
         }
             
     }
+    
+    clearMaps();
      
+}
+
+void World::generateBaseTemperature()
+{
+    int northPole = 0;
+    int equator = temperatureMap.size()/2;
+    int southPole = temperatureMap.size();
+    
+    int northPoleTemp = 0;
+    int equatorTemp = 90;
+    int southPoleTemp = 0; //actually medians closer to -20ish, 
+    //but don't want to over-complicate, and pole seasons are switched so it's warmer in January...
+    
+    int temp = northPoleTemp;
+    
+    int diff = equatorTemp/equator;
+    for(int y = northPole; y < southPole; ++y)
+    {
+        
+        for(int x = 0; x < temperatureMap.size(); ++x)
+        {
+            temperatureMap[x][y] = temp;
+        }
+        
+        if(y <= equator)
+        {
+            temp += diff;
+        }
+
+        else if(y > equator)
+        {
+            temp -= (diff * 1.25);
+        }
+        
+        
+    }
+
 }
 

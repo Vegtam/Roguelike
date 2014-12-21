@@ -4,6 +4,7 @@
 
 #include "Image.hpp"
 #include "TitleView.hpp"
+#include "World.hpp"
 
 bool TitleView::init()
 {

@@ -11,23 +11,26 @@ class World {
 private:
     const int xSize;
     const int ySize;
+    float min, max;
+    std::vector<std::vector<float> > elevationMap;
+    std::vector<std::vector<float> > rainfallMap;
+    std::vector<std::vector<int> > temperatureMap;
     
 public:
     
     World(int width, int height);
     virtual ~World();
-    std::vector <std::vector<std::vector<float> > > maps;
-    std::vector<std::vector<float> > baseMap;
+    std::vector<std::vector<float> > fillerMap;    
     std::vector <std::vector<Biome> > worldMap;
     Tile getTile(int xPos, int yPos);
-    void buildBiomes();
+    void buildMaps();
     
-private:
-    int min, max;
-
-
+    void buildBiomes();
+    void clearMaps();
 protected:    
+    void generateBaseTemperature();
     void fillMap();
+    
     float random(float max);
     void printMap(int type);
    

@@ -53,18 +53,18 @@ bool TileMap::render()
 
 			for (auto& tile: tiles)
 			{
-				if(tile.isDirty())
-				{
+				//if(tile.isDirty())
+				//{
 					uint8_t r = 0;
 					uint8_t g = 0;
 					uint8_t b = 0;
 					uint8_t o_r = 0;
 					uint8_t o_g = 0;
 					uint8_t o_b = 0; 
-					/* calculate upper left position of tile to be drawn */
+					// calculate upper left position of tile to be drawn
 					uint32_t tile_x = (index%map_w)*t_set->getTileWidth();
 					uint32_t tile_y = (index/map_w)*t_set->getTileHeight();
-					/* Get the foreground color as components */
+					// Get the foreground color as components
 					al_unmap_rgb(tile.getFore(),&o_r,&o_g,&o_b);
 								
 					for(uint32_t i = 0; i<t_set->getTileWidth();i++)
@@ -73,7 +73,7 @@ bool TileMap::render()
 						{
 							ALLEGRO_COLOR pix = al_get_pixel(t_set->get(tile.getIndex()),i,j);
 							al_unmap_rgb(pix,&r,&g,&b);
-							/* magenta is the background color 255, 0, 255 in rgb */
+							// magenta is the background color 255, 0, 255 in rgb
 							if(r==255 && b == 255 && g == 0)
 							{
 								pix = tile.getBack();
@@ -87,8 +87,9 @@ bool TileMap::render()
 					}
 
 					tile.clearDirty();
-				}
-				index++;
+				//}
+				
+                            index++;
 			}
 			al_unlock_bitmap(backing_bmap);
 			dirty = false;

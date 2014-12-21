@@ -29,13 +29,121 @@ Biome::Biome(const Biome& orig) {
 Biome::~Biome() {
 }
 
-void Biome::setBiomeAttributes(float elevation)
+void Biome::setBiomeType()
 {
+    float sealevel = 0.0f;// 0.0 sea level
+    float flood = 0.5f; // .5 flood zone
+    float mount = 3.0f;// 3.0 mountain level
     
-    float flood = 0.5f;//flood level
-    float mount = 3.0f;//mountain level
-/*
-        switch(biomeType)
+    float humid = 3.0f; // 3.0 high rainfall
+    float arid = 0.5f; // 0.5 low rainfall
+    
+    int tropical = 64; // 64 Hot Temperature
+    int arctic = 15; // 15 Cold Temperature 
+    
+    
+    
+    
+    if(elevation <= sealevel)
+    {
+        biomeType = 0; // Ocean
+    }
+    
+    else if(elevation >= mount)
+    {
+        biomeType = 10; // Montane
+    }
+    
+    else if(elevation > sealevel and elevation <= flood)
+    {
+        if(temperature >= tropical)
+        {
+            biomeType = 14; //Mangrove Forest
+        }
+        
+        else if(temperature > arctic and temperature < tropical)
+        {
+            biomeType = 9; //Flooded Grasslands
+        }      
+        
+        else
+        {
+            biomeType = 15; //Not Set!
+        }
+        
+    }   
+    else if(elevation > flood)
+    {
+        if(temperature <= arctic) //Boreal Forest or Tundra
+        {
+            if(rainfall >= humid)
+            {
+                biomeType = 6; //Boreal Forest
+            }
+            
+            else if(rainfall < humid)
+            {
+                biomeType = 11; //Tundra
+            }
+            
+            else
+            {
+                biomeType = 15; //Not Set!!!
+            }
+        }
+        
+        else
+        {
+            biomeType = 15; //Not Set!!
+        }
+    } //end elevation > flood  
+    else if(temperature >= tropical)
+        {
+            if(rainfall >= humid)
+            {
+                biomeType = 1; //Tropical Broadleaf Forest
+            }
+            
+            else if(rainfall <= arid)
+            {
+                biomeType = 13; //Desert
+            }
+            
+            else
+            {
+                if(rainfall >= humid - 1.5f and rainfall < humid - 1.0f)
+                {
+                    biomeType = 2; //Tropical Dry Broadleaf Forest
+                    
+                }
+                
+                else if(rainfall > arid and rainfall < arid + 1.0f)
+                {
+                    biomeType = 7; //Tropical grasslands
+                }
+                
+                else
+                {
+                    biomeType = 3; //Tropical Coniferous Forest
+                }
+            }
+        }
+    
+    
+    else
+    {
+        biomeType = 15;
+    }
+    
+    
+    
+    std::cout << "Setting Elevation for Biome: " << elevation << std::endl;
+    std::cout << "Setting Rainfall for Biome: " << rainfall << std::endl;
+    std::cout << "Setting Temperature for Biome: " << temperature << std::endl;
+    
+    
+    
+    switch(biomeType)
     {
             case 0: // ocean 
                 
@@ -273,56 +381,103 @@ void Biome::setBiomeAttributes(float elevation)
                 // dark green
                 foregroundR = 1;
                 foregroundG = 100;
-                foregroundB = 1;        
+                foregroundB = 1;
+                
+            case 15: // Not Set!!!!
+                
+                displayID = 33; // !
+                
+                // Red
+                backgroundR = 250;
+                backgroundG = 1;
+                backgroundB = 1;
+                
+                // Orange
+                foregroundR = 250;
+                foregroundG = 125;
+                foregroundB = 1;
+                
+                
                 
                 
     }
-*/
 
-if(elevation > mount)
-{
+ /*   
+  * Elevation Debugging
+  * 
+    if(elevation > mount)
+    {
  
-    displayID = 94; // pointed arch 
+        displayID = 94; // pointed arch 
+                
+                    // light green
+                    backgroundR = 115;
+                    backgroundG = 185;
+                    backgroundB = 1;
+                
+                    // dark gray 
+                    foregroundR = 135;
+                    foregroundG = 130;
+                    foregroundB = 120;
+    }
+    else if(elevation < flood)
+    {
+        displayID = 247; // ~ 
+                
+                    // blue          
+                    backgroundR = 1;
+                    backgroundG = 100;
+                    backgroundB = 255;
+                
+                    // light blue
+                    foregroundR = 175;
+                    foregroundG = 230;
+                    foregroundB = 245;
+    }
+    else
+    {
+        displayID = 0; // blank 
                 
                 // light green
                 backgroundR = 115;
                 backgroundG = 185;
                 backgroundB = 1;
                 
-                // dark gray 
-                foregroundR = 135;
-                foregroundG = 130;
-                foregroundB = 120;
-}
-else if(elevation < flood)
-{
-    displayID = 247; // ~ 
-                
-                // blue          
-                backgroundR = 1;
-                backgroundG = 100;
-                backgroundB = 255;
-                
-                // light blue
-                foregroundR = 175;
-                foregroundG = 230;
-                foregroundB = 245;
-}
-else
-{
-    displayID = 0; // blank 
-                
                 // light green
                 backgroundR = 115;
                 backgroundG = 185;
                 backgroundB = 1;
-                
-                // light green
-                backgroundR = 115;
-                backgroundG = 185;
-                backgroundB = 1;
-}
+    }
+  */
+  //Temperature Debugging
+    if(temperature > tropical)
+    {
+        //displayID = 0; // blank
+            //red
+        backgroundR = 250;
+        backgroundG = 1;
+        backgroundB = 1;
+    }
 
+    else if(temperature < arctic)
+    {
+        //displayID = 0; //blank
+            //blue
+        backgroundR = 1;
+        backgroundG = 1;
+        backgroundB = 250;
+    }
+    
+    else
+    {
+        //displayID = 0; //blank
+            //purple
+        backgroundR = 125;
+        backgroundG = 1;
+        backgroundB = 125;
+    }
+    
+    
 } 
 
 
