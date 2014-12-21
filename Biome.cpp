@@ -14,7 +14,7 @@
     -09 Flooded grasslands and savannas (temperate to tropical, fresh or brackish water inundated)
     -10 Montane grasslands and shrublands (alpine or montane climate)
     -11 Tundra (Arctic)
-    12 Mediterranean forests, woodlands, and scrub or sclerophyll forests (temperate warm, semihumid to semiarid with winter rainfall)
+    -12 Mediterranean forests, woodlands, and scrub or sclerophyll forests (temperate warm, semihumid to semiarid with winter rainfall)
     -13 Deserts and xeric shrublands (temperate to tropical, arid)
     -14 Mangrove (subtropical and tropical, salt water inundated)
 
@@ -63,11 +63,6 @@ void Biome::setBiomeType()
             biomeType = 14; //Mangrove Forest
         }
         
-        else if(temperature > arctic and temperature < tropical)
-        {
-            biomeType = 9; //Flooded Grasslands
-        }   
-        
         else if(temperature <= arctic)
         {
            if(rainfall >= humid)
@@ -82,10 +77,10 @@ void Biome::setBiomeType()
             
         }
         
-        else
+        else// if(temperature > arctic and temperature < tropical)
         {
-            biomeType = 15; //Not Set!
-        }
+            biomeType = 9; //Flooded Grasslands
+        }   
         
     }   //end elevation in flood plain
     else if(elevation > flood and elevation < mount)
