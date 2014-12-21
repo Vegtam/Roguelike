@@ -3,20 +3,20 @@
 
 /*
   
-    01 Tropical and subtropical moist broadleaf forests (tropical and subtropical, humid)
-    02 Tropical and subtropical dry broadleaf forests (tropical and subtropical, semihumid)
-    03 Tropical and subtropical coniferous forests (tropical and subtropical, semihumid)
-    04 Temperate broadleaf and mixed forests (temperate, humid)
-    05 Temperate coniferous forests (temperate, humid to semihumid)
-    06 Boreal forests/taiga (subarctic, humid)
-    07 Tropical and subtropical grasslands, savannas, and shrublands (tropical and subtropical, semiarid)
-    08 Temperate grasslands, savannas, and shrublands (temperate, semiarid)
-    09 Flooded grasslands and savannas (temperate to tropical, fresh or brackish water inundated)
-    10 Montane grasslands and shrublands (alpine or montane climate)
-    11 Tundra (Arctic)
+    -01 Tropical and subtropical moist broadleaf forests (tropical and subtropical, humid)
+    -02 Tropical and subtropical dry broadleaf forests (tropical and subtropical, semihumid)
+    -03 Tropical and subtropical coniferous forests (tropical and subtropical, semihumid)
+    -04 Temperate broadleaf and mixed forests (temperate, humid)
+    -05 Temperate coniferous forests (temperate, humid to semihumid)
+    -06 Boreal forests/taiga (subarctic, humid)
+    -07 Tropical and subtropical grasslands, savannas, and shrublands (tropical and subtropical, semiarid)
+    -08 Temperate grasslands, savannas, and shrublands (temperate, semiarid)
+    -09 Flooded grasslands and savannas (temperate to tropical, fresh or brackish water inundated)
+    -10 Montane grasslands and shrublands (alpine or montane climate)
+    -11 Tundra (Arctic)
     12 Mediterranean forests, woodlands, and scrub or sclerophyll forests (temperate warm, semihumid to semiarid with winter rainfall)
-    13 Deserts and xeric shrublands (temperate to tropical, arid)
-    14 Mangrove (subtropical and tropical, salt water inundated)
+    -13 Deserts and xeric shrublands (temperate to tropical, arid)
+    -14 Mangrove (subtropical and tropical, salt water inundated)
 
  */
 
@@ -31,12 +31,14 @@ Biome::~Biome() {
 
 void Biome::setBiomeType()
 {
-    float sealevel = 0.0f;// 0.0 sea level
-    float flood = 0.5f; // .5 flood zone
-    float mount = 3.0f;// 3.0 mountain level
+    float sealevel = 0.0f;// 0.0f sea level
+    float flood = 0.5f; // .5f flood zone
+    float mount = 4.0f;// 4 mountain level
     
-    float humid = 3.0f; // 3.0 high rainfall
-    float arid = 0.5f; // 0.5 low rainfall
+    float humid = 4.0f; // 4 high rainfall
+    float semihumid = 2.0f; // 2 med high rainfall
+    float semiarid = 0.5f; // .5 med low rainfall
+    float arid = -1.0f; // .0 low rainfall
     
     int tropical = 64; // 64 Hot Temperature
     int arctic = 15; // 15 Cold Temperature 
@@ -64,75 +66,104 @@ void Biome::setBiomeType()
         else if(temperature > arctic and temperature < tropical)
         {
             biomeType = 9; //Flooded Grasslands
-        }      
+        }   
+        
+        else if(temperature <= arctic)
+        {
+           if(rainfall >= humid)
+            {
+                biomeType = 6; //Boreal Forest
+            }
+            
+            else
+            {
+                biomeType = 11; //Tundra
+            }
+            
+        }
         
         else
         {
             biomeType = 15; //Not Set!
         }
         
-    }   
-    else if(elevation > flood)
+    }   //end elevation in flood plain
+    else if(elevation > flood and elevation < mount)
     {
         if(temperature <= arctic) //Boreal Forest or Tundra
         {
-            if(rainfall >= humid)
+            if(rainfall >= semihumid)
             {
                 biomeType = 6; //Boreal Forest
             }
             
-            else if(rainfall < humid)
+            else// if(rainfall < humid)
             {
                 biomeType = 11; //Tundra
             }
             
-            else
-            {
-                biomeType = 15; //Not Set!!!
-            }
-        }
+        }//end of arctic temperatures
         
-        else
+        else if(temperature >= tropical)
         {
-            biomeType = 15; //Not Set!!
-        }
-    } //end elevation > flood  
-    else if(temperature >= tropical)
+            if(rainfall <= arid)
+            {
+                biomeType = 13; //Desert
+            }
+
+            else if(rainfall < humid and rainfall >= semihumid)
+            {
+                biomeType = 2; //Tropical Dry Broadleaf Forest
+
+            }
+            
+            else if(rainfall < semihumid and rainfall > semiarid)
+            {
+                biomeType = 3; //Tropical Coniferous Forest
+            }
+
+            else //if(rainfall <= semiarid and rainfall > arid)
+            {
+                biomeType = 7; //Tropical grasslands
+            }
+            
+        }//end of tropical temperatures
+            
+        else if(temperature < tropical and temperature > arctic)
         {
             if(rainfall >= humid)
             {
-                biomeType = 1; //Tropical Broadleaf Forest
+                biomeType = 4; //Broadleaf Forest
             }
+            
             
             else if(rainfall <= arid)
             {
                 biomeType = 13; //Desert
             }
             
+            else if(rainfall < semihumid and rainfall > semiarid)
+            {
+                biomeType = 5; //Coniferous Forest
+            }
+            
+            else if(rainfall <= semiarid and rainfall > arid)
+            {
+                biomeType = 8; //Grassland
+            }
+            
             else
             {
-                if(rainfall >= humid - 1.5f and rainfall < humid - 1.0f)
-                {
-                    biomeType = 2; //Tropical Dry Broadleaf Forest
-                    
-                }
-                
-                else if(rainfall > arid and rainfall < arid + 1.0f)
-                {
-                    biomeType = 7; //Tropical grasslands
-                }
-                
-                else
-                {
-                    biomeType = 3; //Tropical Coniferous Forest
-                }
+                biomeType = 12; //Mediterranean Forest
             }
-        }
+            
+        } //end of temperate temperatures  
     
+    }
     
     else
     {
-        biomeType = 15;
+        biomeType = 15; //Not Set!!!
     }
     
     
@@ -449,6 +480,7 @@ void Biome::setBiomeType()
                 backgroundB = 1;
     }
   */
+    /*
   //Temperature Debugging
     if(temperature > tropical)
     {
@@ -476,6 +508,7 @@ void Biome::setBiomeType()
         backgroundG = 1;
         backgroundB = 125;
     }
+    */
     
     
 } 
