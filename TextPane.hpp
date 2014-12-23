@@ -30,6 +30,8 @@ private:
 
 	bool dirty;
 	bool is_init;
+protected:
+	inline bool isInit() {return is_init;};
 public:
 	TextPane();
 	bool init(ALLEGRO_FONT* fnt, uint32_t x, uint32_t y, uint32_t w, uint32_t h);

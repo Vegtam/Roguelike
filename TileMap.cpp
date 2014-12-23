@@ -39,7 +39,7 @@ bool TileMap::render()
 			al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP);
 			backing_bmap = al_create_bitmap(map_w*t_set->getTileWidth(), 
 										    map_h*t_set->getTileHeight());
-			al_clear_to_color(al_map_rgb(255,255,255));
+			//al_clear_to_color(al_map_rgb(255,255,255));
 
 		}
 		if(backing_bmap)
@@ -49,12 +49,16 @@ bool TileMap::render()
 			al_set_target_bitmap(backing_bmap);
 			
 			/* @todo consider checking this lock */
-			al_lock_bitmap(backing_bmap,ALLEGRO_PIXEL_FORMAT_ANY,ALLEGRO_LOCK_WRITEONLY);
+			if( al_lock_bitmap(backing_bmap,ALLEGRO_PIXEL_FORMAT_ANY,ALLEGRO_LOCK_WRITEONLY) == NULL)
+			{
+				std::cout <<"Error locking bitmap"<<std::endl;
+				return false;
+			}
 
 			for (auto& tile: tiles)
 			{
-				//if(tile.isDirty())
-				//{
+				if(tile.isDirty())
+				{
 					uint8_t r = 0;
 					uint8_t g = 0;
 					uint8_t b = 0;
@@ -66,12 +70,13 @@ bool TileMap::render()
 					uint32_t tile_y = (index/map_w)*t_set->getTileHeight();
 					// Get the foreground color as components
 					al_unmap_rgb(tile.getFore(),&o_r,&o_g,&o_b);
-								
+					ALLEGRO_BITMAP* t = t_set->get(tile.getIndex());
+					al_lock_bitmap(t,ALLEGRO_PIXEL_FORMAT_ANY, ALLEGRO_LOCK_READONLY);
 					for(uint32_t i = 0; i<t_set->getTileWidth();i++)
 					{
 						for(uint32_t j = 0; j< t_set->getTileHeight(); j++)
 						{
-							ALLEGRO_COLOR pix = al_get_pixel(t_set->get(tile.getIndex()),i,j);
+							ALLEGRO_COLOR pix = al_get_pixel(t,i,j);
 							al_unmap_rgb(pix,&r,&g,&b);
 							// magenta is the background color 255, 0, 255 in rgb
 							if(r==255 && b == 255 && g == 0)
@@ -85,11 +90,10 @@ bool TileMap::render()
 							al_put_pixel(tile_x+i, tile_y+j, pix);
 						}
 					}
-
+					al_unlock_bitmap(t);
 					tile.clearDirty();
-				//}
-				
-                            index++;
+				}
+                index++;
 			}
 			al_unlock_bitmap(backing_bmap);
 			dirty = false;
