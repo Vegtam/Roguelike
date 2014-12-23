@@ -10,7 +10,7 @@ bool TileSet::init(uint32_t w, uint32_t h)
 	int32_t base_h = 0;
 	if(!is_init)
 	{
-		al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
+		al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP);
 		tileset = al_load_bitmap(al_path_cstr(tileset_path,ALLEGRO_NATIVE_PATH_SEP));
 		if(tileset)
 		{
