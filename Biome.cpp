@@ -160,8 +160,12 @@ void Biome::setBiomeType()
     {
         biomeType = 15; //Not Set!!!
     }
+    displayBiome(biomeType);
     
-    
+}
+
+void Biome::displayBiome(int biomeType)
+{
     switch(biomeType)
     {
             case 0: // ocean 
@@ -500,7 +504,7 @@ void Biome::setBiomeType()
         backgroundB = 125;
     }
     */
-    /*
+    
     //Drainage Debugging
     
     if(river)
@@ -522,7 +526,7 @@ void Biome::setBiomeType()
     {
         
     }
-    */
+    
     
 } 
 

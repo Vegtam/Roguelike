@@ -59,8 +59,8 @@ void World::buildMaps()
     std::cout << "Generated Rainfall Map" << std::endl;
     generateBaseTemperature();
     std::cout << "Generated Base Temperatures" << std::endl;
-   // generateRivers();
-   // std::cout << "Generated Erosion and Rivers" << std::endl;
+    generateRiverSource();
+    std::cout << "Generated Erosion and Rivers" << std::endl;
     
 
         
@@ -74,6 +74,92 @@ void World::clearMaps()
     drainageMap.clear();
     riverMap.clear();
     fillerMap.clear();
+}
+
+bool World::checkMaps()
+{
+    int mountainsHigh = 30;
+    int mountainsLow = 20;
+    
+    int oceansHigh = 40;
+    int oceansLow = 20;
+    
+    int aridityHigh = 10;
+    int aridityLow = 1;
+    
+    int humidityHigh = 10;
+    int humidityLow = 1;
+    
+    float mountain = 4.0f;
+    float ocean = 0.0f;
+    float arid = -0.5f;
+    float humid = 4.0f;
+    
+    float totalSize = worldMap.size() * worldMap[0].size();
+    float mountainCount = 0.0f;
+    float oceanCount = 0.0f;
+    float aridCount = 0.0f;
+    float humidCount = 0.0f;
+    
+    
+    
+    for(int x = 0; x < worldMap.size(); ++x)
+    {
+        for(int y = 0; y < worldMap.size(); ++y)
+        {
+            if(elevationMap[x][y] >= mountain)
+            {
+                ++mountainCount;
+            }
+            else if(elevationMap[x][y] <= ocean)
+            {
+                ++oceanCount;
+            }
+            if(rainfallMap[x][y] >= humid)
+            {
+                ++humidCount;
+            }
+            else if(rainfallMap[x][y] <= arid)
+            {
+                ++aridCount;
+            }
+            
+          
+        }
+    }
+    
+    int mountainPercentage = round(mountainCount/totalSize * 100);
+    int oceanPercentage = round(oceanCount/totalSize * 100);
+    int humidity = round(humidCount/totalSize * 100);
+    int aridity = round(aridCount/totalSize * 100);
+    
+    if(mountainPercentage >= mountainsHigh or mountainPercentage <= mountainsLow)
+    {
+        return false;
+    }
+    if(oceanPercentage >= oceansHigh or oceanPercentage <= oceansLow)
+    {
+        return false;
+    }
+    if(humidity >= humidityHigh or humidity <= humidityLow)
+    {
+        return false;
+    }
+    if(aridity >= aridityHigh or aridity <= aridityLow)
+    {
+        return false;
+    }
+    
+                
+    
+    std::cout << "Your map contains " << totalSize << " biomes." << std::endl;
+    std::cout << mountainPercentage << "% of which are mountains." << std::endl;
+    std::cout << oceanPercentage << "% of which are ocean." << std::endl;
+    std::cout << "It has " << humidity << "% humidity." << std::endl;
+    std::cout << "It has " << aridity << "% aridity." << std::endl;
+    
+    return true;
+            
 }
 
 void World::fillMap(){
@@ -333,23 +419,31 @@ void World::buildBiomes()
     
     buildMaps();
     
-    for(int x = 0; x < worldMap.size(); x++)
+    if(checkMaps())
     {
-        for(int y = 0; y < worldMap[x].size(); y++)
+        for(int x = 0; x < worldMap.size(); x++)
         {
-            
-            worldMap[x][y].setElevation(elevationMap[x][y]);
-            
-            worldMap[x][y].setRainfall(rainfallMap[x][y]);
-           
-            worldMap[x][y].setTemperature(temperatureMap[x][y]);
-           // worldMap[x][y].setDrainage(drainageMap[x][y]);
-            worldMap[x][y].setBiomeType();
-            
+            for(int y = 0; y < worldMap[x].size(); y++)
+            {
+
+                worldMap[x][y].setElevation(elevationMap[x][y]);
+
+                worldMap[x][y].setRainfall(rainfallMap[x][y]);
+
+                worldMap[x][y].setTemperature(temperatureMap[x][y]);
+                worldMap[x][y].setDrainage(drainageMap[x][y]);
+                worldMap[x][y].setBiomeType();
+
+            }
+
         }
-            
     }
     
+    else
+    {
+        std::cout << "World Requirements Failed, Rebuilding World" << std::endl;
+        buildBiomes();
+    }
     clearMaps();
      
 }
@@ -399,8 +493,8 @@ void World::generateBaseTemperature()
 
 }
 
-/*
-void World::generateRivers()
+
+void World::generateRiverSource()
 {
     int north;
     int west;
@@ -419,91 +513,15 @@ void World::generateRivers()
         for(y; y < elevationMap[0].size() -1; ++y)
         {   
             
-            if(elevationMap[x][y] >= mountain and rainfallMap[x][y] > semiarid)
+            if(elevationMap[x][y] >= mountain and rainfallMap[x][y] >= semiarid)
             {
-                while(elevationMap[x][y] > ocean and rainfallMap[x][y] > arid)
-                {
-                    curElevation = elevationMap[x][y];
-                    north = x - 1;
-                    west = y - 1;
-                    south = x + 1;
-                    east = y + 1;
-                    if(elevationMap[north][y] < curElevation)
-                    {
-                        curElevation = elevationMap[north][y];
-                        riverMap[x][y] = "N";
-                        drainageMap[north][y] = true;
-                        x = north;
-                    }
-                
-                    if(elevationMap[north][west] < curElevation)
-                    {
-                        curElevation = elevationMap[north][west];
-                        riverMap[x][y] = "NW";
-                        drainageMap[north][west] = true;
-                        x = north;
-                        y = west;
-                    }
-                
-                    if(elevationMap[x][west] < curElevation)
-                    {
-                        curElevation = elevationMap[x][west];
-                        riverMap[x][y] = "W";
-                        drainageMap[x][west] = true;
-                        y = west;
-                    }
-                
-                    if(elevationMap[south][west] < curElevation)
-                    {
-                        curElevation = elevationMap[south][west];
-                        riverMap[x][y] = "SW";
-                        drainageMap[south][west] = true;
-                        x = south;
-                        y = west;
-                    }
-                
-                    if(elevationMap[south][y] < curElevation)
-                    {
-                        curElevation = elevationMap[south][y];
-                        riverMap[x][y] = "S";
-                        drainageMap[south][y] = true;
-                        x = south;
-                    }
-                
-                    if(elevationMap[south][east] < curElevation)
-                    {
-                        curElevation = elevationMap[south][east];
-                        riverMap[x][y] = "SE";
-                        drainageMap[south][east] = true;
-                        x = south;
-                        y = east;
-                    }
-                
-                    if(elevationMap[x][east] < curElevation)
-                    {
-                        curElevation = elevationMap[x][east];
-                        riverMap[x][y] = "E";
-                        drainageMap[x][east] = true;
-                        y = east;
-                    }
-                
-                    if(elevationMap[north][east] < curElevation)
-                    {
-                        curElevation = elevationMap[north][east];
-                        riverMap[x][y] = "NE";
-                        drainageMap[north][east] = true;
-                        x = north;
-                        y = east;
-                                
-                    }
-                    
-                    else
-                    {
-                        break;
-                    }
-                }
+                generateRiver(x, y);
             }
         }
     }
 }
-*/
+
+void World::generateRiver(int x, int y)
+{
+    std::cout << "Possible source at : " << x << " " << y << std::endl;
+}

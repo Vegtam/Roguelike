@@ -41,6 +41,7 @@ OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISE
 #include <vector>
 #include <array>
 #include <string>
+#include <math.h>
 #include "Biome.hpp"
 #include "Tile.hpp"
 #include "TerrainGenerator.hpp"
@@ -71,9 +72,11 @@ public:
 protected:    
     void generateBaseTemperature();
     void fillMap();   
-    void generateRivers();
+    void generateRiverSource();
+    void generateRiver(int x, int y);
     float random(float max);
     void printMap(int type);
+    bool checkMaps();
    
     struct color{
 	//v[0]=red, v[1]=green, v[2]=blue

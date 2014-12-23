@@ -30,6 +30,9 @@ public:
     inline void setTemperature(int wGenTemperature){temperature = (wGenTemperature - (elevation * 2));};
     inline void setDrainage(bool wGenDrainage){river = (wGenDrainage);};
     
+private:
+    void displayBiome(int biomeType);
+    
 
 
 
