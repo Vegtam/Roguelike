@@ -13,6 +13,8 @@ World::World(int width, int height) :
         elevationMap(width, std::vector<float>(height)),
         temperatureMap(width, std::vector<int>(height)),
         rainfallMap(width, std::vector<float>(height)),
+        drainageMap(width, std::vector<bool>(height, false)),
+        riverMap(width, std::vector<std::string>(height)),
         xSize(width), ySize(height){
     
 }
@@ -57,6 +59,9 @@ void World::buildMaps()
     std::cout << "Generated Rainfall Map" << std::endl;
     generateBaseTemperature();
     std::cout << "Generated Base Temperatures" << std::endl;
+   // generateRivers();
+   // std::cout << "Generated Erosion and Rivers" << std::endl;
+    
 
         
 }
@@ -66,6 +71,8 @@ void World::clearMaps()
     elevationMap.clear();
     rainfallMap.clear();
     temperatureMap.clear();
+    drainageMap.clear();
+    riverMap.clear();
     fillerMap.clear();
 }
 
@@ -336,6 +343,7 @@ void World::buildBiomes()
             worldMap[x][y].setRainfall(rainfallMap[x][y]);
            
             worldMap[x][y].setTemperature(temperatureMap[x][y]);
+           // worldMap[x][y].setDrainage(drainageMap[x][y]);
             worldMap[x][y].setBiomeType();
             
         }
@@ -354,7 +362,7 @@ void World::generateBaseTemperature()
     
     int northPoleTemp = 0;
     int equatorTemp = 90;
-    int southPoleTemp = 0; //actually medians closer to -20ish, 
+    int southPoleTemp = -20; 
     //but don't want to over-complicate, and pole seasons are switched so it's warmer in January...
     
     int temp = northPoleTemp;
@@ -375,7 +383,15 @@ void World::generateBaseTemperature()
 
         else if(y > equator)
         {
-            temp -= (diff * 1.25);
+            if(temp > southPoleTemp)
+            {
+                temp -= (diff * 1.25);
+            }
+            else
+            {
+                temp = southPoleTemp;
+            }
+            
         }
         
         
@@ -383,3 +399,111 @@ void World::generateBaseTemperature()
 
 }
 
+/*
+void World::generateRivers()
+{
+    int north;
+    int west;
+    int south;
+    int east;
+    float mountain = 4.0f;
+    float ocean = 0.0f;
+    float semiarid = 0.5f;
+    float arid = -1.0f;
+    int x = 1;
+    int y = 1;
+    float curElevation;
+    
+    for(x; x < elevationMap.size() -1; ++x)
+    {
+        for(y; y < elevationMap[0].size() -1; ++y)
+        {   
+            
+            if(elevationMap[x][y] >= mountain and rainfallMap[x][y] > semiarid)
+            {
+                while(elevationMap[x][y] > ocean and rainfallMap[x][y] > arid)
+                {
+                    curElevation = elevationMap[x][y];
+                    north = x - 1;
+                    west = y - 1;
+                    south = x + 1;
+                    east = y + 1;
+                    if(elevationMap[north][y] < curElevation)
+                    {
+                        curElevation = elevationMap[north][y];
+                        riverMap[x][y] = "N";
+                        drainageMap[north][y] = true;
+                        x = north;
+                    }
+                
+                    if(elevationMap[north][west] < curElevation)
+                    {
+                        curElevation = elevationMap[north][west];
+                        riverMap[x][y] = "NW";
+                        drainageMap[north][west] = true;
+                        x = north;
+                        y = west;
+                    }
+                
+                    if(elevationMap[x][west] < curElevation)
+                    {
+                        curElevation = elevationMap[x][west];
+                        riverMap[x][y] = "W";
+                        drainageMap[x][west] = true;
+                        y = west;
+                    }
+                
+                    if(elevationMap[south][west] < curElevation)
+                    {
+                        curElevation = elevationMap[south][west];
+                        riverMap[x][y] = "SW";
+                        drainageMap[south][west] = true;
+                        x = south;
+                        y = west;
+                    }
+                
+                    if(elevationMap[south][y] < curElevation)
+                    {
+                        curElevation = elevationMap[south][y];
+                        riverMap[x][y] = "S";
+                        drainageMap[south][y] = true;
+                        x = south;
+                    }
+                
+                    if(elevationMap[south][east] < curElevation)
+                    {
+                        curElevation = elevationMap[south][east];
+                        riverMap[x][y] = "SE";
+                        drainageMap[south][east] = true;
+                        x = south;
+                        y = east;
+                    }
+                
+                    if(elevationMap[x][east] < curElevation)
+                    {
+                        curElevation = elevationMap[x][east];
+                        riverMap[x][y] = "E";
+                        drainageMap[x][east] = true;
+                        y = east;
+                    }
+                
+                    if(elevationMap[north][east] < curElevation)
+                    {
+                        curElevation = elevationMap[north][east];
+                        riverMap[x][y] = "NE";
+                        drainageMap[north][east] = true;
+                        x = north;
+                        y = east;
+                                
+                    }
+                    
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+    }
+}
+*/
