@@ -500,7 +500,7 @@ void Biome::setBiomeType()
         backgroundB = 125;
     }
     */
-    
+    /*
     //Drainage Debugging
     
     if(river)
@@ -522,7 +522,7 @@ void Biome::setBiomeType()
     {
         
     }
-    
+    */
     
 } 
 
