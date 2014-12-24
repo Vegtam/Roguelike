@@ -31,18 +31,6 @@ Biome::~Biome() {
 
 void Biome::setBiomeType()
 {
-    float sealevel = 0.0f;// 0.0f sea level
-    float flood = 0.5f; // .5f flood zone
-    float mount = 4.0f;// 4 mountain level
-    
-    float humid = 4.0f; // 4 high rainfall
-    float semihumid = 2.0f; // 2 med high rainfall
-    float semiarid = 0.5f; // .5 med low rainfall
-    float arid = -1.0f; // .0 low rainfall
-    
-    int tropical = 64; // 64 Hot Temperature
-    int arctic = 15; // 15 Cold Temperature 
-    
     
     
     
@@ -160,6 +148,7 @@ void Biome::setBiomeType()
     {
         biomeType = 15; //Not Set!!!
     }
+    
     displayBiome(biomeType);
     
 }
@@ -475,7 +464,7 @@ void Biome::displayBiome(int biomeType)
                 backgroundB = 1;
     }
   */
-    /*
+  /*
   //Temperature Debugging
     if(temperature > tropical)
     {
@@ -503,7 +492,7 @@ void Biome::displayBiome(int biomeType)
         backgroundG = 1;
         backgroundB = 125;
     }
-    */
+*/
     
     //Drainage Debugging
     
@@ -526,7 +515,20 @@ void Biome::displayBiome(int biomeType)
     {
         
     }
-    
+    if(lake)
+    {
+        displayID = 247; // ~ 
+                
+        // lightGreen          
+        backgroundR = 25; 
+        backgroundG = 240; 
+        backgroundB = 50; 
+
+        // light blue
+        foregroundR = 1; //175
+        foregroundG = 100; //230
+        foregroundB = 255; //245
+    }
     
 } 
 

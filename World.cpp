@@ -59,9 +59,10 @@ void World::buildMaps()
     std::cout << "Generated Rainfall Map" << std::endl;
     generateBaseTemperature();
     std::cout << "Generated Base Temperatures" << std::endl;
-    generateRiverSource();
-    std::cout << "Generated Erosion and Rivers" << std::endl;
-    
+    //generateRiverSource();
+    //std::cout << "Generated Erosion and Rivers" << std::endl;
+    ++worldsCount;
+   
 
         
 }
@@ -78,11 +79,13 @@ void World::clearMaps()
 
 bool World::checkMaps()
 {
-    int mountainsHigh = 30;
-    int mountainsLow = 20;
+    
+    
+    int mountainsHigh = 20;
+    int mountainsLow = 10;
     
     int oceansHigh = 40;
-    int oceansLow = 20;
+    int oceansLow = 30;
     
     int aridityHigh = 10;
     int aridityLow = 1;
@@ -102,10 +105,9 @@ bool World::checkMaps()
     float humidCount = 0.0f;
     
     
-    
     for(int x = 0; x < worldMap.size(); ++x)
     {
-        for(int y = 0; y < worldMap.size(); ++y)
+        for(int y = 0; y < worldMap[0].size(); ++y)
         {
             if(elevationMap[x][y] >= mountain)
             {
@@ -157,6 +159,8 @@ bool World::checkMaps()
     std::cout << oceanPercentage << "% of which are ocean." << std::endl;
     std::cout << "It has " << humidity << "% humidity." << std::endl;
     std::cout << "It has " << aridity << "% aridity." << std::endl;
+    std::cout << "You destroyed " << worldsCount << 
+            " worlds in pursuit of your perfect world.  I hope you're happy." << std::endl;
     
     return true;
             
@@ -421,6 +425,8 @@ void World::buildBiomes()
     
     if(checkMaps())
     {
+        generateRiverSource();
+        std::cout << "Generated Erosion and Rivers" << std::endl;
         for(int x = 0; x < worldMap.size(); x++)
         {
             for(int y = 0; y < worldMap[x].size(); y++)
@@ -441,6 +447,7 @@ void World::buildBiomes()
     
     else
     {
+        
         std::cout << "World Requirements Failed, Rebuilding World" << std::endl;
         buildBiomes();
     }
@@ -496,32 +503,145 @@ void World::generateBaseTemperature()
 
 void World::generateRiverSource()
 {
-    int north;
-    int west;
-    int south;
-    int east;
+    
     float mountain = 4.0f;
     float ocean = 0.0f;
-    float semiarid = 0.5f;
+    float semihumid = 2.0f;
     float arid = -1.0f;
-    int x = 1;
-    int y = 1;
-    float curElevation;
     
-    for(x; x < elevationMap.size() -1; ++x)
+    for(int x = 0; x < elevationMap.size(); ++x)
     {
-        for(y; y < elevationMap[0].size() -1; ++y)
+        for(int y = 0; y < elevationMap[0].size(); ++y)
         {   
             
-            if(elevationMap[x][y] >= mountain and rainfallMap[x][y] >= semiarid)
+            if(elevationMap[x][y] >= mountain and rainfallMap[x][y] >= semihumid)
             {
-                generateRiver(x, y);
+                generateRiverPath(x, y);
+                
             }
         }
     }
 }
 
-void World::generateRiver(int x, int y)
+void World::generateRiverPath(int x, int y)
 {
-    std::cout << "Possible source at : " << x << " " << y << std::endl;
+    
+    if(x != prevX and y != prevY)
+    {
+        
+    
+        if(x > 1 and x < worldMap.size() - 1 and y > 1 and y < worldMap[0].size() - 1)
+        {
+            
+            int curX = x;
+            int curY = y;
+
+            fillRiver(curX, curY);
+        }
+        else
+        {
+            std::cout << "Generating Lake at X: " << x << " Y: " << y << std::endl;
+            worldMap[x][y].setLake(true);
+        }
+    }
+}
+
+void World::fillRiver(int x, int y)
+{
+    int north = x - 1;
+    int west = y - 1;
+    int south = x + 1;
+    int east = y + 1;
+    int newX = x;
+    int newY = y;
+    
+    float lowest = elevationMap[x][y];
+    //North
+    if(elevationMap[north][y] < lowest)
+    {
+        lowest = elevationMap[north][y];     
+        newX = north;
+    }
+    //NorthWest
+    if(elevationMap[north][west] < lowest)
+    {
+        lowest = elevationMap[north][west];  
+        newX = north;
+        newY = west;
+    }
+    //West
+    if(elevationMap[x][west] < lowest)
+    {
+        lowest = elevationMap[x][west];
+        newY = west;        
+    }
+    //SouthWest
+    if(elevationMap[south][west] < lowest)
+    {
+        lowest = elevationMap[south][west];
+        newX = south;
+        newY = west;
+    }
+    //South
+    if(elevationMap[south][y] < lowest)
+    {
+        lowest = elevationMap[south][y];
+        newX = south;
+    }
+    //SouthEast
+    if(elevationMap[south][east] < lowest)
+    {
+        lowest = elevationMap[south][east];
+        newX = south;
+        newY = east;
+    }
+    //East
+    if(elevationMap[x][east] < lowest)
+    {
+        lowest = elevationMap[x][east];
+        newY = east;
+    }
+    //NorthEast
+    if(elevationMap[north][east] < lowest)
+    {
+        lowest = elevationMap[north][east];
+        newX = north;
+        newY = east;
+    }
+    else
+    {
+       
+        
+    }
+    drainageMap[newX][newY] = true;
+    /*
+    if(x != newX and y != newY and elevationMap[newX][newY] > -0.2f)
+    {
+        if(newX != prevX and newY != prevY)
+        {
+            
+            generateRiverPath(newX, newY);
+        }
+        else
+        {
+            
+        }
+    }
+     */
+    if(newX != prevX and newY != prevY)
+    {
+        prevX = newX;
+        prevY = newY;
+       
+        std::cout << "River flowing through X: " << x << " Y: " << y <<std::endl;
+        generateRiverPath(newX, newY);
+    }
+        
+    else
+    {
+        
+        
+    }
+    
+    
 }

@@ -51,12 +51,15 @@ class World {
 private:
     const int xSize;
     const int ySize;
+    int prevX;
+    int prevY;
     float min, max;
     std::vector<std::vector<float> > elevationMap;
     std::vector<std::vector<float> > rainfallMap;
     std::vector<std::vector<int> > temperatureMap;
     std::vector<std::vector<bool> > drainageMap;
     std::vector<std::vector<std::string> > riverMap;
+    int worldsCount = 0;
     
 public:
     
@@ -73,7 +76,8 @@ protected:
     void generateBaseTemperature();
     void fillMap();   
     void generateRiverSource();
-    void generateRiver(int x, int y);
+    void generateRiverPath(int x, int y);
+    void fillRiver(int x, int y);
     float random(float max);
     void printMap(int type);
     bool checkMaps();
