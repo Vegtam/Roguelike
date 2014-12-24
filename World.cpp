@@ -1,5 +1,6 @@
 #include "World.hpp"
 #include "Biome.hpp"
+#include "BiomeTile.hpp"
 #include "Tile.hpp"
 #include <vector>
 #include <fstream>
@@ -50,15 +51,15 @@ void World::buildMaps()
 {
     
     
-    std::cout << "Generated Filler Map" << std::endl;
+    //std::cout << "Generated Filler Map" << std::endl;
     fillMap();    
     fillerMap.swap(elevationMap);
-    std::cout << "Generated Elevation Map" << std::endl;
+    //std::cout << "Generated Elevation Map" << std::endl;
     fillMap();
     fillerMap.swap(rainfallMap);
-    std::cout << "Generated Rainfall Map" << std::endl;
+    //std::cout << "Generated Rainfall Map" << std::endl;
     generateBaseTemperature();
-    std::cout << "Generated Base Temperatures" << std::endl;
+    //std::cout << "Generated Base Temperatures" << std::endl;
     ++worldsCount;
    
 
@@ -409,7 +410,7 @@ void World::printMap(int mapType) {
 
 Tile World::getTile(int xPos, int yPos)
 {
-    Tile tileDisplay = worldMap[xPos][yPos].getTile();
+    Tile tileDisplay = worldMap[xPos][yPos].getBiomeData().getTile();
     
     return tileDisplay;
     
@@ -418,37 +419,30 @@ Tile World::getTile(int xPos, int yPos)
 
 void World::buildBiomes()
 {
-    
-    buildMaps();
-    
-    if(checkMaps())
-    {
-        generateRiverSource();
-        std::cout << "Generated Erosion and Rivers" << std::endl;
-        for(int x = 0; x < worldMap.size(); x++)
+    bool built = false;
+    do{
+        buildMaps();
+        built = checkMaps();
+        if( ! built )
         {
-            for(int y = 0; y < worldMap[x].size(); y++)
-            {
-
-                worldMap[x][y].setElevation(elevationMap[x][y]);
-
-                worldMap[x][y].setRainfall(rainfallMap[x][y]);
-
-                worldMap[x][y].setTemperature(temperatureMap[x][y]);
-                worldMap[x][y].setDrainage(drainageMap[x][y]);
-                worldMap[x][y].setBiomeType();
-
-            }
-
+            std::cout << "World Requirements Failed, Rebuilding World" << std::endl;
+        }
+    } while(!built);
+    generateRiverSource();
+    std::cout << "Generated Erosion and Rivers" << std::endl;
+    for(int x = 0; x < worldMap.size(); x++)
+    {
+        for(int y = 0; y < worldMap[x].size(); y++)
+        {
+            BiomeTile& biome = worldMap[x][y].getBiomeData();
+            biome.setElevation(elevationMap[x][y]);
+            biome.setRainfall(rainfallMap[x][y]);
+            biome.setTemperature(temperatureMap[x][y]);
+            biome.setDrainage(drainageMap[x][y]);
+            biome.setBiomeTileType();
         }
     }
     
-    else
-    {
-        
-        std::cout << "World Requirements Failed, Rebuilding World" << std::endl;
-        buildBiomes();
-    }
     clearMaps();
      
 }
@@ -624,7 +618,7 @@ void World::fillRiver(int x, int y)
         else
         {
         std::cout << "Generating Lake at X: " << x << " Y: " << y << std::endl;
-        worldMap[x][y].setLake(true);
+        worldMap[x][y].getBiomeData().setLake(true);
         }
     }
         

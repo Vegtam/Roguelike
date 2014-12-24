@@ -1,4 +1,4 @@
-#include "Biome.hpp"
+#include "BiomeTile.hpp"
 #include "World.hpp"
 #include <iostream>
 
@@ -21,16 +21,16 @@
 
  */
 
-Biome::Biome() {
+BiomeTile::BiomeTile() {
 }
 
-Biome::Biome(const Biome& orig) {
+BiomeTile::BiomeTile(const BiomeTile& orig) {
 }
 
-Biome::~Biome() {
+BiomeTile::~BiomeTile() {
 }
 
-void Biome::setBiomeType()
+void BiomeTile::setBiomeTileType()
 {
     
     
@@ -150,11 +150,11 @@ void Biome::setBiomeType()
         biomeType = 15; //Not Set!!!
     }
     
-    displayBiome(biomeType);
+    displayBiomeTile(biomeType);
     
 }
 
-void Biome::displayBiome(int biomeType)
+void BiomeTile::displayBiomeTile(int biomeType)
 {
     switch(biomeType)
     {
@@ -534,7 +534,7 @@ void Biome::displayBiome(int biomeType)
 } 
 
 
-void Biome::debugBiome()
+void BiomeTile::debugBiomeTile()
 {
     if(displayID == 33)
     {
@@ -550,7 +550,7 @@ void Biome::debugBiome()
     }
 }
 
-Tile Biome::getTile()
+Tile BiomeTile::getTile()
 {
     return Tile(displayID, al_map_rgb(backgroundR,backgroundG,backgroundB), al_map_rgb(foregroundR,foregroundG,foregroundB));
 }

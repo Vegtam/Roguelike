@@ -38,8 +38,9 @@ LIB_SRC = $(LIB_CODE)/Allegro.cpp \
 	$(LIB_CODE)/TerrainGenerator.cpp \
 	$(LIB_CODE)/World.cpp \
 	$(LIB_CODE)/Model.cpp \
-	$(LIB_CODE)/Biome.cpp \
-	$(LIB_CODE)/main2.cpp \
+	$(LIB_CODE)/BiomeTile.cpp \
+	$(LIB_CODE)/Tile.cpp \
+	$(LIB_CODE)/main.cpp \
 
 game: $(LIB_SRC)
 	clang++ $(CPP_FLAGS) $(FRAMEWORKS) $(INCLUDE) -o game $(LIB_SRC)

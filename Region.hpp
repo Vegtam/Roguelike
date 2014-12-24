@@ -1,15 +1,20 @@
 #ifndef REGION_HPP
 #define	REGION_HPP
-#include "Biome.hpp"
 
-class Region : public Biome
+#include <vector>
+#include "RegionTile.hpp"
+
+class Region 
 {
-public:
-    Region();
-    Region(const Region& orig);
-    virtual ~Region();
 private:
+	RegionTile tile;
+	/* std::vector<std::vector<Local>> localMap*/
+public:
+    Region(){};
+    virtual ~Region(){};
+    inline RegionTile& getTile(){return tile;};
 
+    /* add code here to setup the localMap */
 };
 
 #endif	/* REGION_HPP */
