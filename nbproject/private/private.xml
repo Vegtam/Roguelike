@@ -10,10 +10,14 @@
             <file>file:/home/luke/NetBeansProjects/Roguelike/Model.cpp</file>
             <file>file:/home/luke/NetBeansProjects/Roguelike/WorldView.hpp</file>
             <file>file:/home/luke/NetBeansProjects/Roguelike/World.cpp</file>
+            <file>file:/home/luke/NetBeansProjects/Roguelike/main.cpp</file>
+            <file>file:/home/luke/NetBeansProjects/Roguelike/Region.hpp</file>
+            <file>file:/home/luke/NetBeansProjects/Roguelike/Region.cpp</file>
+            <file>file:/home/luke/NetBeansProjects/Roguelike/World.hpp</file>
+            <file>file:/home/luke/NetBeansProjects/Roguelike/RegionMap.hpp</file>
+            <file>file:/home/luke/NetBeansProjects/Roguelike/RegionMap.cpp</file>
             <file>file:/home/luke/NetBeansProjects/Roguelike/Biome.hpp</file>
             <file>file:/home/luke/NetBeansProjects/Roguelike/Biome.cpp</file>
-            <file>file:/home/luke/NetBeansProjects/Roguelike/main.cpp</file>
-            <file>file:/home/luke/NetBeansProjects/Roguelike/World.hpp</file>
             <file>file:/home/luke/NetBeansProjects/Roguelike/WorldView.cpp</file>
             <file>file:/home/luke/NetBeansProjects/Roguelike/Model.hpp</file>
         </group>

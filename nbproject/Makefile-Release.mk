@@ -36,7 +36,6 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Allegro.o \
-	${OBJECTDIR}/BiomeTile.o \
 	${OBJECTDIR}/Creature.o \
 	${OBJECTDIR}/CreditsView.o \
 	${OBJECTDIR}/Display.o \
@@ -86,11 +85,6 @@ ${OBJECTDIR}/Allegro.o: Allegro.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Allegro.o Allegro.cpp
-
-${OBJECTDIR}/BiomeTile.o: BiomeTile.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BiomeTile.o BiomeTile.cpp
 
 ${OBJECTDIR}/Creature.o: Creature.cpp 
 	${MKDIR} -p ${OBJECTDIR}
