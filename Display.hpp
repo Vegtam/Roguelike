@@ -17,7 +17,7 @@ private:
 	uint32_t height;
 	bool is_init;
 	ALLEGRO_DISPLAY* display;
-	inline void setCurrent() { if(is_init) al_set_target_backbuffer(display);}
+	inline void setCurrent() { al_set_target_backbuffer(display);}
 public:
 	Display();
 	Display(uint32_t w, uint32_t h);

@@ -90,6 +90,8 @@ bool TextPane::write(std::string txt)
 
 bool TextPane::render()
 {
+	ALLEGRO_BITMAP* old_target = al_get_target_bitmap();
+	
 	if (is_init && dirty)
 	{
 		if ( backing_bmap == NULL)
@@ -118,6 +120,7 @@ bool TextPane::render()
 			dirty = false;
 		}
 	}
+	al_set_target_bitmap(old_target);
 	return !dirty;
 }
 

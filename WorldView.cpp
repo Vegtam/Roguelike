@@ -2,6 +2,7 @@
 #include <tuple>
 #include <allegro5/allegro.h>
 #include <iostream>
+#include <ctime>
 
 #include "WorldView.hpp"
 #include "Displayable.hpp"
@@ -74,6 +75,7 @@ DefinedViews WorldView::handleKeyPress(ALLEGRO_EVENT* ev)
 	int newY = playerY;
 	bool move = false;
 	
+
 	switch(ev->keyboard.keycode)
 	{
 		case ALLEGRO_KEY_ESCAPE: /* return to tile Game*/
@@ -114,9 +116,10 @@ DefinedViews WorldView::handleKeyPress(ALLEGRO_EVENT* ev)
 	{
 		/* Also need to update the TextPane based on the Biome */
 		/* Reset the map tile to terrain instead of the player */
-		(*tile_array)[playerX+playerY*worldMapWidth].setIndex( world.getTile(playerX,playerY).getIndex());	
-		(*tile_array)[playerX+playerY*worldMapWidth].setFore(world.getTile(playerX,playerY).getFore());
-		(*tile_array)[playerX+playerY*worldMapWidth].setBack(world.getTile(playerX,playerY).getBack());
+		Tile t = world.getTile(playerX,playerY);
+		(*tile_array)[playerX+playerY*worldMapWidth].setIndex(t.getIndex());	
+		(*tile_array)[playerX+playerY*worldMapWidth].setFore(t.getFore());
+		(*tile_array)[playerX+playerY*worldMapWidth].setBack(t.getBack());
 		/* draw the player */
 		(*tile_array)[newX+newY*worldMapWidth].setIndex(player.GetChar());
 		(*tile_array)[newX+newY*worldMapWidth].setFore(model->getThemeBackground());

@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <allegro5/allegro.h>
 #include <vector>
+#include <map>
 
 #include "Tile.hpp"
 #include "TileSet.hpp"
@@ -45,10 +46,12 @@ private:
 	TileSet* t_set; /* Tileset from which to get tile bitmaps */
 	ALLEGRO_BITMAP* backing_bmap; /* colored bitmap of current tiles */
 	std::vector<Tile> tiles; /* set of tiles in tile map */
+	std::map<Tile, ALLEGRO_BITMAP*> coloredTileCache;
 
 	bool is_init;
 	bool dirty; /* flag to indicate need to re-render backing bitmap */
 
+	ALLEGRO_BITMAP* getColoredTile(Tile);
 public:
 	TileMap():x(0),
 	          y(0), 

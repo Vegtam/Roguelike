@@ -26,6 +26,7 @@ int main(int argc, char **argv)
 	ALLEGRO_EVENT_QUEUE* evq;
 	ALLEGRO_EVENT ev;
 	ALLEGRO_TIMER* tmr;
+	bool redraw = true;
 	std::map<DefinedViews, View*> viewMap;
 	
 	DefinedViews currentView = DefinedViews::TITLE_VIEW;
@@ -65,13 +66,24 @@ int main(int argc, char **argv)
 
 		while(1)
 		{
-			disp.clear(model.getThemeBackground());
-			disp.render(viewMap[currentView]->draw());
 			al_wait_for_event(evq, &ev);
-			
-			/* call event handlers */
-			currentView = viewMap[currentView]->handleEvent(&ev);
-			disp.handler(&ev);
+			if( ev.type == ALLEGRO_EVENT_TIMER && ev.timer.source == tmr)
+			{
+				if (redraw)
+				{
+					disp.clear(model.getThemeBackground());
+					disp.render(viewMap[currentView]->draw());
+				}
+				/* flush the queue after a redraw...might want to reconsider this*/
+				//al_flush_event_queue(evq);
+			}
+			else
+			{
+				/* call event handlers */
+				currentView = viewMap[currentView]->handleEvent(&ev);
+				disp.handler(&ev);
+				redraw = true;
+			}
 
 			if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE || 
 				currentView == DefinedViews::QUIT_VIEW)

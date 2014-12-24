@@ -23,6 +23,7 @@ private:
 	ALLEGRO_COLOR back;
 	ALLEGRO_COLOR fore;
 	bool dirty;
+	int compareColor(const ALLEGRO_COLOR& lhs, const ALLEGRO_COLOR& rhs) const ;
 public:
 	Tile(): Tile(0){};
 	Tile(uint32_t index): Tile(index, al_map_rgb(0,0,0),al_map_rgb(1,1,1)){};
@@ -36,6 +37,7 @@ public:
 	inline void setFore(ALLEGRO_COLOR clr) {dirty = true; fore=clr;};
 	inline bool isDirty(){return dirty;};
 	inline void clearDirty() {dirty = false;};
+	bool operator<(Tile const& rhs) const;
 };
 
 #endif

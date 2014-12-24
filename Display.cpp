@@ -20,8 +20,8 @@ bool Display::init()
 {
 	al_set_new_display_flags(ALLEGRO_RESIZABLE);
 	display = al_create_display(width,height);
-	al_set_blender(ALLEGRO_ADD, ALLEGRO_ALPHA, ALLEGRO_INVERSE_ALPHA);
-	al_set_new_bitmap_flags(al_get_new_bitmap_flags()|ALLEGRO_NO_PREMULTIPLIED_ALPHA);
+	//al_set_blender(ALLEGRO_ADD, ALLEGRO_ALPHA, ALLEGRO_INVERSE_ALPHA);
+	//al_set_new_bitmap_flags(al_get_new_bitmap_flags()|ALLEGRO_NO_PREMULTIPLIED_ALPHA);
 	
 	is_init = (display != NULL);
 	return is_init;
@@ -55,6 +55,7 @@ void Display::render (std::vector<Displayable*>& to_draw)
 	if(is_init)
 	{
 		setCurrent();
+		al_hold_bitmap_drawing(true);
 		for(std::vector<Displayable*>::iterator it = to_draw.begin();
 			it != to_draw.end(); it++)
 		{
@@ -62,6 +63,7 @@ void Display::render (std::vector<Displayable*>& to_draw)
 			(*it)->draw((float)width/(float)kDefaultWidth,
 			         (float)height/(float)kDefaultHeight);
 		}
+		al_hold_bitmap_drawing(false);
 		al_flip_display();
 	}
 }

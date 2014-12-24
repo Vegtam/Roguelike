@@ -59,6 +59,7 @@
       <itemPath>TextPane.cpp</itemPath>
       <itemPath>TileMap.cpp</itemPath>
       <itemPath>TileSet.cpp</itemPath>
+      <itemPath>Tile.cpp</itemPath>
       <itemPath>TitleView.cpp</itemPath>
       <itemPath>World.cpp</itemPath>
       <itemPath>WorldView.cpp</itemPath>
@@ -188,6 +189,8 @@
       </item>
       <item path="TextPane.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Tile.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="Tile.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TileMap.cpp" ex="false" tool="1" flavor2="0">
@@ -309,6 +312,8 @@
       <item path="TextPane.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="TextPane.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="Tile.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Tile.hpp" ex="false" tool="3" flavor2="0">
       </item>

@@ -50,6 +50,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Text.o \
 	${OBJECTDIR}/TextPane.o \
 	${OBJECTDIR}/TileMap.o \
+	${OBJECTDIR}/Tile.o \
 	${OBJECTDIR}/TileSet.o \
 	${OBJECTDIR}/TitleView.o \
 	${OBJECTDIR}/World.o \
@@ -155,6 +156,11 @@ ${OBJECTDIR}/TileMap.o: TileMap.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TileMap.o TileMap.cpp
+
+${OBJECTDIR}/Tile.o: Tile.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Tile.o Tile.cpp
 
 ${OBJECTDIR}/TileSet.o: TileSet.cpp 
 	${MKDIR} -p ${OBJECTDIR}
