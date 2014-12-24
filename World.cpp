@@ -59,8 +59,6 @@ void World::buildMaps()
     std::cout << "Generated Rainfall Map" << std::endl;
     generateBaseTemperature();
     std::cout << "Generated Base Temperatures" << std::endl;
-    //generateRiverSource();
-    //std::cout << "Generated Erosion and Rivers" << std::endl;
     ++worldsCount;
    
 
@@ -540,8 +538,7 @@ void World::generateRiverPath(int x, int y)
         }
         else
         {
-            std::cout << "Generating Lake at X: " << x << " Y: " << y << std::endl;
-            worldMap[x][y].setLake(true);
+            
         }
     }
 }
@@ -610,31 +607,25 @@ void World::fillRiver(int x, int y)
     }
     else
     {
-       
+        
         
     }
     drainageMap[newX][newY] = true;
-    /*
-    if(x != newX and y != newY and elevationMap[newX][newY] > -0.2f)
-    {
-        if(newX != prevX and newY != prevY)
-        {
-            
-            generateRiverPath(newX, newY);
-        }
-        else
-        {
-            
-        }
-    }
-     */
+   
     if(newX != prevX and newY != prevY)
     {
         prevX = newX;
         prevY = newY;
-       
+        if(newX != x and newY != y)
+        {
         std::cout << "River flowing through X: " << x << " Y: " << y <<std::endl;
         generateRiverPath(newX, newY);
+        }
+        else
+        {
+        std::cout << "Generating Lake at X: " << x << " Y: " << y << std::endl;
+        worldMap[x][y].setLake(true);
+        }
     }
         
     else
