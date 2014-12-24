@@ -6,6 +6,7 @@
                    projectFiles="true">
       <itemPath>Allegro.hpp</itemPath>
       <itemPath>Biome.hpp</itemPath>
+      <itemPath>BiomeTile.hpp</itemPath>
       <itemPath>Creature.hpp</itemPath>
       <itemPath>CreditsView.hpp</itemPath>
       <itemPath>Display.hpp</itemPath>
@@ -18,6 +19,7 @@
       <itemPath>Object.hpp</itemPath>
       <itemPath>Player.hpp</itemPath>
       <itemPath>Region.hpp</itemPath>
+      <itemPath>RegionTile.hpp</itemPath>
       <itemPath>ResourceSet.hpp</itemPath>
       <itemPath>TerrainGenerator.hpp</itemPath>
       <itemPath>Text.hpp</itemPath>
@@ -45,7 +47,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>Allegro.cpp</itemPath>
-      <itemPath>Biome.cpp</itemPath>
+      <itemPath>BiomeTile.cpp</itemPath>
       <itemPath>Creature.cpp</itemPath>
       <itemPath>CreditsView.cpp</itemPath>
       <itemPath>Display.cpp</itemPath>
@@ -55,7 +57,6 @@
       <itemPath>Model.cpp</itemPath>
       <itemPath>Object.cpp</itemPath>
       <itemPath>Player.cpp</itemPath>
-      <itemPath>Region.cpp</itemPath>
       <itemPath>TerrainGenerator.cpp</itemPath>
       <itemPath>Text.cpp</itemPath>
       <itemPath>TextPane.cpp</itemPath>
