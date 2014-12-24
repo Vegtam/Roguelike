@@ -1,4 +1,5 @@
 #include "Biome.hpp"
+#include "World.hpp"
 #include <iostream>
 
 /*
@@ -20,7 +21,7 @@
 
  */
 
-Biome::Biome() {
+Biome::Biome : public World {
 }
 
 Biome::Biome(const Biome& orig) {

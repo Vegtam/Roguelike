@@ -2,8 +2,10 @@
 #define	BIOME_HPP
 #include <vector>
 #include "Tile.hpp"
+#include "Region.hpp"
 
-class Biome {
+class Biome : public World 
+{
     
 protected:
     int displayID;
@@ -43,6 +45,7 @@ public:
     inline void setTemperature(int wGenTemperature){temperature = (wGenTemperature - (elevation * 2));};
     inline void setDrainage(bool wGenDrainage){river = (wGenDrainage);};
     inline void setLake(bool wGenLake){lake = (wGenLake);};
+    std::vector<std::vector<Region> > regionMap;
     
 private:
     void displayBiome(int biomeType);

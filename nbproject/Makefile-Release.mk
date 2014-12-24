@@ -46,11 +46,12 @@ OBJECTFILES= \
 	${OBJECTDIR}/Model.o \
 	${OBJECTDIR}/Object.o \
 	${OBJECTDIR}/Player.o \
+	${OBJECTDIR}/Region.o \
 	${OBJECTDIR}/TerrainGenerator.o \
 	${OBJECTDIR}/Text.o \
 	${OBJECTDIR}/TextPane.o \
-	${OBJECTDIR}/TileMap.o \
 	${OBJECTDIR}/Tile.o \
+	${OBJECTDIR}/TileMap.o \
 	${OBJECTDIR}/TileSet.o \
 	${OBJECTDIR}/TitleView.o \
 	${OBJECTDIR}/World.o \
@@ -137,6 +138,11 @@ ${OBJECTDIR}/Player.o: Player.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Player.o Player.cpp
 
+${OBJECTDIR}/Region.o: Region.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Region.o Region.cpp
+
 ${OBJECTDIR}/TerrainGenerator.o: TerrainGenerator.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
@@ -152,15 +158,15 @@ ${OBJECTDIR}/TextPane.o: TextPane.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TextPane.o TextPane.cpp
 
-${OBJECTDIR}/TileMap.o: TileMap.cpp 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TileMap.o TileMap.cpp
-
 ${OBJECTDIR}/Tile.o: Tile.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Tile.o Tile.cpp
+
+${OBJECTDIR}/TileMap.o: TileMap.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TileMap.o TileMap.cpp
 
 ${OBJECTDIR}/TileSet.o: TileSet.cpp 
 	${MKDIR} -p ${OBJECTDIR}
