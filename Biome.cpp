@@ -21,7 +21,7 @@
 
  */
 
-Biome::Biome : public World {
+Biome::Biome() {
 }
 
 Biome::Biome(const Biome& orig) {
