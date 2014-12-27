@@ -429,7 +429,7 @@ void World::buildBiomes()
         }
     } while(!built);
     generateRiverSource();
-    std::cout << "Generated Erosion and Rivers" << std::endl;
+    std::cout << "Generated Erosion, Lakes,  and Rivers" << std::endl;
     for(int x = 0; x < worldMap.size(); x++)
     {
         for(int y = 0; y < worldMap[x].size(); y++)
@@ -508,6 +508,7 @@ void World::generateRiverSource()
             
             if(elevationMap[x][y] >= mountain and rainfallMap[x][y] >= semihumid)
             {
+                std::cout << "River source at X: " << x << " Y: "  << y << std::endl;
                 generateRiverPath(x, y);
                 
             }
@@ -521,10 +522,10 @@ void World::generateRiverPath(int x, int y)
     if(x != prevX and y != prevY)
     {
         
-    
+        
         if(x > 1 and x < worldMap.size() - 1 and y > 1 and y < worldMap[0].size() - 1)
         {
-            
+            std::cout << "Starting river flow at X: " << x << " Y: " << y << std::endl;
             int curX = x;
             int curY = y;
 
@@ -547,76 +548,82 @@ void World::fillRiver(int x, int y)
     int newY = y;
     
     float lowest = elevationMap[x][y];
-    //North
-    if(elevationMap[north][y] < lowest)
+    if(x > 1 and x < worldMap.size() - 1 and y > 1 and y < worldMap[0].size() - 1)
     {
-        lowest = elevationMap[north][y];     
-        newX = north;
+        std::cout << "Calculating flow for X: " << x << " Y: " << y << std::endl;
+        //North
+        if(elevationMap[north][y] < lowest and elevationMap[north][y] > 0)
+        {
+            lowest = elevationMap[north][y];     
+            newX = north;
+        }
+        //NorthWest
+        if(elevationMap[north][west] < lowest and elevationMap[north][west] > 0)
+        {
+            lowest = elevationMap[north][west];  
+            newX = north;
+            newY = west;
+        }
+        //West
+        if(elevationMap[x][west] < lowest and elevationMap[x][west] > 0)
+        {
+            lowest = elevationMap[x][west];
+            newY = west;        
+        }
+        //SouthWest
+        if(elevationMap[south][west] < lowest and elevationMap[south][west] > 0)
+        {
+            lowest = elevationMap[south][west];
+            newX = south;
+            newY = west;
+        }
+        //South
+        if(elevationMap[south][y] < lowest and elevationMap[south][y] > 0)
+        {
+            lowest = elevationMap[south][y];
+            newX = south;
+        }
+        //SouthEast
+        if(elevationMap[south][east] < lowest and elevationMap[south][east] > 0)
+        {
+            lowest = elevationMap[south][east];
+            newX = south;
+            newY = east;
+        }
+        //East
+        if(elevationMap[x][east] < lowest and elevationMap[x][east] > 0)
+        {
+            lowest = elevationMap[x][east];
+            newY = east;
+        }
+        //NorthEast
+        if(elevationMap[north][east] < lowest and elevationMap[north][east] > 0)
+        {
+            lowest = elevationMap[north][east];
+            newX = north;
+            newY = east;
+        }
+        else
+        {
+
+
+        }
+        drainageMap[newX][newY] = true;
     }
-    //NorthWest
-    if(elevationMap[north][west] < lowest)
-    {
-        lowest = elevationMap[north][west];  
-        newX = north;
-        newY = west;
-    }
-    //West
-    if(elevationMap[x][west] < lowest)
-    {
-        lowest = elevationMap[x][west];
-        newY = west;        
-    }
-    //SouthWest
-    if(elevationMap[south][west] < lowest)
-    {
-        lowest = elevationMap[south][west];
-        newX = south;
-        newY = west;
-    }
-    //South
-    if(elevationMap[south][y] < lowest)
-    {
-        lowest = elevationMap[south][y];
-        newX = south;
-    }
-    //SouthEast
-    if(elevationMap[south][east] < lowest)
-    {
-        lowest = elevationMap[south][east];
-        newX = south;
-        newY = east;
-    }
-    //East
-    if(elevationMap[x][east] < lowest)
-    {
-        lowest = elevationMap[x][east];
-        newY = east;
-    }
-    //NorthEast
-    if(elevationMap[north][east] < lowest)
-    {
-        lowest = elevationMap[north][east];
-        newX = north;
-        newY = east;
-    }
-    else
-    {
-        
-        
-    }
-    drainageMap[newX][newY] = true;
+    
    
     if(newX != prevX and newY != prevY)
     {
         prevX = newX;
         prevY = newY;
-        if(newX != x and newY != y)
+        if(newX != x or newY != y)
         {
-            std::cout << "River flowing through X: " << x << " Y: " << y <<std::endl;
-            generateRiverPath(newX, newY);
+            std::cout << "Flow moving towards X: " << newX << " Y: " << newY << std::endl;
+            fillRiver(newX, newY);
         }
         else
-        {     
+        {   
+            std::cout << "Flow blocked by elevation! X: " << x << " Y: " << y << "this is the lowest point at " << elevationMap[x][y] * 100 << "ft." << std::endl;
             generateErosion(x, y);            
         }
     }
@@ -643,59 +650,65 @@ void World::generateErosion(int x, int y)
     
     float lowest = 10.0f;
     
-    if(elevationMap[north][y] < lowest)
+    //North
+    if(elevationMap[north][y] < lowest and elevationMap[north][y] > 0)
     {
         lowest = elevationMap[north][y];     
         newX = north;
     }
     //NorthWest
-    if(elevationMap[north][west] < lowest)
+    if(elevationMap[north][west] < lowest and elevationMap[north][west] > 0)
     {
         lowest = elevationMap[north][west];  
         newX = north;
         newY = west;
     }
     //West
-    if(elevationMap[x][west] < lowest)
+    if(elevationMap[x][west] < lowest and elevationMap[x][west] > 0)
     {
         lowest = elevationMap[x][west];
         newY = west;        
     }
     //SouthWest
-    if(elevationMap[south][west] < lowest)
+    if(elevationMap[south][west] < lowest and elevationMap[south][west] > 0)
     {
         lowest = elevationMap[south][west];
         newX = south;
         newY = west;
     }
     //South
-    if(elevationMap[south][y] < lowest)
+    if(elevationMap[south][y] < lowest and elevationMap[south][y] > 0)
     {
         lowest = elevationMap[south][y];
         newX = south;
     }
     //SouthEast
-    if(elevationMap[south][east] < lowest)
+    if(elevationMap[south][east] < lowest and elevationMap[south][east] > 0)
     {
         lowest = elevationMap[south][east];
         newX = south;
         newY = east;
     }
     //East
-    if(elevationMap[x][east] < lowest)
+    if(elevationMap[x][east] < lowest and elevationMap[x][east] > 0)
     {
         lowest = elevationMap[x][east];
         newY = east;
     }
     //NorthEast
-    if(elevationMap[north][east] < lowest)
+    if(elevationMap[north][east] < lowest and elevationMap[north][east] > 0)
     {
         lowest = elevationMap[north][east];
         newX = north;
         newY = east;
     }
-    
-    if(lowest <= currentElevation + 1.0f)
+    else
+    {
+
+
+    }
+
+    if(lowest <= currentElevation + 0.1f)
     {
         prevX = newX;
         prevY = newY;
@@ -704,11 +717,11 @@ void World::generateErosion(int x, int y)
         std::cout << "Generating Erosion at X: " << newX << " Y: " << newY << 
                         "\nNew Elevation = " << lowest << std:: endl;
         worldMap[newX][newY].getBiomeData().setElevation(lowest);
-        generateRiverPath(newX, newY);
+        fillRiver(newX, newY);
     
     }
     
-    else
+    else if(lowest > currentElevation + 0.1f)
     {
         std::cout << "Generating Lake at X: " << x << " Y: " << y << std::endl;
         worldMap[x][y].getBiomeData().setLake(true);
