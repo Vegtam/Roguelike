@@ -17,17 +17,17 @@ protected:
     bool lake;
     int biomeType;
 private:
-    float sealevel = 0.0f;// 0.0f sea level
-    float flood = 0.5f; // .5f flood zone
-    float mount = 4.0f;// 4 mountain level
+    const float sealevel = 0.0f;// 0.0f sea level
+    const float flood = 0.5f; // .5f flood zone
+    const float mount = 4.0f;// 4 mountain level
     
-    float humid = 4.0f; // 4 high rainfall
-    float semihumid = 2.0f; // 2 med high rainfall
-    float semiarid = 0.5f; // .5 med low rainfall
-    float arid = -1.0f; // .0 low rainfall
+    const float humid = 4.0f; // 4 high rainfall
+    const float semihumid = 2.0f; // 2 med high rainfall
+    const float semiarid = 0.5f; // .5 med low rainfall
+    const float arid = -1.0f; // .0 low rainfall
     
-    int tropical = 64; // 64 Hot Temperature
-    int arctic = 15; // 15 Cold Temperature 
+    const int tropical = 64; // 64 Hot Temperature
+    const int arctic = 15; // 15 Cold Temperature 
     
     
 public:

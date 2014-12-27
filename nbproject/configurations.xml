@@ -129,10 +129,12 @@
       <item path="Allegro.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Allegro.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Biome.cpp" ex="false" tool="1" flavor2="0">
-      </item>
+      </item>      
       <item path="Biome.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="BiomeTile.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="BiomeTile.hpp" ex="false" tool="3" flavor="0">
       </item>
       <item path="Creature.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -258,7 +260,9 @@
       </item>
       <item path="Allegro.hpp" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Biome.cpp" ex="false" tool="1" flavor2="0">
+      <item path="BiomeTile.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="BiomeTile.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Biome.hpp" ex="false" tool="3" flavor2="0">
       </item>

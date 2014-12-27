@@ -43,6 +43,7 @@ OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISE
 #include <string>
 #include <math.h>
 #include "Biome.hpp"
+#include "BiomeTile.hpp"
 #include "Tile.hpp"
 #include "TerrainGenerator.hpp"
 
@@ -77,6 +78,7 @@ protected:
     void fillMap();   
     void generateRiverSource();
     void generateRiverPath(int x, int y);
+    void generateErosion(int x, int y);
     void fillRiver(int x, int y);
     float random(float max);
     void printMap(int type);
