@@ -7,6 +7,7 @@
       <itemPath>Allegro.hpp</itemPath>
       <itemPath>Biome.hpp</itemPath>
       <itemPath>BiomeTile.hpp</itemPath>
+      <itemPath>CharacterCreationNameView.hpp</itemPath>
       <itemPath>Creature.hpp</itemPath>
       <itemPath>CreditsView.hpp</itemPath>
       <itemPath>Display.hpp</itemPath>
@@ -23,6 +24,7 @@
       <itemPath>ResourceSet.hpp</itemPath>
       <itemPath>TerrainGenerator.hpp</itemPath>
       <itemPath>Text.hpp</itemPath>
+      <itemPath>TextEntry.hpp</itemPath>
       <itemPath>TextPane.hpp</itemPath>
       <itemPath>Tile.hpp</itemPath>
       <itemPath>TileMap.hpp</itemPath>
@@ -49,6 +51,7 @@
       <itemPath>Allegro.cpp</itemPath>
       <itemPath>Biome.cpp</itemPath>
       <itemPath>BiomeTile.cpp</itemPath>
+      <itemPath>CharacterCreationNameView.cpp</itemPath>
       <itemPath>Creature.cpp</itemPath>
       <itemPath>CreditsView.cpp</itemPath>
       <itemPath>Display.cpp</itemPath>
@@ -61,6 +64,7 @@
       <itemPath>RegionTile.cpp</itemPath>
       <itemPath>TerrainGenerator.cpp</itemPath>
       <itemPath>Text.cpp</itemPath>
+      <itemPath>TextEntry.cpp</itemPath>
       <itemPath>TextPane.cpp</itemPath>
       <itemPath>Tile.cpp</itemPath>
       <itemPath>TileMap.cpp</itemPath>
@@ -140,6 +144,10 @@
       </item>
       <item path="BiomeTile.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="CharacterCreationNameView.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CharacterCreationNameView.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Creature.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Creature.hpp" ex="false" tool="3" flavor2="0">
@@ -197,6 +205,10 @@
       <item path="Text.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Text.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TextEntry.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TextEntry.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TextPane.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -272,6 +284,10 @@
       </item>
       <item path="BiomeTile.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="CharacterCreationNameView.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="CharacterCreationNameView.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Creature.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Creature.hpp" ex="false" tool="3" flavor2="0">
@@ -329,6 +345,10 @@
       <item path="Text.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Text.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="TextEntry.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="TextEntry.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="TextPane.cpp" ex="false" tool="1" flavor2="0">
       </item>

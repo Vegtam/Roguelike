@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Allegro.o \
 	${OBJECTDIR}/Biome.o \
 	${OBJECTDIR}/BiomeTile.o \
+	${OBJECTDIR}/CharacterCreationNameView.o \
 	${OBJECTDIR}/Creature.o \
 	${OBJECTDIR}/CreditsView.o \
 	${OBJECTDIR}/Display.o \
@@ -50,6 +51,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/RegionTile.o \
 	${OBJECTDIR}/TerrainGenerator.o \
 	${OBJECTDIR}/Text.o \
+	${OBJECTDIR}/TextEntry.o \
 	${OBJECTDIR}/TextPane.o \
 	${OBJECTDIR}/Tile.o \
 	${OBJECTDIR}/TileMap.o \
@@ -98,6 +100,11 @@ ${OBJECTDIR}/BiomeTile.o: BiomeTile.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BiomeTile.o BiomeTile.cpp
+
+${OBJECTDIR}/CharacterCreationNameView.o: CharacterCreationNameView.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/CharacterCreationNameView.o CharacterCreationNameView.cpp
 
 ${OBJECTDIR}/Creature.o: Creature.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -158,6 +165,11 @@ ${OBJECTDIR}/Text.o: Text.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Text.o Text.cpp
+
+${OBJECTDIR}/TextEntry.o: TextEntry.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/TextEntry.o TextEntry.cpp
 
 ${OBJECTDIR}/TextPane.o: TextPane.cpp 
 	${MKDIR} -p ${OBJECTDIR}
