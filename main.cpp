@@ -16,6 +16,7 @@
 #include "TitleView.hpp"
 #include "CreditsView.hpp"
 #include "WorldView.hpp"
+#include "CharacterCreationNameView.hpp"
 
 #define FPS 60
 
@@ -44,9 +45,9 @@ int main(int argc, char **argv)
 
 		Model model;
 
-		ResourceSet<Font> fs ("fonts/");
-		ResourceSet<TileSet> ts ("tileset/");
-		ResourceSet<Image> is ("image/");
+		ResourceSet<Font> fs ("../../fonts/");
+		ResourceSet<TileSet> ts ("../../tileset/");
+		ResourceSet<Image> is ("../../image/");
 
 		/* @todo could check return values of init calls */
 		TitleView titleview(&model, &is);
@@ -58,9 +59,13 @@ int main(int argc, char **argv)
 		WorldView worldview(&model, &fs,&ts);
 		worldview.init();
 
+		CharacterCreationNameView characterCreationNameView(&model, &fs);
+		characterCreationNameView.init();
+
 		viewMap[DefinedViews::TITLE_VIEW] = &titleview;
 		viewMap[DefinedViews::CREDITS_VIEW] = &creditView;
 		viewMap[DefinedViews::WORLD_VIEW] = &worldview;
+		viewMap[DefinedViews::CHARACTER_CREATION_NAME_VIEW] = &characterCreationNameView;
 
 		al_start_timer(tmr);
 
