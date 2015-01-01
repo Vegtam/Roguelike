@@ -40,6 +40,8 @@ LIB_SRC = $(LIB_CODE)/Allegro.cpp \
 	$(LIB_CODE)/Model.cpp \
 	$(LIB_CODE)/BiomeTile.cpp \
 	$(LIB_CODE)/Tile.cpp \
+	$(LIB_CODE)/TextEntry.cpp \
+	$(LIB_CODE)/CharacterCreationNameView.cpp \
 	$(LIB_CODE)/main.cpp \
 
 game: $(LIB_SRC)

@@ -30,6 +30,18 @@ bool TileMap::init(uint32_t xpos,
 	return result;
 }
 
+TileMap::~TileMap()
+{
+	if (backing_bmap)
+	{
+		al_destroy_bitmap(backing_bmap);
+	}
+	for(auto& kv : coloredTileCache)
+	{
+		al_destroy_bitmap(kv.second);
+	}
+}
+
 ALLEGRO_BITMAP* TileMap::getColoredTile(Tile t)
 {
 	ALLEGRO_BITMAP* old_target = al_get_target_bitmap();

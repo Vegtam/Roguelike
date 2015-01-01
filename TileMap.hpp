@@ -64,7 +64,8 @@ public:
 	          backing_bmap(NULL), 
 	          is_init(false),
 	          t_set(NULL), 
-	          dirty(true){};
+	          dirty(true),
+	          coloredTileCache(){};
 
 	bool init(uint32_t xpos, 
 		      uint32_t ypos,
@@ -76,6 +77,8 @@ public:
 
 	inline std::vector<Tile>* getTiles() { return is_init?&tiles:NULL; };
 	inline void setDirty() {dirty = true;};
+
+	virtual ~TileMap();
 
 	bool render();
 

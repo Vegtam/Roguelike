@@ -25,7 +25,7 @@ DefinedViews TitleView::handleKeyPress(ALLEGRO_EVENT* ev)
 	switch(ev->keyboard.keycode)
 	{
 		case ALLEGRO_KEY_N: /* New Game*/
-			dv = DefinedViews::WORLD_VIEW; /* should really be character creation view but that needs definition */
+			dv = DefinedViews::CHARACTER_CREATION_NAME_VIEW; 
 			break;
 		case ALLEGRO_KEY_R: /* Credits */
 			dv = DefinedViews::CREDITS_VIEW;
