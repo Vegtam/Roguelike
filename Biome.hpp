@@ -14,6 +14,7 @@ public:
 	Biome(){};
 	virtual ~Biome(){};
 	inline BiomeTile& getBiomeData(){return tile;};
+        void fillRegions();
 	
 	/* add functions to do stuff with regionMap here */
 };

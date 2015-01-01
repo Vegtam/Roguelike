@@ -12,7 +12,7 @@ private:
 public:
     Region(){};
     virtual ~Region(){};
-    inline RegionTile& getTile(){return tile;};
+    inline RegionTile& getRegionData(){return tile;};
 
     /* add code here to setup the localMap */
 };

@@ -36,6 +36,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/Allegro.o \
+	${OBJECTDIR}/Biome.o \
 	${OBJECTDIR}/BiomeTile.o \
 	${OBJECTDIR}/Creature.o \
 	${OBJECTDIR}/CreditsView.o \
@@ -46,6 +47,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Model.o \
 	${OBJECTDIR}/Object.o \
 	${OBJECTDIR}/Player.o \
+	${OBJECTDIR}/RegionTile.o \
 	${OBJECTDIR}/TerrainGenerator.o \
 	${OBJECTDIR}/Text.o \
 	${OBJECTDIR}/TextPane.o \
@@ -86,6 +88,11 @@ ${OBJECTDIR}/Allegro.o: Allegro.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Allegro.o Allegro.cpp
+
+${OBJECTDIR}/Biome.o: Biome.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Biome.o Biome.cpp
 
 ${OBJECTDIR}/BiomeTile.o: BiomeTile.cpp 
 	${MKDIR} -p ${OBJECTDIR}
@@ -136,6 +143,11 @@ ${OBJECTDIR}/Player.o: Player.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Player.o Player.cpp
+
+${OBJECTDIR}/RegionTile.o: RegionTile.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/RegionTile.o RegionTile.cpp
 
 ${OBJECTDIR}/TerrainGenerator.o: TerrainGenerator.cpp 
 	${MKDIR} -p ${OBJECTDIR}

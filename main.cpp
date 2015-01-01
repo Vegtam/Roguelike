@@ -1,4 +1,4 @@
-
+//so I don't forget... Look into Djikstra Algorithm for pathfinding..
 #include <iostream>
 #include <map>
 #include <allegro5/allegro.h> 
