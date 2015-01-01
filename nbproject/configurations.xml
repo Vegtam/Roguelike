@@ -47,6 +47,7 @@
                    displayName="Source Files"
                    projectFiles="true">
       <itemPath>Allegro.cpp</itemPath>
+      <itemPath>Biome.cpp</itemPath>
       <itemPath>BiomeTile.cpp</itemPath>
       <itemPath>Creature.cpp</itemPath>
       <itemPath>CreditsView.cpp</itemPath>
@@ -57,6 +58,7 @@
       <itemPath>Model.cpp</itemPath>
       <itemPath>Object.cpp</itemPath>
       <itemPath>Player.cpp</itemPath>
+      <itemPath>RegionTile.cpp</itemPath>
       <itemPath>TerrainGenerator.cpp</itemPath>
       <itemPath>Text.cpp</itemPath>
       <itemPath>TextPane.cpp</itemPath>
@@ -129,12 +131,14 @@
       <item path="Allegro.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Allegro.hpp" ex="false" tool="3" flavor2="0">
-      </item>      
+      </item>
+      <item path="Biome.cpp" ex="false" tool="1" flavor2="0">
+      </item>
       <item path="Biome.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="BiomeTile.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="BiomeTile.hpp" ex="false" tool="3" flavor="0">
+      <item path="BiomeTile.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Creature.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -180,9 +184,9 @@
       </item>
       <item path="README.md" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Region.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="Region.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RegionTile.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ResourceSet.hpp" ex="false" tool="3" flavor2="0">
       </item>
@@ -260,11 +264,13 @@
       </item>
       <item path="Allegro.hpp" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="Biome.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="Biome.hpp" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="BiomeTile.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="BiomeTile.hpp" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="Biome.hpp" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Creature.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -310,9 +316,9 @@
       </item>
       <item path="README.md" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="Region.cpp" ex="false" tool="1" flavor2="0">
-      </item>
       <item path="Region.hpp" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="RegionTile.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="ResourceSet.hpp" ex="false" tool="3" flavor2="0">
       </item>
