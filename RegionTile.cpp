@@ -1,7 +1,7 @@
 #include "RegionTile.hpp"
+#include <iostream>
 
-
-void RegionTile::setRegionTileType(int regionType)
+void RegionTile::displayRegionTileType(int regionType)
 {
     switch(regionType)
     {
@@ -33,7 +33,12 @@ void RegionTile::setRegionTileType(int regionType)
     }
 }
 
-Tile RegionTile::displayRegionTile()
+Tile RegionTile::getTile()
 {
     return Tile(displayID, al_map_rgb(backgroundR,backgroundG,backgroundB), al_map_rgb(foregroundR,foregroundG,foregroundB));
+}
+
+void RegionTile::setRegionTileType()
+{
+    displayRegionTileType(1);
 }

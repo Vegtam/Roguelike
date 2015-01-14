@@ -8,19 +8,21 @@
 class RegionTile: public BiomeTile
 {
 protected:
+    int regionType;
     int displayID;
     int backgroundR, backgroundG, backgroundB; //background
     int foregroundR, foregroundG, foregroundB; //foreground
 private:
+    void displayRegionTileType(int regionType);
     
-    Tile displayRegionTile();
     
     
 public:
 	RegionTile(){};
 	virtual ~RegionTile(){};
 	/* add code here for RegionTile specific stuff */
-        void setRegionTileType(int regionType);
+        Tile getTile();
+        void setRegionTileType();
         
 };
 

@@ -1,4 +1,4 @@
-//so I don't forget... Look into Djikstra Algorithm for pathfinding..
+//so I don't forget... Look into Djikstra Algorithm for pathfinding.. Roads as well maybe?
 #include <iostream>
 #include <map>
 #include <allegro5/allegro.h> 
@@ -16,6 +16,7 @@
 #include "TitleView.hpp"
 #include "CreditsView.hpp"
 #include "WorldView.hpp"
+#include "BiomeView.hpp"
 #include "CharacterCreationNameView.hpp"
 
 #define FPS 60
@@ -58,6 +59,9 @@ int main(int argc, char **argv)
 
 		WorldView worldview(&model, &fs,&ts);
 		worldview.init();
+                
+                BiomeView biomeView(&model, &fs, &ts);
+                biomeView.init();
 
 		CharacterCreationNameView characterCreationNameView(&model, &fs);
 		characterCreationNameView.init();
@@ -65,6 +69,7 @@ int main(int argc, char **argv)
 		viewMap[DefinedViews::TITLE_VIEW] = &titleview;
 		viewMap[DefinedViews::CREDITS_VIEW] = &creditView;
 		viewMap[DefinedViews::WORLD_VIEW] = &worldview;
+                viewMap[DefinedViews::BIOME_VIEW] = &biomeView;
 		viewMap[DefinedViews::CHARACTER_CREATION_NAME_VIEW] = &characterCreationNameView;
 
 		al_start_timer(tmr);

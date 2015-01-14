@@ -9,6 +9,7 @@
 
 class Creature : public Object
 {
+    // all these are going to change
 private:
     int Health, Mana;
     int Attribute[4];

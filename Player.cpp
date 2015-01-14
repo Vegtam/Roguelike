@@ -10,8 +10,7 @@ Player::~Player()
 
 }
 
-void Player::Init()
+void Player::init()
 {
-    Creature::Init(16, 16, 2, 2);
-    Creature::SetAttribute(STR, 10);
+    Creature::init(16, 16, 155, 1, 2);
 }

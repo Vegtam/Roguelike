@@ -12,20 +12,23 @@
 #include "TextPane.hpp"
 #include "ResourceSet.hpp"
 #include "Model.hpp"
+#include "BiomeView.hpp"
 
 class WorldView : public View
 {
 private:
+        
 	TextPane biomeInfo;
 	TileMap biomeDisplay;
+        
 	std::vector<Displayable*> drawList;
-	DefinedViews handleKeyPress(ALLEGRO_EVENT* ev);
+	virtual DefinedViews handleKeyPress(ALLEGRO_EVENT* ev);
 public:
 	WorldView(){};
 	WorldView(Model* md, 
 		      ResourceSet<Font>* fs, 
 		      ResourceSet<TileSet>* ts):View(md, fs, ts, NULL){};
-	bool init();
+	virtual bool init();
 	virtual ~WorldView(){/*drawlist and parent destructor get called automatically*/};
 	virtual DefinedViews handleEvent(ALLEGRO_EVENT* ev);
 	virtual std::vector<Displayable*>& draw();

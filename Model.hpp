@@ -14,8 +14,18 @@ private:
 	ALLEGRO_COLOR themeBackground;
 	ALLEGRO_COLOR themeFont;
 	std::tuple<std::string, uint32_t, uint32_t> worldTileSet;
+        //Vegtam added the biomeTileSet tuple variable
+        std::tuple<std::string, uint32_t, uint32_t> biomeTileSet;
+        //Vegtam end
 	World world;
+        
+        
+        
 	Player player;
+        //Vegtam codes...
+        Biome biome;
+        //maybe?
+        
 
 public:
 	Model();
@@ -23,7 +33,13 @@ public:
 	inline ALLEGRO_COLOR getThemeBackground(){return themeBackground;};
 	inline ALLEGRO_COLOR getThemeFont(){return themeFont;};
 	inline std::tuple<std::string, uint32_t, uint32_t> getWorldTileSet(){return worldTileSet;};
+        //Vegtam added getBiomeTileSet
+        inline std::tuple<std::string, uint32_t, uint32_t> getBiomeTileSet(){return biomeTileSet;};
+        //Vegtam end
 	inline World& getWorld(){return world;};
+        //Vegtam added a getBiome
+        inline Biome& getBiome(){return world.worldMap[player.getWorldX()][player.getWorldY()];};
+        //Vegtam end
 	inline Player& getPlayer(){return player;};
 };
 

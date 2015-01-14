@@ -38,6 +38,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Allegro.o \
 	${OBJECTDIR}/Biome.o \
 	${OBJECTDIR}/BiomeTile.o \
+	${OBJECTDIR}/BiomeView.o \
 	${OBJECTDIR}/CharacterCreationNameView.o \
 	${OBJECTDIR}/Creature.o \
 	${OBJECTDIR}/CreditsView.o \
@@ -100,6 +101,11 @@ ${OBJECTDIR}/BiomeTile.o: BiomeTile.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BiomeTile.o BiomeTile.cpp
+
+${OBJECTDIR}/BiomeView.o: BiomeView.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/BiomeView.o BiomeView.cpp
 
 ${OBJECTDIR}/CharacterCreationNameView.o: CharacterCreationNameView.cpp 
 	${MKDIR} -p ${OBJECTDIR}

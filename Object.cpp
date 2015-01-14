@@ -10,46 +10,29 @@ Object::~Object()
 
 }
 
-void Object::Init(int x, int y, int color, char character)
+void Object::init(int x, int y, int backgroundColor, int foregroundColor, char character)
 {
-    this->x=x;
-    this->y=y;
-    this->color=color;
+    this->worldX=worldX;
+    this->worldY=worldY;
+    this->backgroundColor=backgroundColor;
+    this->foregroundColor = foregroundColor;
     this->character=character;
 }
 
-int Object::GetX()
+void Object::setWorldPosition(int worldX, int worldY)
 {
-    return x;
+    this->worldX=worldX;
+    this->worldY=worldY;
 }
 
-int Object::GetY()
+void Object::setRegionPosition(int regionX, int regionY)
 {
-    return y;
+    this->regionX = regionX;
+    this->regionY = regionY;
 }
 
-int Object::GetColor()
+void Object::setLocalPosition(int localX, int localY)
 {
-    return color;
-}
-
-char Object::GetChar()
-{
-    return character;
-}
-
-void Object::SetPosition(int x, int y)
-{
-    this->x=x;
-    this->y=y;
-}
-
-void Object::SetColor(int color)
-{
-    this->color=color;
-}
-
-void Object::SetChar(char character)
-{
-    this->character=character;
+    this->localX = localX;
+    this->localY = localY;
 }

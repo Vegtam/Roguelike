@@ -7,6 +7,7 @@
 #include "WorldView.hpp"
 #include "Displayable.hpp"
 #include "View.hpp"
+#include "BiomeView.hpp"
 #include "World.hpp"
 
 
@@ -19,6 +20,8 @@ bool WorldView::init()
 
 		World& world = model->getWorld();
 		world.buildBiomes(); /* generate terrain */
+                
+                
 
 		TileSet& ts = tileset->get(std::get<0>(worldTileSet));
 		ts.init(std::get<1>(worldTileSet), 
@@ -42,13 +45,13 @@ bool WorldView::init()
 			(*tile_array)[i] = world.getTile(i%worldMapWidth, i/worldMapWidth);
 		}
 
-		/* put the player on the map */
+		// put the player on the world map
 		Player& player = model->getPlayer();
-		(*tile_array)[player.GetX()+player.GetY()*worldMapWidth].setIndex(player.GetChar());
+		(*tile_array)[player.getWorldX()+player.getWorldY()*worldMapWidth].setIndex(player.getChar());
 
 		/*base colors for now */
-		(*tile_array)[player.GetX()+player.GetY()*worldMapWidth].setFore(model->getThemeBackground());
-		(*tile_array)[player.GetX()+player.GetY()*worldMapWidth].setBack(model->getThemeFont());
+		(*tile_array)[player.getWorldX()+player.getWorldY()*worldMapWidth].setFore(model->getThemeBackground());
+		(*tile_array)[player.getWorldX()+player.getWorldY()*worldMapWidth].setBack(model->getThemeFont());
 		biomeDisplay.render();
 
 		/* @todo Create the TextPane to give info about the Biome */
@@ -62,6 +65,7 @@ bool WorldView::init()
 
 DefinedViews WorldView::handleKeyPress(ALLEGRO_EVENT* ev)
 {
+        std::map<DefinedViews, View*> viewMap;
 	DefinedViews dv = DefinedViews::WORLD_VIEW;
 	std::vector<Tile>* tile_array = biomeDisplay.getTiles();
 	World& world = model->getWorld();
@@ -69,41 +73,52 @@ DefinedViews WorldView::handleKeyPress(ALLEGRO_EVENT* ev)
 	int worldMapHeight = world.worldMap[0].size();
 
 	Player& player = model->getPlayer();
-	int playerX = player.GetX();
-	int playerY = player.GetY();
-	int newX = playerX;
-	int newY = playerY;
+	int playerWorldX = player.getWorldX();
+	int playerWorldY = player.getWorldY();
+	int newX = playerWorldX;
+	int newY = playerWorldY;
 	bool move = false;
 	
 
 	switch(ev->keyboard.keycode)
 	{
+            //Vegtam added code here for debugging Regions, feel free to delete.
+                case ALLEGRO_KEY_ENTER:
+                    
+                    
+                    
+                    player.setRegionPosition(8,8);
+                    
+                    dv = DefinedViews::BIOME_VIEW;
+                    
+                    break;
+            //end of Vegtam's code.
 		case ALLEGRO_KEY_ESCAPE: /* return to tile Game*/
 			dv = DefinedViews::TITLE_VIEW; 
 			break;
 		case ALLEGRO_KEY_LEFT:
-			if( playerX - 1 >= 0 )
+			if( playerWorldX - 1 >= 0 )
 			{
 				newX -= 1;
 				move = true;
 			}
 			break;
 		case ALLEGRO_KEY_RIGHT:
-			if( playerX + 1 < worldMapWidth )
+			if( playerWorldX + 1 < worldMapWidth )
 			{
 				newX += 1;
 				move = true;
 			}
 			break;
 		case ALLEGRO_KEY_UP:
-			if( playerY - 1 >= 0 )
+			if( playerWorldY - 1 >= 0 )
 			{
 				newY -=1 ;
 				move = true;
 			}
 			break;
 		case ALLEGRO_KEY_DOWN:
-			if( playerY + 1 < worldMapHeight )
+			if( playerWorldY + 1 < worldMapHeight )
 			{
 				newY += 1;
 				move = true;
@@ -116,16 +131,16 @@ DefinedViews WorldView::handleKeyPress(ALLEGRO_EVENT* ev)
 	{
 		/* Also need to update the TextPane based on the Biome */
 		/* Reset the map tile to terrain instead of the player */
-		Tile t = world.getTile(playerX,playerY);
-		(*tile_array)[playerX+playerY*worldMapWidth].setIndex(t.getIndex());	
-		(*tile_array)[playerX+playerY*worldMapWidth].setFore(t.getFore());
-		(*tile_array)[playerX+playerY*worldMapWidth].setBack(t.getBack());
+		Tile t = world.getTile(playerWorldX,playerWorldY);
+		(*tile_array)[playerWorldX+playerWorldY*worldMapWidth].setIndex(t.getIndex());	
+		(*tile_array)[playerWorldX+playerWorldY*worldMapWidth].setFore(t.getFore());
+		(*tile_array)[playerWorldX+playerWorldY*worldMapWidth].setBack(t.getBack());
 		/* draw the player */
-		(*tile_array)[newX+newY*worldMapWidth].setIndex(player.GetChar());
+		(*tile_array)[newX+newY*worldMapWidth].setIndex(player.getChar());
 		(*tile_array)[newX+newY*worldMapWidth].setFore(model->getThemeBackground());
 		(*tile_array)[newX+newY*worldMapWidth].setBack(model->getThemeFont());
 		/* update the players position */
-		player.SetPosition(newX,newY);
+		player.setWorldPosition(newX,newY);
 		
 		/* redraw the display */
 		biomeDisplay.setDirty();

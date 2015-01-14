@@ -10,14 +10,16 @@ class Biome
 {
 private:
 	BiomeTile tile;
-	std::vector<std::vector<Region> > regionMap;
+	
 
 public:
-	Biome(){};
+	Biome();
 	virtual ~Biome(){};
+        std::vector<std::vector<Region> > regionMap;
 	inline BiomeTile& getBiomeData(){return tile;};
         
-        void fillRegions();
+        bool fillRegions();
+        Tile getTile(int xPos, int yPos);
 	
 	/* add functions to do stuff with regionMap here */
 };

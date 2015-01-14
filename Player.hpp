@@ -7,7 +7,7 @@ class Player : public Creature
 public:
     Player();       // Construct Player
     virtual ~Player();      // Destruct Player
-    void Init();    // Initialize Player
+    void init();    // Initialize Player
 };
 
 #endif // PLAYER_HPP
