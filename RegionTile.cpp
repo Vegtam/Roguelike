@@ -92,5 +92,5 @@ Tile RegionTile::getTile()
 void RegionTile::setRegionTileType()
 {
     int r = rand() % 4;
-    displayRegionTileType(1);
+    displayRegionTileType(r);
 }

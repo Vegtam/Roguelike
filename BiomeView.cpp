@@ -24,23 +24,7 @@ bool BiomeView::init()
         int biomeMapHeight = biome.regionMap[0].size();
         
         localeDisplay.init(0, 0, 768, 768, biomeMapWidth, biomeMapHeight, &ts);
-        
-        std::vector<Tile>* tile_array = localeDisplay.getTiles();
-        
-        for (int i = 0; i< (*tile_array).size(); i++)
-	{
-            (*tile_array)[i] = biome.getTile(i%biomeMapHeight, i/biomeMapWidth);
-	}
-
-        /* put the player on the map */
-        Player& player = model->getPlayer();
-        (*tile_array)[player.getRegionX()+player.getRegionY()*biomeMapWidth].setIndex(player.getChar());
-
-        /*base colors for now */
-        (*tile_array)[player.getRegionX()+player.getRegionY()*biomeMapWidth].setFore(model->getThemeBackground());
-        (*tile_array)[player.getRegionX()+player.getRegionY()*biomeMapWidth].setBack(model->getThemeFont());
-        localeDisplay.render();
-
+       
         /* @todo Create the TextPane to give info about the Biome */
 
         drawList.push_back(&localeDisplay);
@@ -125,7 +109,7 @@ DefinedViews BiomeView::handleKeyPress(ALLEGRO_EVENT* ev)
 		(*tile_array)[newX+newY*regionMapWidth].setFore(model->getThemeBackground());
 		(*tile_array)[newX+newY*regionMapWidth].setBack(model->getThemeFont());
 		/* update the players position */
-		player.setWorldPosition(newX,newY);
+		player.setRegionPosition(newX,newY);
 		
 		/* redraw the display */
 		localeDisplay.setDirty();
@@ -155,5 +139,26 @@ DefinedViews BiomeView::handleEvent(ALLEGRO_EVENT* ev)
 
 std::vector<Displayable*>& BiomeView::draw()
 {
+        Biome& biome = model->getWorld().worldMap[model->getPlayer().getWorldX()][model->getPlayer().getWorldY()];
+        
+        int biomeMapWidth = biome.regionMap.size();
+        int biomeMapHeight = biome.regionMap[0].size();
+     
+        std::vector<Tile>* tile_array = localeDisplay.getTiles();
+        
+        for (int i = 0; i< (*tile_array).size(); i++)
+	{
+            (*tile_array)[i] = biome.getTile(i%biomeMapHeight, i/biomeMapWidth);
+	}
+
+        // put the player on the map
+        Player& player = model->getPlayer();
+        (*tile_array)[player.getRegionX()+player.getRegionY()*biomeMapWidth].setIndex(player.getChar());
+
+        //base colors for now
+        (*tile_array)[player.getRegionX()+player.getRegionY()*biomeMapWidth].setFore(model->getThemeBackground());
+        (*tile_array)[player.getRegionX()+player.getRegionY()*biomeMapWidth].setBack(model->getThemeFont());
+        localeDisplay.render();
+        
 	return drawList;
 }
