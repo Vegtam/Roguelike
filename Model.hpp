@@ -23,7 +23,7 @@ private:
         
 	Player player;
         //Vegtam codes...
-        Biome biome;
+       // Biome biome;
         //maybe?
         
 

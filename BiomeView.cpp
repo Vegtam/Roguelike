@@ -7,7 +7,7 @@ bool BiomeView::init()
     int result = false;
     if( model and fontset and tileset)
     {
-        //std::cout << "Model, Fontset, and Tileset found" << std::endl;
+        
         auto biomeTileSet = model->getBiomeTileSet();
         std::cout << "Retrieved biomeTileSet from model: " << std::endl;
         
@@ -28,26 +28,26 @@ bool BiomeView::init()
         std::vector<Tile>* tile_array = localeDisplay.getTiles();
         
         for (int i = 0; i< (*tile_array).size(); i++)
-	      {
-			(*tile_array)[i] = biome.getTile(i%biomeMapHeight, i/biomeMapWidth);
-		}
-
-		/* put the player on the map */
-		Player& player = model->getPlayer();
-		(*tile_array)[player.getRegionX()+player.getRegionY()*biomeMapWidth].setIndex(player.getChar());
-
-		/*base colors for now */
-		(*tile_array)[player.getRegionX()+player.getRegionY()*biomeMapWidth].setFore(model->getThemeBackground());
-		(*tile_array)[player.getRegionX()+player.getRegionY()*biomeMapWidth].setBack(model->getThemeFont());
-		localeDisplay.render();
-
-		/* @todo Create the TextPane to give info about the Biome */
-
-		drawList.push_back(&localeDisplay);
-		result = is_init = true;
-
+	{
+            (*tile_array)[i] = biome.getTile(i%biomeMapHeight, i/biomeMapWidth);
 	}
-	return result;
+
+        /* put the player on the map */
+        Player& player = model->getPlayer();
+        (*tile_array)[player.getRegionX()+player.getRegionY()*biomeMapWidth].setIndex(player.getChar());
+
+        /*base colors for now */
+        (*tile_array)[player.getRegionX()+player.getRegionY()*biomeMapWidth].setFore(model->getThemeBackground());
+        (*tile_array)[player.getRegionX()+player.getRegionY()*biomeMapWidth].setBack(model->getThemeFont());
+        localeDisplay.render();
+
+        /* @todo Create the TextPane to give info about the Biome */
+
+        drawList.push_back(&localeDisplay);
+        result = is_init = true;
+
+    }
+    return result;
 }
 
 
@@ -55,7 +55,7 @@ DefinedViews BiomeView::handleKeyPress(ALLEGRO_EVENT* ev)
 {
 	DefinedViews dv = DefinedViews::BIOME_VIEW;
 	std::vector<Tile>* tile_array = localeDisplay.getTiles();
-	Biome& biome = model->getBiome();
+	Biome& biome = model->getWorld().worldMap[model->getPlayer().getWorldX()][model->getPlayer().getWorldY()];
 	int regionMapWidth = biome.regionMap.size();
 	int regionMapHeight = biome.regionMap[0].size();
 
