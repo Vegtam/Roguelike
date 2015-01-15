@@ -27,7 +27,7 @@ bool BiomeView::init()
        
         /* @todo Create the TextPane to give info about the Biome */
 
-        drawList.push_back(&localeDisplay);
+        //drawList.push_back(&localeDisplay);
         result = is_init = true;
 
     }
@@ -38,18 +38,25 @@ bool BiomeView::init()
 DefinedViews BiomeView::handleKeyPress(ALLEGRO_EVENT* ev)
 {
 	DefinedViews dv = DefinedViews::BIOME_VIEW;
-	std::vector<Tile>* tile_array = localeDisplay.getTiles();
+	
 	Biome& biome = model->getWorld().worldMap[model->getPlayer().getWorldX()][model->getPlayer().getWorldY()];
 	int regionMapWidth = biome.regionMap.size();
 	int regionMapHeight = biome.regionMap[0].size();
+        
+        
+        
 
 	Player& player = model->getPlayer();
+        
+        
 	int playerX = player.getRegionX();
 	int playerY = player.getRegionY();
 	int newX = playerX;
 	int newY = playerY;
 	bool move = false;
 	
+        drawList.push_back(&localeDisplay);
+        std::vector<Tile>* tile_array = localeDisplay.getTiles();
 
 	switch(ev->keyboard.keycode)
 	{
@@ -62,7 +69,7 @@ DefinedViews BiomeView::handleKeyPress(ALLEGRO_EVENT* ev)
 			dv = DefinedViews::TITLE_VIEW; 
 			break;
                 case ALLEGRO_KEY_W: /* return to world Map*/
-                        player.setWorldPosition(player.getWorldX(), player.getWorldY());
+                        
                         dv = DefinedViews::WORLD_VIEW;
                         break;
 		case ALLEGRO_KEY_LEFT:
@@ -96,6 +103,7 @@ DefinedViews BiomeView::handleKeyPress(ALLEGRO_EVENT* ev)
 		default:
 			break; 
 	}
+        
 	if( move )
 	{
 		/* Also need to update the TextPane based on the Biome */

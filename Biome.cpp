@@ -4,17 +4,16 @@
 #include <iostream>
 
 
-Biome::Biome() : regionMap(17, std::vector<Region>(17)){fillRegions();}
 
-bool Biome::fillRegions()
+
+bool Biome::fillRegions(int biomeType)
 {
-    //build empty region map
+    
     for(int x = 0; x < regionMap.size(); ++x)
     {
         for(int y = 0; y < regionMap[0].size(); ++y)
         {
-            
-            regionMap[x][y].getRegionData().setRegionTileType();
+            regionMap[x][y].getRegionData().setRegionTileType(biomeType);
             
         }
     }

@@ -473,6 +473,11 @@ void World::buildBiomes()
             biome.setTemperature(temperatureMap[x][y]);
             biome.setDrainage(drainageMap[x][y]);
             biome.setBiomeTileType();
+            int biomeType = biome.getBiomeTileType();
+            Biome& region = worldMap[x][y];
+            region.fillRegions(biomeType);
+            
+           
         }
     }
     

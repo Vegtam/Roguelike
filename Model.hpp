@@ -37,9 +37,6 @@ public:
         inline std::tuple<std::string, uint32_t, uint32_t> getBiomeTileSet(){return biomeTileSet;};
         //Vegtam end
 	inline World& getWorld(){return world;};
-        //Vegtam added a getBiome
-        inline Biome& getBiome(){return world.worldMap[player.getWorldX()][player.getWorldY()];};
-        //Vegtam end
 	inline Player& getPlayer(){return player;};
 };
 

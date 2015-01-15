@@ -31,9 +31,8 @@ private:
     
     
 public:
-    BiomeTile();
-    BiomeTile(const BiomeTile& orig);
-    virtual ~BiomeTile();
+    BiomeTile(){};
+    virtual ~BiomeTile(){};
 
     void setBiomeTileType();
     inline int getBiomeTileType(){return biomeType;};
@@ -46,6 +45,7 @@ public:
     inline void setLake(bool wGenLake){lake = (wGenLake);};
     
 private:
+    
     void displayBiomeTile(int biomeType);
     
 

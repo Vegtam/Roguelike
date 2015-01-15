@@ -2,10 +2,9 @@
 #define REGIONTILE_HPP_
 
 #include "Tile.hpp"
-#include "BiomeTile.hpp"
 
 
-class RegionTile: public BiomeTile
+class RegionTile
 {
 protected:
     int regionType;
@@ -22,7 +21,7 @@ public:
 	virtual ~RegionTile(){};
 	/* add code here for RegionTile specific stuff */
         Tile getTile();
-        void setRegionTileType();
+        void setRegionTileType(int biomeType);
         
 };
 

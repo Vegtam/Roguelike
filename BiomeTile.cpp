@@ -20,14 +20,7 @@
 
  */
 
-BiomeTile::BiomeTile() {
-}
 
-BiomeTile::BiomeTile(const BiomeTile& orig) {
-}
-
-BiomeTile::~BiomeTile() {
-}
 
 void BiomeTile::setBiomeTileType()
 {
@@ -397,7 +390,7 @@ void BiomeTile::displayBiomeTile(int biomeType)
                 
                 break;
                 
-            case 15: // Not Set!!!! For debugging purposes
+            default: // Not Set!!!! For debugging purposes
                 
                 displayID = 33; // !
                 
