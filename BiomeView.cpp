@@ -8,13 +8,11 @@ bool BiomeView::init()
     if( model and fontset and tileset)
     {
         
-        auto biomeTileSet = model->getBiomeTileSet();
-        std::cout << "Retrieved biomeTileSet from model: " << std::endl;
+        
         
         Biome& biome = model->getWorld().worldMap[model->getPlayer().getWorldX()][model->getPlayer().getWorldY()];
-        std::cout << "Retrieved Biome from model" << std::endl;
         
-        
+        auto biomeTileSet = model->getBiomeTileSet();
         
         TileSet& ts = tileset->get(std::get<0>(biomeTileSet));
                     
@@ -24,7 +22,7 @@ bool BiomeView::init()
         int biomeMapHeight = biome.regionMap[0].size();
         
         localeDisplay.init(0, 0, 768, 768, biomeMapWidth, biomeMapHeight, &ts);
-       
+        drawList.push_back(&localeDisplay);
         /* @todo Create the TextPane to give info about the Biome */
 
         //drawList.push_back(&localeDisplay);
@@ -42,21 +40,20 @@ DefinedViews BiomeView::handleKeyPress(ALLEGRO_EVENT* ev)
 	Biome& biome = model->getWorld().worldMap[model->getPlayer().getWorldX()][model->getPlayer().getWorldY()];
 	int regionMapWidth = biome.regionMap.size();
 	int regionMapHeight = biome.regionMap[0].size();
-        
-        
-        
 
-	Player& player = model->getPlayer();
-        
+	Player& player = model->getPlayer();        
         
 	int playerX = player.getRegionX();
 	int playerY = player.getRegionY();
 	int newX = playerX;
 	int newY = playerY;
+        
+        redraw(playerX, playerY);
+        
 	bool move = false;
 	
-        drawList.push_back(&localeDisplay);
-        std::vector<Tile>* tile_array = localeDisplay.getTiles();
+        
+        
 
 	switch(ev->keyboard.keycode)
 	{
@@ -106,24 +103,44 @@ DefinedViews BiomeView::handleKeyPress(ALLEGRO_EVENT* ev)
         
 	if( move )
 	{
-		/* Also need to update the TextPane based on the Biome */
-		/* Reset the map tile to terrain instead of the player */
-		Tile t = biome.getTile(playerX,playerY);
-		(*tile_array)[playerX+playerY*regionMapWidth].setIndex(t.getIndex());	
-		(*tile_array)[playerX+playerY*regionMapWidth].setFore(t.getFore());
-		(*tile_array)[playerX+playerY*regionMapWidth].setBack(t.getBack());
-		/* draw the player */
-		(*tile_array)[newX+newY*regionMapWidth].setIndex(player.getChar());
-		(*tile_array)[newX+newY*regionMapWidth].setFore(model->getThemeBackground());
-		(*tile_array)[newX+newY*regionMapWidth].setBack(model->getThemeFont());
-		/* update the players position */
-		player.setRegionPosition(newX,newY);
-		
-		/* redraw the display */
-		localeDisplay.setDirty();
-		localeDisplay.render();
+            /* update the players position */
+            redraw(playerX, playerY);
+            player.setRegionPosition(newX,newY);
 	}
 	return dv;
+}
+
+void BiomeView::redraw(int xPos, int yPos)
+{
+    /* Also need to update the TextPane based on the Biome */
+		/* Reset the map tile to terrain instead of the player */
+    
+    std::vector<Tile>* tile_array = localeDisplay.getTiles();
+    
+    Biome& biome = model->getWorld().worldMap[model->getPlayer().getWorldX()][model->getPlayer().getWorldY()];
+    int regionMapWidth = biome.regionMap.size();
+    int regionMapHeight = biome.regionMap[0].size();
+
+      
+
+    int playerX = xPos;
+    int playerY = yPos;
+    int newX = playerX;
+    int newY = playerY;
+    
+    Tile t = biome.getTile(playerX,playerY);
+    (*tile_array)[playerX+playerY*regionMapWidth].setIndex(t.getIndex());	
+    (*tile_array)[playerX+playerY*regionMapWidth].setFore(t.getFore());
+    (*tile_array)[playerX+playerY*regionMapWidth].setBack(t.getBack());
+    /* draw the player */
+    (*tile_array)[newX+newY*regionMapWidth].setIndex(model->getPlayer().getChar());
+    (*tile_array)[newX+newY*regionMapWidth].setFore(model->getThemeBackground());
+    (*tile_array)[newX+newY*regionMapWidth].setBack(model->getThemeFont());
+    
+
+    /* redraw the display */
+    localeDisplay.setDirty();
+    localeDisplay.render();
 }
 
 DefinedViews BiomeView::handleEvent(ALLEGRO_EVENT* ev)
@@ -147,6 +164,8 @@ DefinedViews BiomeView::handleEvent(ALLEGRO_EVENT* ev)
 
 std::vector<Displayable*>& BiomeView::draw()
 {
+    if(!drawn)
+    {
         Biome& biome = model->getWorld().worldMap[model->getPlayer().getWorldX()][model->getPlayer().getWorldY()];
         
         int biomeMapWidth = biome.regionMap.size();
@@ -166,7 +185,9 @@ std::vector<Displayable*>& BiomeView::draw()
         //base colors for now
         (*tile_array)[player.getRegionX()+player.getRegionY()*biomeMapWidth].setFore(model->getThemeBackground());
         (*tile_array)[player.getRegionX()+player.getRegionY()*biomeMapWidth].setBack(model->getThemeFont());
+        redraw(player.getRegionX(), player.getRegionY());
         localeDisplay.render();
-        
+        bool drawn = true;
+    }
 	return drawList;
 }

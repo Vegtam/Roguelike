@@ -9,9 +9,10 @@ class BiomeView : public View
 private:
     TextPane localeInfo;
     TileMap localeDisplay;
-    
+    bool drawn = false;
     std::vector<Displayable*> drawList;
     virtual DefinedViews handleKeyPress(ALLEGRO_EVENT* ev);
+    void redraw(int xPos, int yPos);
     
     
 public:
