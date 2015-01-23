@@ -8,34 +8,25 @@ void RegionTile::displayRegionTileType(int regionType)
     switch(regionType)
     {
             case 0: // ocean 
-                
-                displayID = 247; // ~ 
+                buildOceanRegion();
+                //displayID = 247; // ~ 
                 
                 // blue          
-                backgroundR = 1;
-                backgroundG = 100;
-                backgroundB = 255;
+                //backgroundR = 1;
+                //backgroundG = 100;
+                //backgroundB = 255;
                 
                 // light blue
-                foregroundR = 175;
-                foregroundG = 230;
-                foregroundB = 245;
+                //foregroundR = 175;
+                //foregroundG = 230;
+                //foregroundB = 245;
                 
                 break;
         
             case 1: // Tropical moist forests 
                 
-                displayID = 5; // deciduous tree
-                
-                // dark green
-                backgroundR = 1;
-                backgroundG = 100;
-                backgroundB = 1;
-                
-                // medium green
-                foregroundR = 1;
-                foregroundG = 150;
-                foregroundB = 1;
+                       
+                buildTropicalMoistForestRegion();
                 
                 break;
                 
@@ -264,6 +255,182 @@ void RegionTile::displayRegionTileType(int regionType)
                 break;
     }
 }
+
+void RegionTile::buildOceanRegion() 
+{
+    int regionNum = rand() % 4;
+    
+    switch(regionNum)
+    {
+        case 0:
+            displayID = 247; // ~ 
+
+            // blue          
+            backgroundR = 1;
+            backgroundG = 100;
+            backgroundB = 255;
+
+            // light blue
+            foregroundR = 175;
+            foregroundG = 230;
+            foregroundB = 245;
+            break;
+            
+        case 1:
+            displayID = 247; // ~ 
+                
+            // green-blue          
+            backgroundR = 1;
+            backgroundG = 150;
+            backgroundB = 200;
+
+            // light blue
+            foregroundR = 175;
+            foregroundG = 230;
+            foregroundB = 245;
+                
+        case 2:
+            displayID = 247; // ~ 
+                
+            // greenish blue          
+            backgroundR = 1;
+            backgroundG = 150;
+            backgroundB = 255;
+
+            // light blue
+            foregroundR = 175;
+            foregroundG = 230;
+            foregroundB = 245;
+            break;
+            
+        case 3:
+            displayID = 247; // ~ 
+                
+            // dark blue          
+            backgroundR = 1;
+            backgroundG = 100;
+            backgroundB = 255;
+
+            // light blue
+            foregroundR = 175;
+            foregroundG = 230;
+            foregroundB = 245;
+            break;
+            
+        case 4:
+            displayID = 247; // ~ 
+                
+            // blue-green          
+            backgroundR = 1;
+            backgroundG = 200;
+            backgroundB = 255;
+
+            // light blue
+            foregroundR = 175;
+            foregroundG = 230;
+            foregroundB = 245;
+            
+    }
+}
+
+void RegionTile::buildTropicalMoistForestRegion()
+{
+    int regionNum = rand() % 5;
+    
+    switch(regionNum)
+    {
+        case 0:
+            displayID = 5; // deciduous tree
+                
+            // dark green
+            backgroundR = 1;
+            backgroundG = 100;
+            backgroundB = 1;
+
+            // medium green
+            foregroundR = 1;
+            foregroundG = 150;
+            foregroundB = 1;
+            
+            break;
+            
+        case 1:
+            displayID = 5; // deciduous tree
+                
+            // medium green
+            backgroundR = 1;
+            backgroundG = 150;
+            backgroundB = 1;
+
+            // dark green
+            foregroundR = 1;
+            foregroundG = 100;
+            foregroundB = 1;
+
+            break;
+                
+        case 2:
+            displayID = 177; // tiny checkerboard
+                
+            // dark green
+            backgroundR = 1;
+            backgroundG = 100;
+            backgroundB = 1;
+
+            // medium green
+            foregroundR = 1;
+            foregroundG = 150;
+            foregroundB = 1;
+                
+            break;
+                
+        case 3:
+            displayID = 177; // deciduous tree
+                
+            // medium green
+            backgroundR = 1;
+            backgroundG = 150;
+            backgroundB = 1;
+
+            // dark green
+            foregroundR = 1;
+            foregroundG = 100;
+            foregroundB = 1;
+
+            break;
+                
+        case 4:
+            displayID = 177; // deciduous tree
+                
+            // dark green
+            backgroundR = 150;
+            backgroundG = 100;
+            backgroundB = 1;
+
+            // medium green
+            foregroundR = 1;
+            foregroundG = 150;
+            foregroundB = 1;
+            break;
+                
+        case 5:
+            displayID = 177; // deciduous tree
+                
+                // dark green
+                backgroundR = 1;
+                backgroundG = 100;
+                backgroundB = 1;
+                
+                // medium brown
+                foregroundR = 150;
+                foregroundG = 100;
+                foregroundB = 1;
+                
+                break;
+            
+    }
+}
+
 
 Tile RegionTile::getTile()
 {

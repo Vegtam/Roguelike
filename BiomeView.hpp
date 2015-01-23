@@ -11,6 +11,8 @@ private:
     TileMap localeDisplay;
     bool drawn = false;
     std::vector<Displayable*> drawList;
+    std::vector<Biome> biomes;
+    void getSurroundings();
     virtual DefinedViews handleKeyPress(ALLEGRO_EVENT* ev);
     void redraw(int xPos, int yPos);
     

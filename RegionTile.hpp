@@ -13,6 +13,22 @@ protected:
     int foregroundR, foregroundG, foregroundB; //foreground
 private:
     void displayRegionTileType(int regionType);
+    void buildOceanRegion();
+    void buildTropicalMoistForestRegion();
+    void buildTropicalDryForestRegion();
+    void buildTropicalConiferousForestRegion();
+    void buildTemperateBroadleafMixForestRegion();
+    void buildTemperateConiferousForestRegion();
+    void buildBorealForestRegion();
+    void buildTropicalGrasslandRegion();
+    void buildTemperateGrasslandRegion();
+    void buildFloodedGrasslandRegion();
+    void buildMontaneRegion();
+    void buildTundraRegion();
+    void buildMediterraneanRegion();
+    void buildDesertRegion();
+    void buildMangroveRegion();
+    void buildDebugRegion();
     
     
     

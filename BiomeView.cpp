@@ -162,6 +162,61 @@ DefinedViews BiomeView::handleEvent(ALLEGRO_EVENT* ev)
 
 }
 
+void BiomeView::getSurroundings()
+{
+    biomes.clear();
+    int xPos = model->getPlayer().getWorldX();
+    int yPos = model->getPlayer().getWorldY();
+    
+    int north = xPos - 1;
+    int east = yPos + 1;
+    int south = xPos + 1;
+    int west = yPos - 1;
+    
+    if(xPos > 0 and yPos > 0)
+    {
+        Biome& NWBiome = model->getWorld().worldMap[north][west];
+        biomes.push_back(NWBiome);
+    }
+    if(xPos > 0)
+    {
+        Biome& NBiome = model->getWorld().worldMap[north][yPos];
+        biomes.push_back(NBiome);
+    }
+    if(xPos > 0 and  yPos < model->getWorld().worldMap.size())
+    {
+        Biome& NEBiome = model->getWorld().worldMap[north][east];
+        biomes.push_back(NEBiome);
+    }
+    if(yPos > 0)
+    {
+        Biome& WBiome = model->getWorld().worldMap[xPos][west];
+        biomes.push_back(WBiome);
+    }
+    Biome& CBiome = model ->getWorld().worldMap[xPos][yPos];
+    biomes.push_back(CBiome);
+    if(yPos < model->getWorld().worldMap.size())
+    {
+        Biome& EBiome = model->getWorld().worldMap[xPos][east];
+        biomes.push_back(EBiome);
+    }
+    if(xPos < model->getWorld().worldMap.size() and yPos > 0)
+    {
+        Biome& SWBiome = model->getWorld().worldMap[south][west];
+        biomes.push_back(SWBiome);
+    }
+    if(xPos < model->getWorld().worldMap.size())
+    {
+        Biome& SBiome = model->getWorld().worldMap[south][yPos];
+        biomes.push_back(SBiome);
+    }
+    if(xPos < model->getWorld().worldMap.size() and yPos < model->getWorld().worldMap.size())
+    {
+        Biome& SEBiome = model->getWorld().worldMap[south][east];
+        biomes.push_back(SEBiome);
+    }
+}
+
 std::vector<Displayable*>& BiomeView::draw()
 {
     if(!drawn)
@@ -170,13 +225,12 @@ std::vector<Displayable*>& BiomeView::draw()
         
         int biomeMapWidth = biome.regionMap.size();
         int biomeMapHeight = biome.regionMap[0].size();
-     
-        std::vector<Tile>* tile_array = localeDisplay.getTiles();
         
+        std::vector<Tile>* tile_array = localeDisplay.getTiles();
         for (int i = 0; i< (*tile_array).size(); i++)
-	{
+            {
             (*tile_array)[i] = biome.getTile(i%biomeMapHeight, i/biomeMapWidth);
-	}
+            }
 
         // put the player on the map
         Player& player = model->getPlayer();
