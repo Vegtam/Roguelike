@@ -65,7 +65,6 @@ bool WorldView::init()
 
 DefinedViews WorldView::handleKeyPress(ALLEGRO_EVENT* ev)
 {
-        std::map<DefinedViews, View*> viewMap;
 	DefinedViews dv = DefinedViews::WORLD_VIEW;
 	std::vector<Tile>* tile_array = biomeDisplay.getTiles();
 	World& world = model->getWorld();
@@ -78,23 +77,19 @@ DefinedViews WorldView::handleKeyPress(ALLEGRO_EVENT* ev)
 	int newX = playerWorldX;
 	int newY = playerWorldY;
 	bool move = false;
+	bool switchView = false;
 	
 
 	switch(ev->keyboard.keycode)
 	{
-            //Vegtam added code here for debugging Regions, feel free to delete.
-                case ALLEGRO_KEY_ENTER:
-                    
-                    
-                    
-                    player.setRegionPosition(8,8);
-                    
-                    dv = DefinedViews::BIOME_VIEW;
-                    
-                    break;
-            //end of Vegtam's code.
+            
+        case ALLEGRO_KEY_ENTER:
+            dv = DefinedViews::BIOME_VIEW;
+            redrawPlayer = true;
+            switchView = true;
+            break;
 		case ALLEGRO_KEY_ESCAPE: /* return to tile Game*/
-			dv = DefinedViews::TITLE_VIEW; 
+			dv = DefinedViews::TITLE_VIEW;
 			break;
 		case ALLEGRO_KEY_LEFT:
 			if( playerWorldX - 1 >= 0 )
@@ -127,7 +122,8 @@ DefinedViews WorldView::handleKeyPress(ALLEGRO_EVENT* ev)
 		default:
 			break; 
 	}
-	if( move )
+
+	if( move || switchView)
 	{
 		/* Also need to update the TextPane based on the Biome */
 		/* Reset the map tile to terrain instead of the player */
@@ -135,13 +131,15 @@ DefinedViews WorldView::handleKeyPress(ALLEGRO_EVENT* ev)
 		(*tile_array)[playerWorldX+playerWorldY*worldMapWidth].setIndex(t.getIndex());	
 		(*tile_array)[playerWorldX+playerWorldY*worldMapWidth].setFore(t.getFore());
 		(*tile_array)[playerWorldX+playerWorldY*worldMapWidth].setBack(t.getBack());
-		/* draw the player */
-		(*tile_array)[newX+newY*worldMapWidth].setIndex(player.getChar());
-		(*tile_array)[newX+newY*worldMapWidth].setFore(model->getThemeBackground());
-		(*tile_array)[newX+newY*worldMapWidth].setBack(model->getThemeFont());
-		/* update the players position */
-		player.setWorldPosition(newX,newY);
-		
+		if(move)
+		{
+			/* draw the player */
+			(*tile_array)[newX+newY*worldMapWidth].setIndex(player.getChar());
+			(*tile_array)[newX+newY*worldMapWidth].setFore(model->getThemeBackground());
+			(*tile_array)[newX+newY*worldMapWidth].setBack(model->getThemeFont());
+			/* update the players position */
+			player.setWorldPosition(newX,newY);
+		}
 		/* redraw the display */
 		biomeDisplay.setDirty();
 		biomeDisplay.render();
@@ -170,5 +168,21 @@ DefinedViews WorldView::handleEvent(ALLEGRO_EVENT* ev)
 
 std::vector<Displayable*>& WorldView::draw()
 {
+	if(redrawPlayer)
+	{
+		std::vector<Tile>* tile_array = biomeDisplay.getTiles();
+		Player& player = model->getPlayer();
+		int playerX = player.getWorldX();
+		int playerY = player.getWorldY();
+		int worldMapWidth = model->getWorld().getXSize();
+		/* draw the player */
+		(*tile_array)[playerX+playerY*worldMapWidth].setIndex(player.getChar());
+		(*tile_array)[playerX+playerY*worldMapWidth].setFore(model->getThemeBackground());
+		(*tile_array)[playerX+playerY*worldMapWidth].setBack(model->getThemeFont());
+		/* redraw the display */
+		biomeDisplay.setDirty();
+		biomeDisplay.render();
+		redrawPlayer = false;
+	}
 	return drawList;
 }

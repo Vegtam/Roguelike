@@ -10,29 +10,12 @@ Object::~Object()
 
 }
 
-void Object::init(int x, int y, int backgroundColor, int foregroundColor, char character)
+void Object::init(int x, int y, int backColor, int foreColor, char chr)
 {
-    this->worldX=worldX;
-    this->worldY=worldY;
-    this->backgroundColor=backgroundColor;
-    this->foregroundColor = foregroundColor;
-    this->character=character;
+    worldX=x;
+    worldY=y;
+    backgroundColor=backColor;
+    foregroundColor = foreColor;
+    character=chr;
 }
 
-void Object::setWorldPosition(int worldX, int worldY)
-{
-    this->worldX=worldX;
-    this->worldY=worldY;
-}
-
-void Object::setRegionPosition(int regionX, int regionY)
-{
-    this->regionX = regionX;
-    this->regionY = regionY;
-}
-
-void Object::setLocalPosition(int localX, int localY)
-{
-    this->localX = localX;
-    this->localY = localY;
-}

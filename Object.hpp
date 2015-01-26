@@ -25,9 +25,11 @@ public:
     inline int getForegroundColor(){return foregroundColor;}; // Return foreground color of object
     inline char getChar(){return character;}; // Return representation of object
 
-    void setWorldPosition(int worldX, int worldY); // Set position of object in world map
-    void setRegionPosition(int regionX, int regionY); // Set position of object in region map
-    void setLocalPosition(int localX, int localY); // Set position of object in local map
+    inline void setWorldPosition(int x, int y){ worldX=x; worldY=y; }; // Set position of object in world map
+    // Set position of object in region map (region map XSize = WorldMapWidth*BiomeWidth, YSize = WorldMapHeight*BiomeHeight)
+    inline void setRegionPosition(int x, int y){regionX=x; regionY=y;}; 
+    // Set position of object in local map (local map xSize = region map Xsize*RegionWidth, YSize = region map YSize * RegionWidth)
+    inline void setLocalPosition(int x, int y){localX=x; localY=y;}; 
     inline void setBackgroundColor(int backgroundColor){this->backgroundColor = backgroundColor;}; // Set background color of object
     inline void setForegroundColor(int foregroundColor){this->foregroundColor = foregroundColor;}; // Set foreground color of object
     inline void setChar(char character){this->character = character;}; // Set representation of object

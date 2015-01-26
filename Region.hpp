@@ -8,7 +8,7 @@ class Region
 {
 private:
 	RegionTile tile;
-        bool generated = false;
+    bool generated = false;
 	/* std::vector<std::vector<Local>> localMap*/
 public:
     Region(){};

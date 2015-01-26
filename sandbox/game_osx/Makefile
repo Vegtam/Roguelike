@@ -42,7 +42,10 @@ LIB_SRC = $(LIB_CODE)/Allegro.cpp \
 	$(LIB_CODE)/Tile.cpp \
 	$(LIB_CODE)/TextEntry.cpp \
 	$(LIB_CODE)/CharacterCreationNameView.cpp \
+	$(LIB_CODE)/Biome.cpp \
+	$(LIB_CODE)/BiomeView.cpp \
+	$(LIB_CODE)/RegionTile.cpp \
 	$(LIB_CODE)/main.cpp \
 
 game: $(LIB_SRC)
-	clang++ $(CPP_FLAGS) $(FRAMEWORKS) $(INCLUDE) -o game $(LIB_SRC)
+	clang++ $(CPP_FLAGS) $(FRAMEWORKS) $(INCLUDE) -o ../../game $(LIB_SRC)

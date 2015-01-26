@@ -20,13 +20,8 @@
 
  */
 
-
-
 void BiomeTile::setBiomeTileType()
 {
-    
-    
-    
     if(elevation <= sealevel)
     {
         biomeType = 0; // Ocean
@@ -493,15 +488,15 @@ void BiomeTile::displayBiomeTile(int biomeType)
     {
         displayID = 247; // ~ 
                 
-                    // blue          
-                    backgroundR = 175; //1
-                    backgroundG = 230; //100
-                    backgroundB = 245; //255
-                
-                    // light blue
-                    foregroundR = 1; //175
-                    foregroundG = 100; //230
-                    foregroundB = 255; //245
+        // blue          
+        backgroundR = 175; //1
+        backgroundG = 230; //100
+        backgroundB = 245; //255
+    
+        // light blue
+        foregroundR = 1; //175
+        foregroundG = 100; //230
+        foregroundB = 255; //245
     }
     
     else

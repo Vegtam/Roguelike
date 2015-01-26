@@ -20,6 +20,7 @@ private:
         
 	TextPane biomeInfo;
 	TileMap biomeDisplay;
+	bool redrawPlayer = false;
         
 	std::vector<Displayable*> drawList;
 	virtual DefinedViews handleKeyPress(ALLEGRO_EVENT* ev);

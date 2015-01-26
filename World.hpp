@@ -30,6 +30,8 @@ public:
     
     World(int width, int height);
     virtual ~World();
+    inline int getXSize() {return xSize;};
+    inline int getYSize() {return ySize;};
     std::vector<std::vector<float> > fillerMap;    
     std::vector <std::vector<Biome> > worldMap;
     Tile getTile(int xPos, int yPos);
