@@ -46,7 +46,7 @@ protected:
     void generateRiverPath(int x, int y);
     void generateErosion(int x, int y);
     void fillRiver(int x, int y);
-    float random(float max);
+    //float random(float max);
     void printMap(int type);
     bool checkMaps();
    
@@ -54,7 +54,7 @@ protected:
 	//v[0]=red, v[1]=green, v[2]=blue
 	unsigned char v[3];
 	
-	color(unsigned char r, unsigned char g, unsigned char b){
+	inline color(unsigned char r, unsigned char g, unsigned char b){
 		v[0]=r;
 		v[1]=g;
 		v[2]=b;

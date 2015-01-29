@@ -22,10 +22,12 @@ private:
     TextPane localeInfo;
     TileMap localeDisplay;
     bool drawn = false;
+    bool bound = true;
+    bool rebound = false;
     std::vector<Region*> currentRegions;
     std::vector<Displayable*> drawList;
-    int lastNWWorldX;
-    int lastNWWorldY;
+    int pseudoX;
+    int pseudoY;
     int viewWindowX;
     int viewWindowY;
 
@@ -43,8 +45,6 @@ public:
 		      ResourceSet<TileSet>* ts):View(md, fs, ts, NULL),
                                         currentRegions((Biome::kMapWidth*3)*
                                                        (Biome::kMapHeight*3)),
-                                        lastNWWorldX(-1), 
-                                        lastNWWorldY(-1),
                                         viewWindowX(0),
                                         viewWindowY(0){};
 	virtual bool init();

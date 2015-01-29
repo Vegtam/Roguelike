@@ -6,6 +6,8 @@
 #include <fstream>
 #include <iostream>
 
+#include "Random.hpp"
+
 
 
 World::World(int width, int height) : 
@@ -23,7 +25,7 @@ World::World(int width, int height) :
 World::~World() {
 }
 
-float World::random(float max){
+/*float World::random(float max){
 	int r;
     float s;
     
@@ -31,7 +33,7 @@ float World::random(float max){
     s = (float)(r & 0x7fff)/(float)0x7fff;
 
     return (s * max);
-}
+}*/
 
 World::color World::lerp(color c1, color c2, float value){
 	color tcolor(0,0,0);
@@ -232,7 +234,7 @@ OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISE
 			x=0;
 			while (x<(xSize-1)){
 				//set the proper map location to the proper value: the mean of it's 4 corners+a random value (minus half the range, so it generates a random number that can be negative
-				temp=(fillerMap[x][y]+fillerMap[x+offset][y]+fillerMap[x][y+offset]+fillerMap[x+offset][y+offset])/4 + random(range)-(range/2);
+				temp=(fillerMap[x][y]+fillerMap[x+offset][y]+fillerMap[x][y+offset]+fillerMap[x+offset][y+offset])/4 + Random::get()->randFloat(range)-(range/2);
 				
                                 if (temp<min)
 					min=temp;
@@ -295,7 +297,7 @@ OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISE
 				
 				total/=4;
 				
-				temp=total+random(range)-(range/2);
+				temp=total+Random::get()->randFloat(range)-(range/2);
 				if (temp<min)
 					min=temp;
 				if (temp>max)
@@ -582,8 +584,8 @@ void World::fillRiver(int x, int y)
     int west = y - 1;
     int south = x + 1;
     int east = y + 1;
-    int newX = x;
-    int newY = y;
+    int newX = 0;
+    int newY = 0;
     
     
     float lowest = elevationMap[x][y];

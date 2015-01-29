@@ -45,6 +45,7 @@ LIB_SRC = $(LIB_CODE)/Allegro.cpp \
 	$(LIB_CODE)/Biome.cpp \
 	$(LIB_CODE)/BiomeView.cpp \
 	$(LIB_CODE)/RegionTile.cpp \
+	$(LIB_CODE)/Random.cpp \
 	$(LIB_CODE)/main.cpp \
 
 game: $(LIB_SRC)

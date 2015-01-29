@@ -41,7 +41,6 @@ bool BiomeView::init()
         /* localeDisplay is indepentent of the player so we use the model 
            defined tileset and the fixed 33x33 dimensions*/
         localeDisplay.init(0, 0, 768, 768, kMapWidth, kMapHeight, &ts);
-        drawList.push_back(&localeDisplay);
         /* @todo Create the TextPane to give info about the Biome */
 
         std::vector<Tile>* tile_array = localeDisplay.getTiles();
@@ -70,15 +69,15 @@ DefinedViews BiomeView::handleKeyPress(ALLEGRO_EVENT* ev)
 
 	Player& player = model->getPlayer();        
         
-	int playerX = player.getRegionX();
-	int playerY = player.getRegionY();
+	int playerX = bound? player.getRegionX():pseudoX;
+	int playerY = bound? player.getRegionY():pseudoY;
 	int newX = 0;
 	int newY = 0;
         
 	bool move = false;
 
-    std::cout<<"regionMapWidth "<<regionMapWidth<<std::endl;
-    std::cout<<"regionMapHeight "<<regionMapHeight<<std::endl;
+    //std::cout<<"regionMapWidth "<<regionMapWidth<<std::endl;
+    //std::cout<<"regionMapHeight "<<regionMapHeight<<std::endl;
 	
 	switch(ev->keyboard.keycode)
 	{
@@ -95,6 +94,21 @@ DefinedViews BiomeView::handleKeyPress(ALLEGRO_EVENT* ev)
                 
             dv = DefinedViews::WORLD_VIEW;
             drawn = false;
+            break;
+        case ALLEGRO_KEY_U:
+            //Unbind the view from the character
+            bound = false;
+            pseudoX = player.getRegionX();
+            pseudoY = player.getRegionY();
+            //no move here
+            break;
+        case ALLEGRO_KEY_C:
+            //recenter on the character
+            bound = true;
+            rebound = true;
+            playerX = player.getRegionX();
+            playerY = player.getRegionY();
+            move = true; //forces recenter
             break;
 		case ALLEGRO_KEY_LEFT:
 			if( playerX - 1 >= 0 )
@@ -130,12 +144,20 @@ DefinedViews BiomeView::handleKeyPress(ALLEGRO_EVENT* ev)
         
 	if( move )
 	{
-        playerX +=newX;
-        playerY +=newY;
-        /* update the players position */
-        player.setRegionPosition(playerX,playerY);
-        player.setWorldPosition(playerX/Biome::kMapWidth, 
-                                playerY/Biome::kMapHeight);
+        if(bound)
+        {
+            playerX +=newX;
+            playerY +=newY;
+            /* update the players position */
+            player.setRegionPosition(playerX,playerY);
+            player.setWorldPosition(playerX/Biome::kMapWidth, 
+                                    playerY/Biome::kMapHeight);
+        }
+        else
+        {
+            pseudoX+=newX;
+            pseudoY+=newY;
+        }
         redraw(newX, newY);
 	}
 	return dv;
@@ -150,13 +172,13 @@ void BiomeView::redraw(int xPos, int yPos)
     
     Player & player = model->getPlayer(); 
     World & world = model->getWorld();
-    int pWorldX = player.getWorldX();
-    int pWorldY = player.getWorldY();
+    int pWorldX = bound?player.getWorldX():pseudoX/Biome::kMapWidth;
+    int pWorldY = bound?player.getWorldY():pseudoY/Biome::kMapHeight;
     int i, j;
 
 
-    int pRegionX = player.getRegionX();
-    int pRegionY = player.getRegionY();
+    int pRegionX = bound?player.getRegionX():pseudoX;
+    int pRegionY = bound?player.getRegionY():pseudoY;
 
     /*
     viewWindow changes
@@ -165,15 +187,25 @@ void BiomeView::redraw(int xPos, int yPos)
     3. When the set of current regions changes
     */
 
-    if (pRegionX/Biome::kMapWidth != pWorldX || 
-        pRegionY/Biome::kMapHeight != pWorldY)
+    if ((pRegionX/Biome::kMapWidth != pWorldX || 
+        pRegionY/Biome::kMapHeight != pWorldY) || rebound)
     {
-        /* if the region coordinates aren't in the correct region per the world coordinates then
-           place the player in the center of the region specified by the world coordinates */
-        pRegionX = pWorldX*Biome::kMapWidth+ Biome::kMapWidth/2;
-        pRegionY = pWorldY*Biome::kMapHeight+ Biome::kMapHeight/2;
+        if (!rebound)
+        {
+            /* if the region coordinates aren't in the correct region per the world coordinates then
+               place the player in the center of the region specified by the world coordinates */
+            pRegionX = pWorldX*Biome::kMapWidth+ Biome::kMapWidth/2;
+            pRegionY = pWorldY*Biome::kMapHeight+ Biome::kMapHeight/2;
 
-        player.setRegionPosition(pRegionX,pRegionY);
+            if (bound)
+            {
+                player.setRegionPosition(pRegionX,pRegionY);
+            }
+        }
+        else
+        {
+            rebound = false;
+        }
 
         /* Now move the view window upper left corner to ensure the player is in it, centered if possible */
         if( pRegionX-16 >= 0)
@@ -209,10 +241,10 @@ void BiomeView::redraw(int xPos, int yPos)
             viewWindowY = 0;
         }
     } 
-    else if (((pRegionX-viewWindowX) <= 3  && xPos == -1)||
+    else if ((((pRegionX-viewWindowX) <= 3  && xPos == -1)||
              ((pRegionY-viewWindowY) <= 3 && yPos == -1) ||
              ((viewWindowX+kMapWidth - pRegionX) <= 3 && xPos==1) ||
-             ((viewWindowY+kMapHeight - pRegionY) <= 3 && yPos ==1))
+             ((viewWindowY+kMapHeight - pRegionY) <= 3 && yPos ==1)) || not bound)
     {
         /* if the player has moved within 3 tiles of the edge of the current view window start sliding the view window 
             but don't move the view window past the edge
@@ -253,9 +285,9 @@ void BiomeView::redraw(int xPos, int yPos)
 
     /* we have screwed up the math above if pRegionX and pRegionY are not greater than or equal to viewWindowX and viewWindowY respectively */
     
-    std::cout << "Relative Coords:" <<std::endl;
-    std::cout << viewWindowX << " " << viewWindowY << std::endl;
-    std::cout << pRegionX << " " << pRegionY << std::endl;
+    //std::cout << "Relative Coords:" <<std::endl;
+    //std::cout << viewWindowX << " " << viewWindowY << std::endl;
+    //std::cout << player.getRegionX() << " " << player.getRegionY() << std::endl;
 
     assert( pRegionX >= viewWindowX && pRegionY >= viewWindowY);
     
@@ -274,10 +306,20 @@ void BiomeView::redraw(int xPos, int yPos)
         }
     }
 
-    /*set the player */
-    (*tile_array)[pRegionX-viewWindowX + (pRegionY-viewWindowY)*BiomeView::kMapWidth].setIndex(model->getPlayer().getChar());
-    (*tile_array)[pRegionX-viewWindowX + (pRegionY-viewWindowY)*BiomeView::kMapWidth].setFore(model->getThemeBackground());
-    (*tile_array)[pRegionX-viewWindowX + (pRegionY-viewWindowY)*BiomeView::kMapWidth].setBack(model->getThemeFont());
+    /* We are done with the pseudo character at this point, lets see if the player should be on the screen */
+    pRegionX = player.getRegionX();
+    pRegionY = player.getRegionY();
+
+    if(pRegionX >= viewWindowX && 
+       pRegionX < viewWindowX+BiomeView::kMapWidth &&
+       pRegionY >= viewWindowY && 
+       pRegionY < viewWindowY+BiomeView::kMapHeight)
+    {
+        /*set the player */
+        (*tile_array)[pRegionX-viewWindowX + (pRegionY-viewWindowY)*BiomeView::kMapWidth].setIndex(model->getPlayer().getChar());
+        (*tile_array)[pRegionX-viewWindowX + (pRegionY-viewWindowY)*BiomeView::kMapWidth].setFore(model->getThemeBackground());
+        (*tile_array)[pRegionX-viewWindowX + (pRegionY-viewWindowY)*BiomeView::kMapWidth].setBack(model->getThemeFont());
+    }
 
     /* redraw the display */
     localeDisplay.setDirty();
