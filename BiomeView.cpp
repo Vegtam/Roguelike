@@ -51,6 +51,22 @@ bool BiomeView::init()
             (*tile_array)[i] = defaultTile;
         }
 
+        Font & f = fontset->get("Roboto-Bold.ttf");
+
+        commandInfo.init(f.get(12),768, 640,256,112); /* 640 means leave a line of empty space at the bottom */
+        commandInfo.setFore(model->getThemeFont());
+        commandInfo.setBack(model->getThemeBackground());
+        commandInfo.write("                              Commands");
+        commandInfo.write(" ");
+        commandInfo.write("  W -> Return to the World View");
+        commandInfo.write("  U -> Scroll without moving the Player");
+        commandInfo.write("  C -> Re-center on the Player");
+        commandInfo.write("  Escape -> Return to the Title View");
+        commandInfo.write("  Arrow Keys -> Move");
+        commandInfo.render();
+
+        drawList.push_back(&commandInfo);
+
         drawList.push_back(&localeDisplay);
         result = is_init = true;
 

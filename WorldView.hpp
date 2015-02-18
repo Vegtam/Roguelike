@@ -19,11 +19,13 @@ class WorldView : public View
 private:
         
 	TextPane biomeInfo;
+	TextPane commandInfo;
 	TileMap biomeDisplay;
 	bool redrawPlayer = false;
         
 	std::vector<Displayable*> drawList;
 	virtual DefinedViews handleKeyPress(ALLEGRO_EVENT* ev);
+	virtual void updateBiomePane();
 public:
 	WorldView(){};
 	WorldView(Model* md, 

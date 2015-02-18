@@ -1,6 +1,7 @@
 #ifndef BIOMETILE_HPP_
 #define	BIOMETILE_HPP_
 #include <vector>
+#include <string>
 #include "Tile.hpp"
 
 class BiomeTile 
@@ -27,7 +28,26 @@ private:
     const float arid = -1.0f; // .0 low rainfall
     
     const int tropical = 64; // 64 Hot Temperature
-    const int arctic = 15; // 15 Cold Temperature 
+    const int arctic = 15; // 15 Cold Temperature
+
+    const std::string kBiomeNames[16] = {
+        "Ocean",
+        "Unused1",
+        "Tropical Dry Broadleaf Forest",
+        "Tropical Coniferous Forest",
+        "Broadleaf Forest",
+        "Coniferous Forest",
+        "Boreal Forest",
+        "Tropical Grasslands",
+        "Grasslands",
+        "Flooded Grasslands",
+        "Mountain",
+        "Tundra",
+        "Mediterranean Forest",
+        "Desert",
+        "Mangrove Forest",
+        "Unused2"
+    };
     
     
 public:
@@ -43,6 +63,12 @@ public:
     inline void setTemperature(int wGenTemperature){temperature = (wGenTemperature - (elevation * 2));};
     inline void setDrainage(bool wGenDrainage){river = (wGenDrainage);};
     inline void setLake(bool wGenLake){lake = (wGenLake);};
+    inline float getElevation() {return elevation;};
+    inline float getRainfall() {return rainfall;};
+    inline int getTemperature() {return temperature;};
+    inline bool getDrainage() {return river;};
+    inline bool getLake() {return lake;};
+    inline std::string getBiomeTypeName(){return biomeType<sizeof(kBiomeNames)/sizeof(std::string)?kBiomeNames[biomeType]:"Invalid Biome Type";};
     
 private:
     

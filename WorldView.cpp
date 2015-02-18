@@ -3,12 +3,17 @@
 #include <allegro5/allegro.h>
 #include <iostream>
 #include <ctime>
+#include <sstream>
 
 #include "WorldView.hpp"
 #include "Displayable.hpp"
 #include "View.hpp"
 #include "BiomeView.hpp"
+#include "BiomeTile.hpp"
 #include "World.hpp"
+#include "TextPane.hpp"
+#include "ResourceSet.hpp"
+#include "Font.hpp"
 
 
 bool WorldView::init()
@@ -55,7 +60,24 @@ bool WorldView::init()
 		biomeDisplay.render();
 
 		/* @todo Create the TextPane to give info about the Biome */
+		Font & f = fontset->get("Roboto-Bold.ttf");
+		biomeInfo.init(f.get(12),768,0, 256, 112); /* each line is 16 pixels tall so 16*7=112 */
+		biomeInfo.setFore(model->getThemeFont());
+		biomeInfo.setBack(model->getThemeBackground());
+		updateBiomePane();
 
+		commandInfo.init(f.get(12),768, 672,256,80); /* 672 means leave a line of empty space at the bottom */
+		commandInfo.setFore(model->getThemeFont());
+		commandInfo.setBack(model->getThemeBackground());
+		commandInfo.write("                              Commands");
+		commandInfo.write(" ");
+		commandInfo.write("  Enter -> Enter the Biome View");
+		commandInfo.write("  Escape -> Return to the Title View");
+		commandInfo.write("  Arrow Keys -> Move");
+		commandInfo.render();
+
+		drawList.push_back(&biomeInfo);
+		drawList.push_back(&commandInfo);
 		drawList.push_back(&biomeDisplay);
 		result = is_init = true;
 
@@ -139,7 +161,9 @@ DefinedViews WorldView::handleKeyPress(ALLEGRO_EVENT* ev)
 			(*tile_array)[newX+newY*worldMapWidth].setBack(model->getThemeFont());
 			/* update the players position */
 			player.setWorldPosition(newX,newY);
+
 		}
+		updateBiomePane();
 		/* redraw the display */
 		biomeDisplay.setDirty();
 		biomeDisplay.render();
@@ -166,6 +190,48 @@ DefinedViews WorldView::handleEvent(ALLEGRO_EVENT* ev)
 
 }
 
+void WorldView::updateBiomePane()
+{
+	/* note the pane is currently calibrated for exactly 7 lines if we want to 
+	   change this, we need to also change the size of the pane */
+	std::ostringstream oss;
+
+	World& world = model->getWorld();
+	Player& player = model->getPlayer();
+	int playerWorldX = player.getWorldX();
+	int playerWorldY = player.getWorldY();
+
+	biomeInfo.write("                              Biome Info");
+	biomeInfo.write(" ");
+
+	BiomeTile& bt = world.worldMap[playerWorldX][playerWorldY].getBiomeData();
+	oss <<"  Biome Type: "<<bt.getBiomeTypeName();
+	biomeInfo.write(oss.str());
+	oss.str("");
+	oss<<"  Elevation: "<<bt.getElevation();
+	biomeInfo.write(oss.str());
+	oss.str("");
+	oss<<"  Rainfall: "<<bt.getRainfall();
+	biomeInfo.write(oss.str());
+	oss.str("");
+	oss<<"  Temperature: "<<bt.getTemperature();
+	biomeInfo.write(oss.str());
+	oss.str("");
+	if (bt.getDrainage())
+	{
+		biomeInfo.write("  River");
+	}
+	else if(bt.getLake())
+	{
+		biomeInfo.write("  Lake");
+	}
+	else
+	{
+		biomeInfo.write(" ");
+	}
+	biomeInfo.render();
+}
+
 std::vector<Displayable*>& WorldView::draw()
 {
 	if(redrawPlayer)
@@ -182,6 +248,9 @@ std::vector<Displayable*>& WorldView::draw()
 		/* redraw the display */
 		biomeDisplay.setDirty();
 		biomeDisplay.render();
+
+		updateBiomePane();
+
 		redrawPlayer = false;
 	}
 	return drawList;
