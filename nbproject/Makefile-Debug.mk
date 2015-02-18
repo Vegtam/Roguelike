@@ -49,6 +49,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Model.o \
 	${OBJECTDIR}/Object.o \
 	${OBJECTDIR}/Player.o \
+	${OBJECTDIR}/Random.o \
 	${OBJECTDIR}/RegionTile.o \
 	${OBJECTDIR}/TerrainGenerator.o \
 	${OBJECTDIR}/Text.o \
@@ -156,6 +157,11 @@ ${OBJECTDIR}/Player.o: Player.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Player.o Player.cpp
+
+${OBJECTDIR}/Random.o: Random.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Random.o Random.cpp
 
 ${OBJECTDIR}/RegionTile.o: RegionTile.cpp 
 	${MKDIR} -p ${OBJECTDIR}

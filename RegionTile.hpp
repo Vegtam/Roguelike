@@ -30,6 +30,8 @@ private:
     void buildMangroveRegion();
     void buildDebugRegion();
     
+    bool forest = false;
+    
     
     
 public:
@@ -38,6 +40,9 @@ public:
 	/* add code here for RegionTile specific stuff */
         Tile getTile();
         void setRegionTileType(int biomeType);
+        
+        inline void setForest(bool forested){forest = forested;};
+        inline bool getForest(){return forest;};
         
 };
 
