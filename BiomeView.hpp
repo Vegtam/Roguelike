@@ -20,6 +20,7 @@ class BiomeView : public View
     
 private:
     TextPane localeInfo;
+    TextPane commandInfo;
     TileMap localeDisplay;
     bool drawn = false;
     bool bound = true;
