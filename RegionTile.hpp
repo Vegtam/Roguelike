@@ -29,7 +29,7 @@ private:
     void buildDesertRegion();
     void buildMangroveRegion();
     void buildDebugRegion();
-    
+    bool lake = false;
     bool forest = false;
     
     

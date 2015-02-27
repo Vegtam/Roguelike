@@ -825,7 +825,14 @@ void RegionTile::buildBorealForestRegion()
 
 void RegionTile::buildTropicalGrasslandRegion()
 {
-    displayID = 177; // tiny checkerboard 
+    int regionNum = rand() % 5;
+    
+    switch(regionNum)
+        
+    {
+            case 0:
+            
+            displayID = 177; // tiny checkerboard 
                 
                 // dark brown
                 backgroundR = 125;
@@ -837,13 +844,82 @@ void RegionTile::buildTropicalGrasslandRegion()
                 foregroundG = 100;
                 foregroundB = 1;
                 
-                //break;
+                break;
+                
+        case 1:
+            
+            displayID = 177; // tiny checkerboard 
+                
+                // dark brown
+                backgroundR = 100;
+                backgroundG = 75;
+                backgroundB = 1;
+                
+                // dark green
+                foregroundR = 1;
+                foregroundG = 100;
+                foregroundB = 1;
+                
+                break;
+                
+        case 2:
+            
+            displayID = 177; // tiny checkerboard 
+                
+                // dark brown
+                backgroundR = 125;
+                backgroundG = 75;
+                backgroundB = 1;
+                
+                // dark green
+                foregroundR = 1;
+                foregroundG = 125;
+                foregroundB = 1;
+                
+                break;
+                
+        case 3:
+            
+            displayID = 177; // tiny checkerboard 
+                
+                // dark brown
+                backgroundR = 100;
+                backgroundG = 75;
+                backgroundB = 1;
+                
+                // dark green
+                foregroundR = 1;
+                foregroundG = 125;
+                foregroundB = 1;
+                
+                break;
+                
+        case 4:
+            
+            displayID = 177; // tiny checkerboard 
+                
+                // dark brown
+                backgroundR = 100;
+                backgroundG = 75;
+                backgroundB = 1;
+                
+                // dark green
+                foregroundR = 1;
+                foregroundG = 100;
+                foregroundB = 1;
+                
+                break;
+    }
 }
 
 void RegionTile::buildTemperateGrasslandRegion()
 {
+    int regionNum = rand() % 5;
     
-                
+    switch(regionNum)
+    {
+        case 0:
+            
                 displayID = 177; // tiny checkerboard
                 
                 // medium brown
@@ -856,12 +932,85 @@ void RegionTile::buildTemperateGrasslandRegion()
                 foregroundG = 150;
                 foregroundB = 1;
                 
-                //break;
+                break;
+                
+        case 1:
+            
+            displayID = 177; // tiny checkerboard
+                
+                // medium brown
+                backgroundR = 125;
+                backgroundG = 100;
+                backgroundB = 1;
+                
+                // medium green
+                foregroundR = 1;
+                foregroundG = 150;
+                foregroundB = 1;
+                
+                break;
+                
+        case 2:
+            
+            displayID = 177; // tiny checkerboard
+                
+                // medium brown
+                backgroundR = 150;
+                backgroundG = 100;
+                backgroundB = 1;
+                
+                // medium green
+                foregroundR = 1;
+                foregroundG = 175;
+                foregroundB = 1;
+                
+                break;
+                
+        case 3:
+            
+            displayID = 177; // tiny checkerboard
+                
+                // medium brown
+                backgroundR = 125;
+                backgroundG = 100;
+                backgroundB = 1;
+                
+                // medium green
+                foregroundR = 1;
+                foregroundG = 175;
+                foregroundB = 1;
+                
+                break;
+                
+        case 4:
+            
+            displayID = 177; // tiny checkerboard
+                
+                // medium brown
+                backgroundR = 175;
+                backgroundG = 100;
+                backgroundB = 1;
+                
+                // medium green
+                foregroundR = 1;
+                foregroundG = 150;
+                foregroundB = 1;
+                
+                break;
+    }
 }
 
 void RegionTile::buildFloodedGrasslandRegion()
 {
-    displayID = 176; // thin diagonal lines
+    
+    int regionNum = rand() % 3;
+    
+    switch(regionNum)
+    {
+        
+        case 0:
+            
+            displayID = 176; // thin diagonal lines
                 
                 // brownish grey 
                 backgroundR = 130;
@@ -873,12 +1022,54 @@ void RegionTile::buildFloodedGrasslandRegion()
                 foregroundG = 135;
                 foregroundB = 75;
                 
-                //break;
+                break;
+                
+        case 1:
+            
+            displayID = 177; // thin diagonal lines
+                
+                // brownish grey 
+                backgroundR = 130;
+                backgroundG = 100;
+                backgroundB = 75;
+                
+                // medium blue
+                foregroundR = 125;
+                foregroundG = 135;
+                foregroundB = 75;
+                
+                break;
+                
+                case 2:
+                    
+                    displayID = 176; // thin diagonal lines
+                
+                // brownish grey 
+                backgroundR = 130;
+                backgroundG = 100;
+                backgroundB = 75;
+                
+                // medium blue
+                foregroundR = 125;
+                foregroundG = 135;
+                foregroundB = 100;
+                
+                break;
+                    
+                    
+    }
 }
 
 void RegionTile::buildMontaneRegion() 
 {
-    displayID = 94; // pointed arch 
+    
+    int regionNum = rand() % 3;
+    
+    switch(regionNum)
+    {
+        case 0:
+                
+            displayID = 94; // pointed arch 
                 
                 // light green
                 backgroundR = 115;
@@ -890,14 +1081,51 @@ void RegionTile::buildMontaneRegion()
                 foregroundG = 130;
                 foregroundB = 120;
                 
-                //break;
+                break;
+                
+                case 1:
+                    
+                    displayID = 6; // coniferous tree
+                
+                // light green
+                backgroundR = 115;
+                backgroundG = 185;
+                backgroundB = 1;
+                
+                // dark gray 
+                foregroundR = 135;
+                foregroundG = 130;
+                foregroundB = 120;
+                
+                forest = true;
+                
+                break;
+                
+                case 2:
+                    
+                    displayID = 177; // tiny checkerboard
+                
+                // light green
+                backgroundR = 115;
+                backgroundG = 185;
+                backgroundB = 1;
+                
+                // dark gray 
+                foregroundR = 135;
+                foregroundG = 130;
+                foregroundB = 120;
+                
+                break;
+                
+    }
 }
 
 void RegionTile::buildTundraRegion()
 {
-    
-                        
-                
+    int regionNum = rand() % 3;
+    switch(regionNum)
+    {
+        case 0:
                 displayID = 177; // tiny checkerboard, prev 236 filled small circle
                 
                 // white
@@ -910,14 +1138,53 @@ void RegionTile::buildTundraRegion()
                 foregroundG = 175;
                 foregroundB = 150;
                 
-                //break;
-               
+                break;
+                
+        case 1:
+            
+            displayID = 177; // tiny checkerboard, prev 236 filled small circle
+                
+                // white
+                backgroundR = 225;
+                backgroundG = 245;
+                backgroundB = 245;
+                
+                // gray
+                foregroundR = 175;
+                foregroundG = 175;
+                foregroundB = 150;
+                
+                break;
+                
+        case 2:
+            
+            displayID = 236; // filled small circle
+                
+                // white
+                backgroundR = 255;
+                backgroundG = 245;
+                backgroundB = 245;
+                
+                // gray
+                foregroundR = 175;
+                foregroundG = 175;
+                foregroundB = 175;
+                
+                break;
+    }          
 }
 
 
 void RegionTile::buildMediterraneanRegion() 
 {
-    displayID = 23; //coneiduous tree
+    
+    int regionNum = rand() % 3;
+    
+    switch(regionNum)
+    {
+        case 0:
+            
+        displayID = 23; //coneiduous tree
                 
                 // medium green
                 backgroundR = 1;
@@ -929,12 +1196,53 @@ void RegionTile::buildMediterraneanRegion()
                 foregroundG = 200;
                 foregroundB = 1;
                 
-                //break;
+                forest = true;
+                
+                break;
+                
+        case 1:
+            displayID = 177; //tiny checkerboard
+                
+                // medium green
+                backgroundR = 1;
+                backgroundG = 150;
+                backgroundB = 1;
+                
+                // light green
+                foregroundR = 1;
+                foregroundG = 200;
+                foregroundB = 1;
+                
+                break;
+                
+        case 2:
+            displayID = 23; //coneiduous tree
+                
+                // medium green
+                backgroundR = 1;
+                backgroundG = 150;
+                backgroundB = 1;
+                
+                // light green
+                foregroundR = 1;
+                foregroundG = 225;
+                foregroundB = 1;
+                
+                forest = true;
+                
+                break;
+            
+    }
+                
 }
 
 void RegionTile::buildDesertRegion()
 {
+    int regionNum = rand() % 3;
     
+    switch(regionNum)
+    {
+        case 0:
                 displayID = 15; // sun
                 
                 // tan
@@ -947,11 +1255,51 @@ void RegionTile::buildDesertRegion()
                 foregroundG = 185;
                 foregroundB = 1;
                 
-                //break;
+                break;
+                
+        case 1:
+            
+            displayID = 143; // tilde
+                
+                // tan
+                backgroundR = 250;
+                backgroundG = 225;
+                backgroundB = 160;
+                
+                // orange
+                foregroundR = 255;
+                foregroundG = 185;
+                foregroundB = 1;
+                
+                break;
+                
+        case 2:
+            
+            displayID = 252; // short rounded arch
+                
+                // tan
+                backgroundR = 250;
+                backgroundG = 225;
+                backgroundB = 160;
+                
+                // orange
+                foregroundR = 255;
+                foregroundG = 185;
+                foregroundB = 1;
+                
+                break;
+    }
 }
 
 void RegionTile::buildMangroveRegion()
 {
+    
+    int regionNum = rand() % 3;
+    
+    switch(regionNum)
+    {
+        case 0:
+            
         displayID = 244; // big tree
                 
                 // medium blue
@@ -964,7 +1312,46 @@ void RegionTile::buildMangroveRegion()
                 foregroundG = 100;
                 foregroundB = 1;
                 
-                //break;
+                forest = true;
+                
+                break;
+                
+        case 1:
+            
+            displayID = 177; // checkerboard
+                
+                // medium blue
+                backgroundR = 1;
+                backgroundG = 125;
+                backgroundB = 255;
+                
+                // dark green
+                foregroundR = 1;
+                foregroundG = 100;
+                foregroundB = 1;
+                
+                break;
+                
+        case 2:
+            
+            displayID = 247; // double tilde
+                
+                // medium blue
+                backgroundR = 1;
+                backgroundG = 125;
+                backgroundB = 255;
+                
+                // dark green
+                foregroundR = 1;
+                foregroundG = 100;
+                foregroundB = 1;
+                
+                lake = true;
+                
+                break;
+                
+                
+    }
 }
 
 Tile RegionTile::getTile()
