@@ -2,7 +2,7 @@
 #define REGIONTILE_HPP_
 
 #include "Tile.hpp"
-
+#include "Random.hpp"
 
 class RegionTile
 {
@@ -31,6 +31,9 @@ private:
     void buildDebugRegion();
     bool lake = false;
     bool forest = false;
+    float elevation;
+    float rainfall;
+    int temperature;
     
     
     
@@ -40,6 +43,9 @@ public:
 	/* add code here for RegionTile specific stuff */
         Tile getTile();
         void setRegionTileType(int biomeType);
+        
+        inline void setElevation(float biomeElevation){elevation = biomeElevation + Random::get()->randFloat(4.0f) - 2.0f;};
+        inline float getElevation(){return elevation;};
         
         inline void setForest(bool forested){forest = forested;};
         inline bool getForest(){return forest;};
