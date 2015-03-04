@@ -39,9 +39,9 @@ int main(int argc, char **argv)
 	   disp.init() &&
 	   (evq = al_create_event_queue()) != NULL)
 	{
-		tmr = al_create_timer((float)1/FPS);
+		//tmr = al_create_timer((float)1/FPS);
 		al_register_event_source(evq, disp.getEventSource());
-		al_register_event_source(evq, al_get_timer_event_source(tmr));
+		//al_register_event_source(evq, al_get_timer_event_source(tmr));
 		al_register_event_source(evq, al_get_keyboard_event_source());
 
 		Model model;
@@ -72,28 +72,29 @@ int main(int argc, char **argv)
         viewMap[DefinedViews::BIOME_VIEW] = &biomeView;
 		viewMap[DefinedViews::CHARACTER_CREATION_NAME_VIEW] = &characterCreationNameView;
 
-		al_start_timer(tmr);
+		//al_start_timer(tmr);
 
 		while(1)
 		{
-			al_wait_for_event(evq, &ev);
-			if( ev.type == ALLEGRO_EVENT_TIMER && ev.timer.source == tmr)
+			if (redraw && al_is_event_queue_empty(evq))
 			{
-				if (redraw)
-				{
-					disp.clear(model.getThemeBackground());
-					disp.render(viewMap[currentView]->draw());
-				}
+				disp.clear(model.getThemeBackground());
+				disp.render(viewMap[currentView]->draw());
+			}
+			al_wait_for_event(evq, &ev);
+			/*if( ev.type == ALLEGRO_EVENT_TIMER && ev.timer.source == tmr)
+			{*/
+				
 				/* flush the queue after a redraw...might want to reconsider this*/
 				//al_flush_event_queue(evq);
-			}
-			else
-			{
+			//}
+			//else
+			//{
 				/* call event handlers */
 				currentView = viewMap[currentView]->handleEvent(&ev);
 				disp.handler(&ev);
 				redraw = true;
-			}
+			//}
 
 			if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE || 
 				currentView == DefinedViews::QUIT_VIEW)
