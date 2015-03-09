@@ -100,6 +100,7 @@ int main(int argc, char **argv)
 				currentView == DefinedViews::QUIT_VIEW)
 			{
 				break;
+				
 			}
 			
 		}

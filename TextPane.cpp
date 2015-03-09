@@ -96,16 +96,17 @@ bool TextPane::render()
 	{
 		if ( backing_bmap == NULL)
 		{
-			al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP);
+			al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
 			backing_bmap = al_create_bitmap(wind_w, wind_h);
 		}
 		if( backing_bmap )
 		{
-			al_set_target_bitmap(backing_bmap);
-			al_clear_to_color(backg);
-
 			uint32_t y = 0;
 			int height = al_get_font_line_height(font);
+			
+			al_set_target_bitmap(backing_bmap);
+			al_hold_bitmap_drawing(true);
+			al_clear_to_color(backg);
 			for (auto& str :text)
 			{
 				/* for now text panes only support left aligned text */
@@ -117,6 +118,8 @@ bool TextPane::render()
 		                     str.c_str());
 				y+=height;
 			}
+
+			al_hold_bitmap_drawing(false);
 			dirty = false;
 		}
 	}
