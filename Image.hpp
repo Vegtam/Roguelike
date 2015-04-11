@@ -26,7 +26,7 @@ public:
 	virtual ~Image();
 	bool init(uint32_t xpos=0, uint32_t ypos=0, int32_t w=-1, int32_t h=-1 );
 	/* Displayable requirement */
-	virtual void draw(float xscale, float yscale);
+	virtual void draw();
 };
 
 #endif

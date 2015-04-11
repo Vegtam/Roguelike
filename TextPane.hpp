@@ -49,7 +49,7 @@ public:
 	bool render();
 
 	/* Displayable requirement */
-	virtual void draw(float xscale, float yscale);
+	virtual void draw();
 
 };
 

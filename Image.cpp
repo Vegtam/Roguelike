@@ -32,7 +32,7 @@ Image::~Image()
 	}
 }
 
-void Image::draw(float xscale, float yscale)
+void Image::draw()
 {
 	if (is_init && img)
 	{
@@ -42,10 +42,10 @@ void Image::draw(float xscale, float yscale)
 		    	              0,
 		        	          al_get_bitmap_width(img),
 		            	      al_get_bitmap_height(img),
-		                	  (float)x*xscale,
-		                  	  (float)y*yscale,
-		                  	  (float)wind_w*xscale,
-		                  	  (float)wind_h*yscale,
+		                	  (float)x,
+		                  	  (float)y,
+		                  	  (float)wind_w,
+		                  	  (float)wind_h,
 		                  	  0);
 	}
 }

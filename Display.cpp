@@ -54,17 +54,24 @@ void Display::render (std::vector<Displayable*>& to_draw)
 {
 	if(is_init)
 	{
+		ALLEGRO_TRANSFORM t;
+		al_identity_transform(&t);
+		al_scale_transform(&t, (float)width/(float)kDefaultWidth,  (float)height/(float)kDefaultHeight);
 		setCurrent();
+		al_use_transform(&t);
 		al_hold_bitmap_drawing(true);
 		for(std::vector<Displayable*>::iterator it = to_draw.begin();
 			it != to_draw.end(); it++)
 		{
 			/* Draw the item and scale it based on the current display size */
-			(*it)->draw((float)width/(float)kDefaultWidth,
-			         (float)height/(float)kDefaultHeight);
+			(*it)->draw();
 		}
 		al_hold_bitmap_drawing(false);
 		al_flip_display();
+
+		/* reset the transform until then next time*/
+		al_identity_transform(&t);
+		al_use_transform(&t);
 	}
 }
 

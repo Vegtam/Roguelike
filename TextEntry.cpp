@@ -117,31 +117,31 @@ void TextEntry::handleKeyPress(ALLEGRO_EVENT* ev)
 	}
 }
 
-void TextEntry::draw(float xscale, float yscale)
+void TextEntry::draw()
 {
 	if( isInit() )
 	{
 		if(inFocus)
 		{
 			/* width 2 highlight around in focus text box */
-			al_draw_rectangle((getX()*xscale)-2,
-							  (getY()*yscale)-2,
-							  ((getX()+getWidth())*xscale)+2,
-							  ((getY()+getHeight())*yscale)+2,
+			al_draw_rectangle((getX())-2,
+							  (getY())-2,
+							  ((getX()+getWidth()))+2,
+							  ((getY()+getHeight()))+2,
 							  getFore(),
 							  2);
 		}
 		else
 		{
 			/* width 1 highlight around out of focus text box */
-			al_draw_rectangle((getX()*xscale)-1,
-							  (getY()*yscale)-1,
-							  ((getX()+getWidth())*xscale)+1,
-							  ((getY()+getHeight())*yscale)+1,
+			al_draw_rectangle((getX())-1,
+							  (getY())-1,
+							  ((getX()+getWidth()))+1,
+							  ((getY()+getHeight()))+1,
 							  getFore(),
 							  1);
 		}
-		TextPane::draw(xscale,yscale);
+		TextPane::draw();
 	}
 
 }

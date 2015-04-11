@@ -155,7 +155,7 @@ bool TileMap::render()
 	return !dirty;
 }
 
-void TileMap::draw(float xscale, float yscale)
+void TileMap::draw()
 {
 	if (is_init && backing_bmap)
 	{
@@ -165,10 +165,10 @@ void TileMap::draw(float xscale, float yscale)
 		    	              0,
 		        	          al_get_bitmap_width(backing_bmap),
 		            	      al_get_bitmap_height(backing_bmap),
-		                	  (float)x*xscale,
-		                  	  (float)y*yscale,
-		                  	  (float)wind_w*xscale,
-		                  	  (float)wind_h*yscale,
+		                	  (float)x,
+		                  	  (float)y,
+		                  	  (float)wind_w,
+		                  	  (float)wind_h,
 		                  	  0);
 	}
 }

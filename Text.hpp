@@ -35,7 +35,7 @@ public:
 	inline void setColor(ALLEGRO_COLOR clr){ color=clr; };
 	inline void setAlign(int32_t algn) { align = algn; };
 	inline void setPos(uint32_t xpos, uint32_t ypos){ x=xpos; y=ypos; };
-	virtual void draw(float xscale, float yscale);
+	virtual void draw();
 	virtual ~Text(){};
 };
 

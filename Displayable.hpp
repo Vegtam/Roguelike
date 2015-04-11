@@ -4,7 +4,7 @@
 class Displayable
 {
 public:
-	virtual void draw(float xscale, float yscale) = 0;
+	virtual void draw() = 0;
 };
 
 #endif

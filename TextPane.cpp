@@ -127,20 +127,14 @@ bool TextPane::render()
 	return !dirty;
 }
 
-void TextPane::draw(float xscale, float yscale)
+void TextPane::draw()
 {
 	if (is_init && backing_bmap)
 	{
 		/* no flags */
-		al_draw_scaled_bitmap(backing_bmap, 
-			                  0, 
-		    	              0,
-		        	          al_get_bitmap_width(backing_bmap),
-		            	      al_get_bitmap_height(backing_bmap),
-		                	  (float)xpos*xscale,
-		                  	  (float)ypos*yscale,
-		                  	  (float)wind_w*xscale,
-		                  	  (float)wind_h*yscale,
+		al_draw_bitmap(backing_bmap, 
+			                  (float)xpos,
+		                  	  (float)ypos,
 		                  	  0);
 	}
 }
