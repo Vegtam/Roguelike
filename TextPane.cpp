@@ -96,7 +96,7 @@ bool TextPane::render()
 	{
 		if ( backing_bmap == NULL)
 		{
-			al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
+			al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP|ALLEGRO_NO_PRESERVE_TEXTURE|ALLEGRO_ALPHA_TEST);
 			backing_bmap = al_create_bitmap(wind_w, wind_h); 
 		
 		}
@@ -104,7 +104,7 @@ bool TextPane::render()
 		{
 			uint32_t y = 0;
 			int height = al_get_font_line_height(font);
-			
+
 			al_set_target_bitmap(backing_bmap);
 			al_hold_bitmap_drawing(true);
 			al_clear_to_color(backg);

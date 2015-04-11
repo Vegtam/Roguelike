@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <vector>
+#include <iostream>
 
 #include "Display.hpp"
 
@@ -20,8 +21,13 @@ bool Display::init()
 {
 	al_set_new_display_flags(ALLEGRO_RESIZABLE);
 	display = al_create_display(width,height);
-	//al_set_blender(ALLEGRO_ADD, ALLEGRO_ALPHA, ALLEGRO_INVERSE_ALPHA);
-	//al_set_new_bitmap_flags(al_get_new_bitmap_flags()|ALLEGRO_NO_PREMULTIPLIED_ALPHA);
+
+	ALLEGRO_MONITOR_INFO info;
+
+	if(al_get_monitor_info(0,&info))
+	{
+		std::cout<<"width: "<<info.x2-info.x1<<" height: "<<info.y2-info.y1<<std::endl;
+	}
 	
 	is_init = (display != NULL);
 	return is_init;
