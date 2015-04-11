@@ -121,26 +121,18 @@ void TextEntry::draw()
 {
 	if( isInit() )
 	{
-		if(inFocus)
-		{
-			/* width 2 highlight around in focus text box */
-			al_draw_rectangle((getX())-2,
-							  (getY())-2,
-							  ((getX()+getWidth()))+2,
-							  ((getY()+getHeight()))+2,
-							  getFore(),
-							  2);
-		}
-		else
-		{
-			/* width 1 highlight around out of focus text box */
-			al_draw_rectangle((getX())-1,
-							  (getY())-1,
-							  ((getX()+getWidth()))+1,
-							  ((getY()+getHeight()))+1,
-							  getFore(),
-							  1);
-		}
+		const ALLEGRO_TRANSFORM * t = al_get_current_transform();
+		float width = inFocus?2:1;
+		float x1 = (float)(getX()-width);
+		float y1 = (float)(getY()-width);
+		float x2 = (float)(getX()+getWidth()+width);
+		float y2 = (float)(getY()+getHeight()+width);
+		al_transform_coordinates(t, &x1, &y1);
+		al_transform_coordinates(t, &x2, &y2);
+		al_draw_rectangle(x1, y1, 
+			              x2, y2,
+						  getFore(),
+						  width);
 		TextPane::draw();
 	}
 
