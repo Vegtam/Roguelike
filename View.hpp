@@ -44,6 +44,7 @@ public:
 	virtual ~View() {/*pointers are not owned by this class so do nothing */};
 	virtual DefinedViews handleEvent(ALLEGRO_EVENT* ev) = 0;
 	virtual std::vector<Displayable*>& draw() = 0;
+	virtual bool init() = 0;
 	
 };
 

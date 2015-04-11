@@ -24,10 +24,7 @@ bool WorldView::init()
 		auto worldTileSet = model->getWorldTileSet();
 
 		World& world = model->getWorld();
-		world.buildBiomes(); /* generate terrain */
-                
-                
-
+		
 		TileSet& ts = tileset->get(std::get<0>(worldTileSet));
 		ts.init(std::get<1>(worldTileSet), 
 			    std::get<2>(worldTileSet));
@@ -45,19 +42,7 @@ bool WorldView::init()
 
 		std::vector<Tile>* tile_array = biomeDisplay.getTiles();
 
-		for (int i = 0; i< (*tile_array).size(); i++)
-		{
-			(*tile_array)[i] = world.getTile(i%worldMapWidth, i/worldMapWidth);
-		}
-
-		// put the player on the world map
-		Player& player = model->getPlayer();
-		(*tile_array)[player.getWorldX()+player.getWorldY()*worldMapWidth].setIndex(player.getChar());
-
-		/*base colors for now */
-		(*tile_array)[player.getWorldX()+player.getWorldY()*worldMapWidth].setFore(model->getThemeBackground());
-		(*tile_array)[player.getWorldX()+player.getWorldY()*worldMapWidth].setBack(model->getThemeFont());
-		biomeDisplay.render();
+		redrawWorld();		
 
 		/* @todo Create the TextPane to give info about the Biome */
 		Font & f = fontset->get("Roboto-Bold.ttf");
@@ -83,6 +68,34 @@ bool WorldView::init()
 
 	}
 	return result;
+}
+
+void WorldView::redrawWorld()
+{
+	World& world = model->getWorld();
+	if (world.getFirstTime())
+	{
+		std::vector<Tile>* tile_array = biomeDisplay.getTiles();
+		int worldMapWidth = world.worldMap.size();
+		int worldMapHeight = world.worldMap[0].size();
+
+		for (int i = 0; i< (*tile_array).size(); i++)
+		{
+			(*tile_array)[i] = world.getTile(i%worldMapWidth, i/worldMapWidth);
+		}
+
+		// put the player on the world map
+		Player& player = model->getPlayer();
+		Tile & t = (*tile_array)[player.getWorldX()+player.getWorldY()*worldMapWidth];
+		
+		/*base colors for now */
+		t.setIndex(player.getChar());
+		t.setFore(model->getThemeBackground());
+		t.setBack(model->getThemeFont());
+
+		biomeDisplay.setDirty();
+		biomeDisplay.render();
+	}
 }
 
 DefinedViews WorldView::handleKeyPress(ALLEGRO_EVENT* ev)
@@ -236,6 +249,7 @@ void WorldView::updateBiomePane()
 
 std::vector<Displayable*>& WorldView::draw()
 {
+	redrawWorld();
 	if(redrawPlayer)
 	{
 		std::vector<Tile>* tile_array = biomeDisplay.getTiles();

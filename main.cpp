@@ -1,6 +1,7 @@
 //so I don't forget... Look into Djikstra Algorithm for pathfinding.. Roads as well maybe?
 #include <iostream>
 #include <map>
+#include <tuple>
 #include <allegro5/allegro.h> 
 
 #include "Allegro.hpp"
@@ -29,7 +30,7 @@ int main(int argc, char **argv)
 	ALLEGRO_EVENT ev;
 	ALLEGRO_TIMER* tmr;
 	bool redraw = true;
-	std::map<DefinedViews, View*> viewMap;
+	std::map<DefinedViews, std::tuple<View*,bool>> viewMap;
 	
 	DefinedViews currentView = DefinedViews::TITLE_VIEW;
 
@@ -54,55 +55,40 @@ int main(int argc, char **argv)
 		TitleView titleview(&model, &is);
 		titleview.init();
 
-		CreditsView creditView(&model, &fs);
-		creditView.init();
-
-		WorldView worldview(&model, &fs,&ts);
-		worldview.init();
-                
+		CreditsView creditView(&model, &fs);		
+		WorldView worldview(&model, &fs,&ts);		        
         BiomeView biomeView(&model, &fs, &ts);
-        biomeView.init();
-
 		CharacterCreationNameView characterCreationNameView(&model, &fs);
-		characterCreationNameView.init();
 
-		viewMap[DefinedViews::TITLE_VIEW] = &titleview;
-		viewMap[DefinedViews::CREDITS_VIEW] = &creditView;
-		viewMap[DefinedViews::WORLD_VIEW] = &worldview;
-        viewMap[DefinedViews::BIOME_VIEW] = &biomeView;
-		viewMap[DefinedViews::CHARACTER_CREATION_NAME_VIEW] = &characterCreationNameView;
-
-		//al_start_timer(tmr);
+		viewMap[DefinedViews::TITLE_VIEW] = std::make_tuple(&titleview, true);
+		viewMap[DefinedViews::CREDITS_VIEW] = std::make_tuple(&creditView,false);
+		viewMap[DefinedViews::WORLD_VIEW] = std::make_tuple(&worldview,false);
+        viewMap[DefinedViews::BIOME_VIEW] = std::make_tuple(&biomeView,false);
+		viewMap[DefinedViews::CHARACTER_CREATION_NAME_VIEW] = std::make_tuple(&characterCreationNameView,false);
 
 		while(1)
 		{
 			if (redraw && al_is_event_queue_empty(evq))
 			{
 				disp.clear(model.getThemeBackground());
-				disp.render(viewMap[currentView]->draw());
+				disp.render(std::get<0>(viewMap[currentView])->draw());
 			}
 			al_wait_for_event(evq, &ev);
-			/*if( ev.type == ALLEGRO_EVENT_TIMER && ev.timer.source == tmr)
-			{*/
-				
-				/* flush the queue after a redraw...might want to reconsider this*/
-				//al_flush_event_queue(evq);
-			//}
-			//else
-			//{
-				/* call event handlers */
-				currentView = viewMap[currentView]->handleEvent(&ev);
-				disp.handler(&ev);
-				redraw = true;
-			//}
+			
+			currentView = std::get<0>(viewMap[currentView])->handleEvent(&ev);
+			disp.handler(&ev);
+			redraw = true;
+		
 
 			if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE || 
 				currentView == DefinedViews::QUIT_VIEW)
 			{
 				break;
-				
 			}
-			
+			if(not std::get<1>(viewMap[currentView]))
+			{
+				std::get<1>(viewMap[currentView])=std::get<0>(viewMap[currentView])->init();
+			}
 		}
 		al_destroy_event_queue(evq);
 	}

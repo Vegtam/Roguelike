@@ -22,6 +22,7 @@ private:
         
         
 	Player player;
+	bool is_init;
         //Vegtam codes...
        // Biome biome;
         //maybe?
@@ -38,6 +39,8 @@ public:
         //Vegtam end
 	inline World& getWorld(){return world;};
 	inline Player& getPlayer(){return player;};
+	inline bool isInit(){return is_init;};
+	bool init();
 };
 
 #endif

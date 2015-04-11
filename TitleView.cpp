@@ -25,13 +25,17 @@ DefinedViews TitleView::handleKeyPress(ALLEGRO_EVENT* ev)
 	switch(ev->keyboard.keycode)
 	{
 		case ALLEGRO_KEY_N: /* New Game*/
-			dv = DefinedViews::CHARACTER_CREATION_NAME_VIEW; 
+			dv = DefinedViews::CHARACTER_CREATION_NAME_VIEW;
+			model->init();
 			break;
 		case ALLEGRO_KEY_R: /* Credits */
 			dv = DefinedViews::CREDITS_VIEW;
 			break;
 		case ALLEGRO_KEY_C: /* Continue */
-			/* not supported yet */
+			if (model->isInit())
+			{
+				dv = DefinedViews::WORLD_VIEW;
+			}
 			break;
 		case ALLEGRO_KEY_S: /* Settings */
 			/* not supported yet */

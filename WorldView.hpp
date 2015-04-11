@@ -25,7 +25,8 @@ private:
         
 	std::vector<Displayable*> drawList;
 	virtual DefinedViews handleKeyPress(ALLEGRO_EVENT* ev);
-	virtual void updateBiomePane();
+	void updateBiomePane();
+	void redrawWorld();
 public:
 	WorldView(){};
 	WorldView(Model* md, 

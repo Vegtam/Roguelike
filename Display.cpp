@@ -34,7 +34,6 @@ bool Display::init()
 		{
 			height = (m_h/100)*100;
 		}
-		std::cout<<"width: "<<m_w<<" height: "<<m_h<<std::endl;
 		
 	}
 

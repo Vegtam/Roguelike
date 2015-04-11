@@ -1,39 +1,24 @@
+#include <vector>
+#include <fstream>
+#include <string>
+#include <iostream>
+
 #include "World.hpp"
 #include "Biome.hpp"
 #include "BiomeTile.hpp"
 #include "Tile.hpp"
-#include <vector>
-#include <fstream>
-#include <iostream>
-
 #include "Random.hpp"
 
 
 
 World::World(int width, int height) : 
-        worldMap(width, std::vector<Biome>(height)), 
-        fillerMap(width, std::vector<float>(height)),
-        elevationMap(width, std::vector<float>(height)),
-        temperatureMap(width, std::vector<int>(height)),
-        rainfallMap(width, std::vector<float>(height)),
-        drainageMap(width, std::vector<bool>(height, false)),
-        riverMap(width, std::vector<std::string>(height)),
+        worldMap(width, std::vector<Biome>(height)),
         xSize(width), ySize(height){
     
 }
 
 World::~World() {
 }
-
-/*float World::random(float max){
-	int r;
-    float s;
-    
-	r = rand();
-    s = (float)(r & 0x7fff)/(float)0x7fff;
-
-    return (s * max);
-}*/
 
 World::color World::lerp(color c1, color c2, float value){
 	color tcolor(0,0,0);
@@ -49,36 +34,8 @@ World::color World::lerp(color c1, color c2, float value){
 	return (tcolor);
 }
 
-void World::buildMaps()
-{
-    
-    
-    //std::cout << "Generated Filler Map" << std::endl;
-    fillMap();    
-    fillerMap.swap(elevationMap);
-    //std::cout << "Generated Elevation Map" << std::endl;
-    fillMap();
-    fillerMap.swap(rainfallMap);
-    //std::cout << "Generated Rainfall Map" << std::endl;
-    generateBaseTemperature();
-    //std::cout << "Generated Base Temperatures" << std::endl;
-    ++worldsCount;
-   
-
-        
-}
-
-void World::clearMaps()
-{    
-    elevationMap.clear();
-    rainfallMap.clear();
-    temperatureMap.clear();
-    drainageMap.clear();
-    riverMap.clear();
-    fillerMap.clear();
-}
-
-bool World::checkMaps()
+bool World::checkMaps(std::vector<std::vector<float> >& elevationMap, 
+                      std::vector<std::vector<float> >& rainfallMap)
 {
     
     
@@ -167,7 +124,7 @@ bool World::checkMaps()
             
 }
 
-void World::fillMap(){
+void World::fillMap(std::vector<std::vector<float> >& fillerMap){
 /*
  * vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv fillMap and printMap vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 Copyright (c) 2009, Travis Archer
@@ -319,7 +276,7 @@ OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISE
     
 }
 
-void World::printMap(int mapType) {
+void World::printMap(int mapType, std::vector<std::vector<float> >& fillerMap) {
     
     
     //set up some variables
@@ -458,12 +415,29 @@ Tile World::getTile(int xPos, int yPos)
 void World::buildBiomes()
 {
     bool built = false;
+    std::vector<std::vector<float> > elevationMap(xSize, std::vector<float>(ySize));
+    std::vector<std::vector<float> > rainfallMap (xSize, std::vector<float>(ySize));
+    std::vector<std::vector<int> > temperatureMap (xSize, std::vector<int>(ySize));
+    std::vector<std::vector<bool> > drainageMap (xSize, std::vector<bool>(ySize, false));
+
+    worldsCount = 0;
+     
     do{
-        buildMaps();
-        built = checkMaps();
+        //std::cout << "Generated Filler Map" << std::endl;
+        fillMap(elevationMap);
+        //std::cout << "Generated Elevation Map" << std::endl;
+        fillMap(rainfallMap);
+        //std::cout << "Generated Rainfall Map" << std::endl;
+        
+        ++worldsCount;
+        built = checkMaps(elevationMap,rainfallMap);
         
     } while(!built);
-    generateRiverSource();
+
+    generateBaseTemperature(temperatureMap);
+    //std::cout << "Generated Base Temperatures" << std::endl;
+
+    generateRiverSource(elevationMap,rainfallMap,drainageMap);
     //std::cout << "Generated Erosion, Lakes,  and Rivers" << std::endl;
     for(int x = 0; x < worldMap.size(); x++)
     {
@@ -478,16 +452,13 @@ void World::buildBiomes()
             int biomeType = biome.getBiomeTileType();
             Biome& region = worldMap[x][y];
             region.fillRegions(biomeType);
-            
-           
+             
         }
     }
-    
-    clearMaps();
-     
+    firstTime = true;
 }
 
-void World::generateBaseTemperature()
+void World::generateBaseTemperature(std::vector<std::vector<int> >& temperatureMap)
 {
     int northPole = 0;
     int equator = temperatureMap.size()/2;
@@ -532,8 +503,9 @@ void World::generateBaseTemperature()
 
 }
 
-
-void World::generateRiverSource()
+void World::generateRiverSource(std::vector<std::vector<float> >& elevationMap, 
+                                std::vector<std::vector<float> >& rainfallMap,
+                                std::vector<std::vector<bool> > drainageMap )
 {
     
     float mountain = 4.0f;
@@ -549,14 +521,17 @@ void World::generateRiverSource()
             if(elevationMap[x][y] >= mountain and rainfallMap[x][y] >= semihumid)
             {
                 //std::cout << "River source at X: " << x << " Y: "  << y << std::endl;
-                generateRiverPath(x, y);
+                generateRiverPath(x, y,elevationMap,drainageMap);
                 
             }
         }
     }
 }
 
-void World::generateRiverPath(int x, int y)
+void World::generateRiverPath(int x, 
+                              int y,
+                              std::vector<std::vector<float> >& elevationMap,
+                              std::vector<std::vector<bool> >& drainageMap)
 {
     
     if(x != prevX and y != prevY)
@@ -569,7 +544,7 @@ void World::generateRiverPath(int x, int y)
             int curX = x;
             int curY = y;
 
-            fillRiver(curX, curY);
+            fillRiver(curX, curY, elevationMap, drainageMap);
         }
         else
         {
@@ -578,7 +553,10 @@ void World::generateRiverPath(int x, int y)
     }
 }
 
-void World::fillRiver(int x, int y)
+void World::fillRiver(int x, 
+                      int y,
+                      std::vector<std::vector<float> >& elevationMap,
+                      std::vector<std::vector<bool> >& drainageMap)
 {
     int north = x - 1;
     int west = y - 1;
@@ -662,7 +640,7 @@ void World::fillRiver(int x, int y)
 
             drainageMap[newX][newY] = true;
             //std::cout << "Flow moving towards X: " << newX << " Y: " << newY << std::endl;
-            fillRiver(newX, newY);
+            fillRiver(newX, newY, elevationMap, drainageMap);
 
 
 
@@ -671,7 +649,7 @@ void World::fillRiver(int x, int y)
         else
         {
             //std::cout << "Flow blocked by elevation! X: " << x << " Y: " << y << "     This is the lowest point at " << elevationMap[x][y] * 100 << "ft." << std::endl;
-            generateErosion(x, y); 
+            generateErosion(x, y, elevationMap, drainageMap); 
 
         }
     }
@@ -679,7 +657,10 @@ void World::fillRiver(int x, int y)
     
 }
 
-void World::generateErosion(int x, int y)
+void World::generateErosion(int x, 
+                            int y,
+                            std::vector<std::vector<float> >& elevationMap,
+                            std::vector<std::vector<bool> >& drainageMap)
 {
     int north = x - 1;
     int west = y - 1;
@@ -761,7 +742,7 @@ void World::generateErosion(int x, int y)
             //std::cout << "Generating Erosion at X: " << newX << " Y: " << newY << 
             //            "\nNew Elevation = " << lowest * 100 << "ft" << std::endl;
             worldMap[newX][newY].getBiomeData().setElevation(lowest - .1f);
-            fillRiver(newX, newY);
+            fillRiver(newX, newY, elevationMap, drainageMap);
         }
                
         

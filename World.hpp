@@ -19,12 +19,8 @@ private:
     int prevX;
     int prevY;
     float min, max;
-    std::vector<std::vector<float> > elevationMap;
-    std::vector<std::vector<float> > rainfallMap;
-    std::vector<std::vector<int> > temperatureMap;
-    std::vector<std::vector<bool> > drainageMap;
-    std::vector<std::vector<std::string> > riverMap;
     int worldsCount = 0;
+    bool firstTime;
     
 public:
     
@@ -32,23 +28,30 @@ public:
     virtual ~World();
     inline int getXSize() {return xSize;};
     inline int getYSize() {return ySize;};
-    std::vector<std::vector<float> > fillerMap;    
+    inline bool getFirstTime(){bool t = firstTime; firstTime= false; return t;} 
     std::vector <std::vector<Biome> > worldMap;
     Tile getTile(int xPos, int yPos);
-    void buildMaps();
-    
+
     void buildBiomes();
-    void clearMaps();
 protected:    
-    void generateBaseTemperature();
-    void fillMap();   
-    void generateRiverSource();
-    void generateRiverPath(int x, int y);
-    void generateErosion(int x, int y);
-    void fillRiver(int x, int y);
+    void generateBaseTemperature(std::vector<std::vector<int> >& temperatureMap);
+    void fillMap(std::vector<std::vector<float> >& fillerMap);   
+    void generateRiverSource(std::vector<std::vector<float> >& elevationMap, 
+                                std::vector<std::vector<float> >& rainfallMap,
+                                std::vector<std::vector<bool> > drainageMap );
+    void generateRiverPath(int x, int y,
+                      std::vector<std::vector<float> >& elevationMap,
+                      std::vector<std::vector<bool> >& drainageMap);
+    void generateErosion(int x, int y,
+                      std::vector<std::vector<float> >& elevationMap,
+                      std::vector<std::vector<bool> >& drainageMap);
+    void fillRiver(int x, int y,
+                      std::vector<std::vector<float> >& elevationMap,
+                      std::vector<std::vector<bool> >& drainageMap);
     //float random(float max);
-    void printMap(int type);
-    bool checkMaps();
+    void printMap(int mapType, std::vector<std::vector<float> >& fillerMap);
+    bool checkMaps(std::vector<std::vector<float> >& elevationMap, 
+                   std::vector<std::vector<float> >& rainfallMap);
    
     struct color{
 	//v[0]=red, v[1]=green, v[2]=blue
