@@ -332,9 +332,10 @@ void BiomeView::redraw(int xPos, int yPos)
        pRegionY < viewWindowY+BiomeView::kMapHeight)
     {
         /*set the player */
-        (*tile_array)[pRegionX-viewWindowX + (pRegionY-viewWindowY)*BiomeView::kMapWidth].setIndex(model->getPlayer().getChar());
-        (*tile_array)[pRegionX-viewWindowX + (pRegionY-viewWindowY)*BiomeView::kMapWidth].setFore(model->getThemeBackground());
-        (*tile_array)[pRegionX-viewWindowX + (pRegionY-viewWindowY)*BiomeView::kMapWidth].setBack(model->getThemeFont());
+        Tile& t = (*tile_array)[pRegionX-viewWindowX + (pRegionY-viewWindowY)*BiomeView::kMapWidth];
+        t.setIndex(model->getPlayer().getChar());
+        t.setFore(model->getThemeBackground());
+        t.setBack(model->getThemeFont());
     }
 
     /* redraw the display */
