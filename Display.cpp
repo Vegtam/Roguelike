@@ -20,15 +20,25 @@ Display::Display(uint32_t w, uint32_t h):width(w),height(h),
 bool Display::init()
 {
 	al_set_new_display_flags(ALLEGRO_RESIZABLE);
-	display = al_create_display(width,height);
 
 	ALLEGRO_MONITOR_INFO info;
-
 	if(al_get_monitor_info(0,&info))
 	{
-		std::cout<<"width: "<<info.x2-info.x1<<" height: "<<info.y2-info.y1<<std::endl;
+		int m_w = info.x2-info.x1;
+		int m_h = info.y2-info.y1;
+		if (width != m_w && (m_w/100)*100 < width)
+		{
+			width = (m_w/100)*100; 
+		}
+		if( (m_h/100)*100 < height)
+		{
+			height = (m_h/100)*100;
+		}
+		std::cout<<"width: "<<m_w<<" height: "<<m_h<<std::endl;
+		
 	}
-	std::cout<<"w: "<<al_get_display_width(display)<<" h: "<<al_get_display_height(display)<<std::endl;
+
+	display = al_create_display(width,height);
 	
 	is_init = (display != NULL);
 	return is_init;
