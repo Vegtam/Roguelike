@@ -107,7 +107,7 @@ bool TileMap::render()
 	{
 		if(backing_bmap==NULL)
 		{
-			al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP|ALLEGRO_FORCE_LOCKING|ALLEGRO_NO_PRESERVE_TEXTURE);
+			al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP|ALLEGRO_FORCE_LOCKING);
 			backing_bmap = al_create_bitmap(map_w*t_set->getTileWidth(), 
 										    map_h*t_set->getTileHeight());
 			firstTime = true;
