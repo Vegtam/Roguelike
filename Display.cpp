@@ -28,6 +28,7 @@ bool Display::init()
 	{
 		std::cout<<"width: "<<info.x2-info.x1<<" height: "<<info.y2-info.y1<<std::endl;
 	}
+	std::cout<<"w: "<<al_get_display_width(display)<<" h: "<<al_get_display_height(display)<<std::endl;
 	
 	is_init = (display != NULL);
 	return is_init;
