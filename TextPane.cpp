@@ -96,7 +96,7 @@ bool TextPane::render()
 	{
 		if ( backing_bmap == NULL)
 		{
-			al_set_new_bitmap_flags(ALLEGRO_MEMORY_BITMAP);
+			al_set_new_bitmap_flags(ALLEGRO_VIDEO_BITMAP);
 			backing_bmap = al_create_bitmap(wind_w, wind_h); 
 		
 		}
