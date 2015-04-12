@@ -30,6 +30,7 @@ public:
 
 	virtual bool init(ALLEGRO_FONT* fnt, uint32_t x, uint32_t y, uint32_t w);
 	void handleEvent(ALLEGRO_EVENT* ev);
+	void clear();
 	virtual void draw();
 };
 

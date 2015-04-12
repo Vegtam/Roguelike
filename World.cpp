@@ -731,7 +731,12 @@ void World::generateErosion(int x,
 
         }
 
-    if(lowest <= currentElevation + 0.5f and !drainageMap[newX][newY] and newX > 0 and newY > 0 and newX < worldMap.size() and newY < worldMap[0].size())
+    if(lowest <= currentElevation + 0.5f and 
+       !drainageMap[newX][newY] and 
+       newX > 0 and 
+       newY > 0 and 
+       newX < worldMap.size() and 
+       newY < worldMap[0].size())
     {
         
         if(x != newX and y != newY)

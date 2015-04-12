@@ -117,6 +117,17 @@ void TextEntry::handleKeyPress(ALLEGRO_EVENT* ev)
 	}
 }
 
+void TextEntry::clear()
+{
+	if (isInit())
+	{
+		cursorPos = 0;
+		current.clear();
+		write("");
+		inFocus = true;
+	}
+}
+
 void TextEntry::draw()
 {
 	if( isInit() )

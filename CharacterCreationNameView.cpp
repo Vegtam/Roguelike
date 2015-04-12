@@ -73,8 +73,11 @@ DefinedViews CharacterCreationNameView::handleKeyPress(ALLEGRO_EVENT* ev)
 			if(!name.getInFocus())
 			{
 				dv = DefinedViews::WORLD_VIEW;
-				//World& world = model->getWorld();
-				//world.buildBiomes();
+				/* should really be setting the name in the model at the point where
+				   we switch from character creation to new game before we clear out 
+				   the name*/
+				name.clear();
+				name.render();
 				break;
 			}
 			/* fall through to handle event */
