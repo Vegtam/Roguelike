@@ -18,7 +18,7 @@ bool TextEntry::init(ALLEGRO_FONT* fnt, uint32_t x, uint32_t y, uint32_t w)
 		if (result)
 		{
 			std::string tmp = "_";
-			while(al_get_text_width(fnt, tmp.c_str()) <= w)
+			while(uint32_t (al_get_text_width(fnt, tmp.c_str())) <= w)
 			{
 				tmp += "_";
 			}
@@ -56,12 +56,12 @@ void TextEntry::handleKeyPress(ALLEGRO_EVENT* ev)
 			change = true;
 			break;
 		case ALLEGRO_KEY_RIGHT:
-			cursorPos = (cursorPos+1) > current.size() ? cursorPos : cursorPos+1;
+			cursorPos = (cursorPos+1) > int32_t (current.size()) ? cursorPos : cursorPos+1;
 			change = true;
 			break;
 		case ALLEGRO_KEY_DELETE:
 			/* if there are characters and the cursor is not at the end */
-			if(current.size() && cursorPos < current.size())
+			if(int32_t(current.size()) && cursorPos < int32_t(current.size()))
 			{
 				current.erase(current.begin()+cursorPos);
 				change = true;
@@ -96,7 +96,7 @@ void TextEntry::handleKeyPress(ALLEGRO_EVENT* ev)
 	
 	if(change)
 	{
-		char curr[current.size()+2];
+		char *curr= new char[current.size()+2];
 		int idx = 0;
 		for (auto i : current)
 		{

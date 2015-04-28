@@ -24,8 +24,8 @@ bool Display::init()
 	ALLEGRO_MONITOR_INFO info;
 	if(al_get_monitor_info(0,&info))
 	{
-		int m_w = info.x2-info.x1;
-		int m_h = info.y2-info.y1;
+		uint32_t m_w = info.x2-info.x1;
+		uint32_t m_h = info.y2-info.y1;
 		if (width != m_w && (m_w/100)*100 < width)
 		{
 			width = (m_w/100)*100; 

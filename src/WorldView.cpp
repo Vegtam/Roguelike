@@ -18,7 +18,7 @@
 
 bool WorldView::init()
 {
-	int result = false;
+	uint8_t result = false;
 	if( model && fontset && tileset)
 	{
 		auto worldTileSet = model->getWorldTileSet();
@@ -29,8 +29,8 @@ bool WorldView::init()
 		ts.init(std::get<1>(worldTileSet), 
 			    std::get<2>(worldTileSet));
 
-		int worldMapWidth = world.worldMap.size();
-		int worldMapHeight = world.worldMap[0].size();
+		uint16_t worldMapWidth = world.worldMap.size();
+		uint16_t worldMapHeight = world.worldMap[0].size();
 
 		biomeDisplay.init(0,
 			      		  0,
@@ -40,7 +40,7 @@ bool WorldView::init()
 			      		  worldMapHeight,
 			      		  &ts);
 
-		std::vector<Tile>* tile_array = biomeDisplay.getTiles();
+	//	std::vector<Tile>* tile_array = biomeDisplay.getTiles();
 
 		redrawWorld();		
 
@@ -76,10 +76,10 @@ void WorldView::redrawWorld()
 	if (world.getFirstTime())
 	{
 		std::vector<Tile>* tile_array = biomeDisplay.getTiles();
-		int worldMapWidth = world.worldMap.size();
-		int worldMapHeight = world.worldMap[0].size();
+		uint16_t worldMapWidth = world.worldMap.size();
+		//uint16_t worldMapHeight = world.worldMap[0].size();
 
-		for (int i = 0; i< (*tile_array).size(); i++)
+		for (uint16_t i = 0; i< (*tile_array).size(); i++)
 		{
 			(*tile_array)[i] = world.getTile(i%worldMapWidth, i/worldMapWidth);
 		}
@@ -103,14 +103,14 @@ DefinedViews WorldView::handleKeyPress(ALLEGRO_EVENT* ev)
 	DefinedViews dv = DefinedViews::WORLD_VIEW;
 	std::vector<Tile>* tile_array = biomeDisplay.getTiles();
 	World& world = model->getWorld();
-	int worldMapWidth = world.worldMap.size();
-	int worldMapHeight = world.worldMap[0].size();
+	uint16_t worldMapWidth = world.worldMap.size();
+	uint16_t worldMapHeight = world.worldMap[0].size();
 
 	Player& player = model->getPlayer();
-	int playerWorldX = player.getWorldX();
-	int playerWorldY = player.getWorldY();
-	int newX = playerWorldX;
-	int newY = playerWorldY;
+	uint16_t playerWorldX = player.getWorldX();
+	uint16_t playerWorldY = player.getWorldY();
+	uint16_t newX = playerWorldX;
+	uint16_t newY = playerWorldY;
 	bool move = false;
 	bool switchView = false;
 	
@@ -213,8 +213,8 @@ void WorldView::updateBiomePane()
 
 	World& world = model->getWorld();
 	Player& player = model->getPlayer();
-	int playerWorldX = player.getWorldX();
-	int playerWorldY = player.getWorldY();
+	uint16_t playerWorldX = player.getWorldX();
+	uint16_t playerWorldY = player.getWorldY();
 
 	biomeInfo.write("                              Biome Info");
 	biomeInfo.write(" ");
@@ -254,9 +254,9 @@ std::vector<Displayable*>& WorldView::draw()
 	{
 		std::vector<Tile>* tile_array = biomeDisplay.getTiles();
 		Player& player = model->getPlayer();
-		int playerX = player.getWorldX();
-		int playerY = player.getWorldY();
-		int worldMapWidth = model->getWorld().getXSize();
+		uint16_t playerX = player.getWorldX();
+		uint16_t playerY = player.getWorldY();
+		uint16_t worldMapWidth = model->getWorld().getXSize();
 		Tile& t = (*tile_array)[playerX+playerY*worldMapWidth];
 		/* draw the player */
 		t.setIndex(player.getChar());

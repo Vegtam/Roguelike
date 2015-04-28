@@ -7,15 +7,15 @@
 
 
 
-bool Biome::fillRegions(int biomeType)
+bool Biome::fillRegions(uint16_t biomeType)
 {
     
-    for(int x = 0; x < regionMap.size(); ++x)
+    for(uint16_t x = 0; x < regionMap.size(); ++x)
     {
-        for(int y = 0; y < regionMap[0].size(); ++y)
+        for(uint16_t y = 0; y < regionMap[0].size(); ++y)
         {
             regionMap[x][y].getRegionData().setRegionTileType(biomeType);
-            float elevation = getBiomeData().getElevation();
+            //float elevation = getBiomeData().getElevation();
         }
     }
     
@@ -23,7 +23,7 @@ bool Biome::fillRegions(int biomeType)
         
 }
 
-Tile Biome::getTile(int xPos, int yPos)
+Tile Biome::getTile(uint16_t xPos, uint16_t yPos)
 {
     Tile tileDisplay = regionMap[xPos][yPos].getRegionData().getTile();
     

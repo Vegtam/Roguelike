@@ -11,7 +11,7 @@
 
 
 
-World::World(int width, int height) : 
+World::World(uint16_t width, uint16_t height) : 
         worldMap(width, std::vector<Biome>(height)),
         xSize(width), ySize(height){
     
@@ -39,17 +39,17 @@ bool World::checkMaps(std::vector<std::vector<float> >& elevationMap,
 {
     
     
-    int mountainsHigh = 20;
-    int mountainsLow = 10;
+    uint8_t mountainsHigh = 20;
+    uint8_t mountainsLow = 10;
     
-    int oceansHigh = 40;
-    int oceansLow = 30;
+    uint8_t oceansHigh = 40;
+    uint8_t oceansLow = 30;
     
-    int aridityHigh = 10;
-    int aridityLow = 1;
+    uint8_t aridityHigh = 10;
+    uint8_t aridityLow = 1;
     
-    int humidityHigh = 10;
-    int humidityLow = 1;
+    uint8_t humidityHigh = 10;
+    uint8_t humidityLow = 1;
     
     float mountain = 4.0f;
     float ocean = 0.0f;
@@ -63,9 +63,9 @@ bool World::checkMaps(std::vector<std::vector<float> >& elevationMap,
     float humidCount = 0.0f;
     
     
-    for(int x = 0; x < worldMap.size(); ++x)
+    for(uint16_t x = 0; x < worldMap.size(); ++x)
     {
-        for(int y = 0; y < worldMap[0].size(); ++y)
+        for(uint16_t y = 0; y < worldMap[0].size(); ++y)
         {
             if(elevationMap[x][y] >= mountain)
             {
@@ -88,10 +88,10 @@ bool World::checkMaps(std::vector<std::vector<float> >& elevationMap,
         }
     }
     
-    int mountainPercentage = round(mountainCount/totalSize * 100);
-    int oceanPercentage = round(oceanCount/totalSize * 100);
-    int humidity = round(humidCount/totalSize * 100);
-    int aridity = round(aridCount/totalSize * 100);
+    uint8_t mountainPercentage = round(mountainCount/totalSize * 100);
+    uint8_t oceanPercentage = round(oceanCount/totalSize * 100);
+    uint8_t humidity = round(humidCount/totalSize * 100);
+    uint8_t aridity = round(aridCount/totalSize * 100);
     
     if(mountainPercentage >= mountainsHigh or mountainPercentage <= mountainsLow)
     {
@@ -167,8 +167,8 @@ OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISE
     
 	unsigned sgrid=((xSize<ySize) ? xSize : ySize)-1;//whichever is smaller (minus 1)
 	
-	int	i,j,k,//iterators
-		x,y,//location variables
+	//int	i,j,k,//iterators
+	int	x,y,//location variables
 		offset=sgrid;//offset is the width of the square or diamond we are working with
 		
 	
@@ -276,7 +276,7 @@ OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISE
     
 }
 
-void World::printMap(int mapType, std::vector<std::vector<float> >& fillerMap) {
+void World::printMap(uint16_t mapType, std::vector<std::vector<float> >& fillerMap) {
     
     
     //set up some variables
@@ -290,7 +290,7 @@ void World::printMap(int mapType, std::vector<std::vector<float> >& fillerMap) {
 	
 	int i,j,k;
 	
-	char c;
+	//char c;
         
 	//these can be changed for interesting results
          //elevation -Vegtam
@@ -403,7 +403,7 @@ void World::printMap(int mapType, std::vector<std::vector<float> >& fillerMap) {
 
 }
 
-Tile World::getTile(int xPos, int yPos)
+Tile World::getTile(uint16_t xPos, uint16_t yPos)
 {
     Tile tileDisplay = worldMap[xPos][yPos].getBiomeData().getTile();
     
@@ -439,9 +439,9 @@ void World::buildBiomes()
 
     generateRiverSource(elevationMap,rainfallMap,drainageMap);
     //std::cout << "Generated Erosion, Lakes,  and Rivers" << std::endl;
-    for(int x = 0; x < worldMap.size(); x++)
+    for(uint16_t x = 0; x < worldMap.size(); x++)
     {
-        for(int y = 0; y < worldMap[x].size(); y++)
+        for(uint16_t y = 0; y < worldMap[x].size(); y++)
         {
             BiomeTile& biome = worldMap[x][y].getBiomeData();
             biome.setElevation(elevationMap[x][y]);
@@ -460,22 +460,22 @@ void World::buildBiomes()
 
 void World::generateBaseTemperature(std::vector<std::vector<int> >& temperatureMap)
 {
-    int northPole = 0;
-    int equator = temperatureMap.size()/2;
-    int southPole = temperatureMap.size();
+    uint8_t northPole = 0;
+    int16_t equator = temperatureMap.size()/2;
+    int16_t southPole = temperatureMap.size();
     
-    int northPoleTemp = 0;
-    int equatorTemp = 90;
-    int southPoleTemp = -20; 
+    int8_t northPoleTemp = 0;
+    int8_t equatorTemp = 90;
+    int8_t southPoleTemp = -20; 
     //but don't want to over-complicate, and pole seasons are switched so it's warmer in January...
     
-    int temp = northPoleTemp;
+    int8_t temp = northPoleTemp;
     
-    int diff = equatorTemp/equator;
-    for(int y = northPole; y < southPole; ++y)
+    int8_t diff = equatorTemp/equator;
+    for(uint16_t y = northPole; y < southPole; ++y)
     {
         
-        for(int x = 0; x < temperatureMap.size(); ++x)
+        for(uint16_t x = 0; x < temperatureMap.size(); ++x)
         {
             temperatureMap[x][y] = temp;
         }
@@ -509,13 +509,13 @@ void World::generateRiverSource(std::vector<std::vector<float> >& elevationMap,
 {
     
     float mountain = 4.0f;
-    float ocean = 0.0f;
+    //float ocean = 0.0f;
     float semihumid = 2.0f;
-    float arid = -1.0f;
+    //float arid = -1.0f;
     
-    for(int x = 0; x < elevationMap.size(); ++x)
+    for(uint16_t x = 0; x < elevationMap.size(); ++x)
     {
-        for(int y = 0; y < elevationMap[0].size(); ++y)
+        for(uint16_t y = 0; y < elevationMap[0].size(); ++y)
         {   
             
             if(elevationMap[x][y] >= mountain and rainfallMap[x][y] >= semihumid)
@@ -528,8 +528,8 @@ void World::generateRiverSource(std::vector<std::vector<float> >& elevationMap,
     }
 }
 
-void World::generateRiverPath(int x, 
-                              int y,
+void World::generateRiverPath(uint16_t x, 
+                              uint16_t y,
                               std::vector<std::vector<float> >& elevationMap,
                               std::vector<std::vector<bool> >& drainageMap)
 {
@@ -541,8 +541,8 @@ void World::generateRiverPath(int x,
         if(x > 1 and x < worldMap.size() - 1 and y > 1 and y < worldMap[0].size() - 1)
         {
             //std::cout << "Starting river flow at X: " << x << " Y: " << y << std::endl;
-            int curX = x;
-            int curY = y;
+            uint16_t curX = x;
+            uint16_t curY = y;
 
             fillRiver(curX, curY, elevationMap, drainageMap);
         }
@@ -553,17 +553,17 @@ void World::generateRiverPath(int x,
     }
 }
 
-void World::fillRiver(int x, 
-                      int y,
+void World::fillRiver(uint16_t x, 
+                      uint16_t y,
                       std::vector<std::vector<float> >& elevationMap,
                       std::vector<std::vector<bool> >& drainageMap)
 {
-    int north = x - 1;
-    int west = y - 1;
-    int south = x + 1;
-    int east = y + 1;
-    int newX = 0;
-    int newY = 0;
+    uint16_t north = x - 1;
+    uint16_t west = y - 1;
+    uint16_t south = x + 1;
+    uint16_t east = y + 1;
+    uint16_t newX = 0;
+    uint16_t newY = 0;
     
     
     float lowest = elevationMap[x][y];
@@ -657,17 +657,17 @@ void World::fillRiver(int x,
     
 }
 
-void World::generateErosion(int x, 
-                            int y,
+void World::generateErosion(uint16_t x, 
+                            uint16_t y,
                             std::vector<std::vector<float> >& elevationMap,
                             std::vector<std::vector<bool> >& drainageMap)
 {
-    int north = x - 1;
-    int west = y - 1;
-    int south = x + 1;
-    int east = y + 1;
-    int newX = x;
-    int newY = y;
+    uint16_t north = x - 1;
+    uint16_t west = y - 1;
+    uint16_t south = x + 1;
+    uint16_t east = y + 1;
+    uint16_t newX = x;
+    uint16_t newY = y;
     
     float currentElevation = elevationMap[x][y];
     
@@ -733,8 +733,8 @@ void World::generateErosion(int x,
 
     if(lowest <= currentElevation + 0.5f and 
        !drainageMap[newX][newY] and 
-       newX > 0 and 
-       newY > 0 and 
+       newX > uint8_t(0) and 
+       newY > uint8_t(0) and 
        newX < worldMap.size() and 
        newY < worldMap[0].size())
     {

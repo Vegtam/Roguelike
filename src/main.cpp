@@ -28,7 +28,7 @@ int main(int argc, char **argv)
 	Display disp;
 	ALLEGRO_EVENT_QUEUE* evq;
 	ALLEGRO_EVENT ev;
-	ALLEGRO_TIMER* tmr;
+	//ALLEGRO_TIMER* tmr;
 	bool redraw = true;
 	std::map<DefinedViews, std::tuple<View*,bool>> viewMap;
 	
@@ -47,9 +47,9 @@ int main(int argc, char **argv)
 
 		Model model;
 
-		ResourceSet<Font> fs ("fonts/");
-		ResourceSet<TileSet> ts ("tileset/");
-		ResourceSet<Image> is ("image/");
+		ResourceSet<Font> fs ("../fonts/");
+		ResourceSet<TileSet> ts ("../tileset/");
+		ResourceSet<Image> is ("../image/");
 
 		/* @todo could check return values of init calls */
 		TitleView titleview(&model, &is);

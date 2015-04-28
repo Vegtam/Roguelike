@@ -46,7 +46,7 @@ bool BiomeView::init()
         std::vector<Tile>* tile_array = localeDisplay.getTiles();
         Tile defaultTile(0);
 
-        for (int i = 0; i< (*tile_array).size(); i++)
+        for (uint16_t i = 0; i< (*tile_array).size(); i++)
         {
             (*tile_array)[i] = defaultTile;
         }
@@ -188,13 +188,13 @@ void BiomeView::redraw(int xPos, int yPos)
     
     Player & player = model->getPlayer(); 
     World & world = model->getWorld();
-    int pWorldX = bound?player.getWorldX():pseudoX/Biome::kMapWidth;
-    int pWorldY = bound?player.getWorldY():pseudoY/Biome::kMapHeight;
-    int i, j;
+    uint32_t pWorldX = bound?player.getWorldX():pseudoX/Biome::kMapWidth;
+    uint32_t pWorldY = bound?player.getWorldY():pseudoY/Biome::kMapHeight;
+    //int i, j;
 
 
-    int pRegionX = bound?player.getRegionX():pseudoX;
-    int pRegionY = bound?player.getRegionY():pseudoY;
+    uint32_t pRegionX = bound?player.getRegionX():pseudoX;
+    uint32_t pRegionY = bound?player.getRegionY():pseudoY;
 
     /*
     viewWindow changes
@@ -311,9 +311,9 @@ void BiomeView::redraw(int xPos, int yPos)
 
     
     /* set the map tiles */
-    for (i = 0; i < BiomeView::kMapWidth; i++)
+    for (uint16_t i = 0; i < BiomeView::kMapWidth; i++)
     {
-        for (j = 0; j <BiomeView::kMapHeight; j++)
+        for (uint16_t j = 0; j <BiomeView::kMapHeight; j++)
         {
             Biome & biome = world.worldMap[(viewWindowX+i)/Biome::kMapWidth][(viewWindowY+j)/Biome::kMapHeight];
             Region & region = biome.regionMap[(viewWindowX+i)%Biome::kMapWidth][(viewWindowY+j)%Biome::kMapHeight];
