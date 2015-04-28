@@ -1,0 +1,31 @@
+CC = g++
+CFLAGS = -std=c++11 -c -Wall
+LDFLAGS =  -Wall -I. -lm
+
+SRC_DIR = src
+INC_DIR = inc
+LIBS_DIR = 
+OBJ_DIR = obj
+BIN_DIR = bin
+
+SOURCES = main.cpp Allegro.cpp Biome.cpp BiomeTile.cpp BiomeView.cpp CharacterCreationNameView.cpp Creature.cpp CreditsView.cpp Display.cpp Font.cpp Image.cpp MapController.cpp MapGenerator.cpp MapModel.cpp Model.cpp Object.cpp Player.cpp Random.cpp RegionMap.cpp RegionTile.cpp TerrainGenerator.cpp Text.cpp TextEntry.cpp TextPane.cpp Tile.cpp TileMap.cpp TileSet.cpp TitleView.cpp unboundView.cpp World.cpp WorldView.cpp
+
+LIBS = allegro allegro_main allegro_acodec allegro_audio allegro_color allegro_dialog allegro_font allegro_image allegro_memfile allegro_physfs allegro_primitives allegro_ttf
+
+EXECUTABLE = roguelike
+
+$(OBJ_DIR):
+	mkdir $(OBJ_DIR)
+
+OBJECTS:=$(SOURCES:$(SRC_DIR)/%.cpp=$(OBJ_DIR)/%.o)
+
+$(OBJECTS): $(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp
+	$(CC) $(CFLAGS) $< -o $@
+	@echo "Compiled "$<" successfully!"
+
+$(BIN_DIR)/$(EXECUTABLE): $(OBJECTS)
+	$(CC) -o $(LDFLAGS) $(OBJECTS)
+	@echo "Linking complete!"
+
+
+

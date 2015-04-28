@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="95">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="sandbox">
+        <df name="t1_osx">
+          <in>main.cpp</in>
+        </df>
+        <df name="t2_osx">
+          <in>main.cpp</in>
+        </df>
+        <df name="t3_osx">
+          <in>main.cpp</in>
+        </df>
+        <df name="test_osx">
+          <in>allegro_temp.c</in>
+        </df>
+      </df>
+      <df name="src">
+        <in>Allegro.cpp</in>
+        <in>Biome.cpp</in>
+        <in>BiomeTile.cpp</in>
+        <in>BiomeView.cpp</in>
+        <in>CharacterCreationNameView.cpp</in>
+        <in>Creature.cpp</in>
+        <in>CreditsView.cpp</in>
+        <in>Display.cpp</in>
+        <in>Font.cpp</in>
+        <in>Image.cpp</in>
+        <in>MapController.cpp</in>
+        <in>MapGenerator.cpp</in>
+        <in>MapModel.cpp</in>
+        <in>Model.cpp</in>
+        <in>Object.cpp</in>
+        <in>Player.cpp</in>
+        <in>Random.cpp</in>
+        <in>RegionMap.cpp</in>
+        <in>RegionTile.cpp</in>
+        <in>TerrainGenerator.cpp</in>
+        <in>Text.cpp</in>
+        <in>TextEntry.cpp</in>
+        <in>TextPane.cpp</in>
+        <in>Tile.cpp</in>
+        <in>TileMap.cpp</in>
+        <in>TileSet.cpp</in>
+        <in>TitleView.cpp</in>
+        <in>World.cpp</in>
+        <in>WorldView.cpp</in>
+        <in>main.cpp</in>
+        <in>unboundView.cpp</in>
+      </df>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <codeAssistance>
+        <resolveSymbolicLinks>true</resolveSymbolicLinks>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath>bin</executablePath>
+        </makeTool>
+      </makefileType>
+      <item path="sandbox/t1_osx/main.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="sandbox/t2_osx/main.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="sandbox/t3_osx/main.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="sandbox/test_osx/allegro_temp.c" ex="false" tool="0" flavor2="2">
+      </item>
+      <item path="src/Allegro.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/Biome.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/BiomeTile.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/BiomeView.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/CharacterCreationNameView.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/Creature.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/CreditsView.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/Display.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/Font.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/Image.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/MapController.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/MapGenerator.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/MapModel.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/Model.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/Object.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/Player.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/Random.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/RegionMap.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/RegionTile.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/TerrainGenerator.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/Text.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/TextEntry.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/TextPane.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/Tile.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/TileMap.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/TileSet.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/TitleView.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/World.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/WorldView.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/main.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+      <item path="src/unboundView.cpp" ex="false" tool="1" flavor2="4">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

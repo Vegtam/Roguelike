@@ -1,0 +1,44 @@
+CC=g++
+
+CFLAGS=-c -Wall -std=c++11
+
+LDFLAGS=
+
+INC_PATH=-Iinc/
+
+LIBS=-lallegro -lallegro_acodec -lallegro_audio -lallegrocolor -lallegrodialog -lallegro_font -lallegro_image -lallegro_main -lallegro_memfile -lallegrophysfs -lallegro_primitives -lallegro_ttf
+
+SOURCEDIR := src
+
+SOURCES := $(shell find $(SOURCEDIR) -name '*.cpp')
+
+OBJECTDIR := obj
+
+OBJECTS:=$($(SOURCES:$(SOURCEDIR)%.cpp=%.o))
+
+$(OBJECTS):$(OBJECTDIR)/%.o :$(SOURCEDIR)/%.c
+	$(CC) $(CFLAGS) $< -o $@
+	@echo "Compiled "$<" successfully!"
+
+$(OBJECTS): | $(OBJECTDIR)
+
+$(OBJECTDIR):
+	mkdir $(OBJECTDIR)
+
+
+EXECUTABLE = roguelike
+
+$(BINDIR)/$(EXECUTABLE): $(OBJECTS)
+	$(LIBS) $@ $(LDFLAGS) $(OBJECTS)
+	@echo "Linking complete!"
+
+all: $(SOURCES) $(EXECUTABLE)
+
+
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(LDFLAGS) $(OBJECTS) -o $@
+
+.PHONY: clean
+
+clean:
+	-rm roguelike $(OBJECTS)

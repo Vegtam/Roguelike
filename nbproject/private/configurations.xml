@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="95">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="bin">
+      </df>
+      <df name="fonts">
+      </df>
+      <df name="image">
+      </df>
+      <df name="inc">
+        <in>Allegro.hpp</in>
+        <in>Biome.hpp</in>
+        <in>BiomeTile.hpp</in>
+        <in>BiomeView.hpp</in>
+        <in>CharacterCreationNameView.hpp</in>
+        <in>Creature.hpp</in>
+        <in>CreditsView.hpp</in>
+        <in>Display.hpp</in>
+        <in>Displayable.hpp</in>
+        <in>Font.hpp</in>
+        <in>Image.hpp</in>
+        <in>MapController.hpp</in>
+        <in>MapGenerator.hpp</in>
+        <in>MapModel.hpp</in>
+        <in>Model.hpp</in>
+        <in>Object.hpp</in>
+        <in>Player.hpp</in>
+        <in>Random.hpp</in>
+        <in>Region.hpp</in>
+        <in>RegionMap.hpp</in>
+        <in>RegionTile.hpp</in>
+        <in>ResourceSet.hpp</in>
+        <in>TerrainGenerator.hpp</in>
+        <in>Text.hpp</in>
+        <in>TextEntry.hpp</in>
+        <in>TextPane.hpp</in>
+        <in>Tile.hpp</in>
+        <in>TileMap.hpp</in>
+        <in>TileSet.hpp</in>
+        <in>TitleView.hpp</in>
+        <in>View.hpp</in>
+        <in>World.hpp</in>
+        <in>WorldView.hpp</in>
+        <in>unboundView.hpp</in>
+      </df>
+      <df name="sandbox">
+        <df name="game_osx">
+        </df>
+        <df name="t1_osx">
+          <in>main.cpp</in>
+        </df>
+        <df name="t2_osx">
+          <in>main.cpp</in>
+        </df>
+        <df name="t3_osx">
+          <in>main.cpp</in>
+        </df>
+        <df name="test_osx">
+          <in>allegro_temp.c</in>
+        </df>
+      </df>
+      <df name="src">
+        <in>Allegro.cpp</in>
+        <in>Biome.cpp</in>
+        <in>BiomeTile.cpp</in>
+        <in>BiomeView.cpp</in>
+        <in>CharacterCreationNameView.cpp</in>
+        <in>Creature.cpp</in>
+        <in>CreditsView.cpp</in>
+        <in>Display.cpp</in>
+        <in>Font.cpp</in>
+        <in>Image.cpp</in>
+        <in>MapController.cpp</in>
+        <in>MapGenerator.cpp</in>
+        <in>MapModel.cpp</in>
+        <in>Model.cpp</in>
+        <in>Object.cpp</in>
+        <in>Player.cpp</in>
+        <in>Random.cpp</in>
+        <in>RegionMap.cpp</in>
+        <in>RegionTile.cpp</in>
+        <in>TerrainGenerator.cpp</in>
+        <in>Text.cpp</in>
+        <in>TextEntry.cpp</in>
+        <in>TextPane.cpp</in>
+        <in>Tile.cpp</in>
+        <in>TileMap.cpp</in>
+        <in>TileSet.cpp</in>
+        <in>TitleView.cpp</in>
+        <in>World.cpp</in>
+        <in>WorldView.cpp</in>
+        <in>main.cpp</in>
+        <in>unboundView.cpp</in>
+      </df>
+      <df name="tileset">
+      </df>
+      <df name="viewDisplayDrafts">
+      </df>
+      <df name="viewDrafts">
+      </df>
+    </df>
+  </logicalFolder>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <compile>
+        <compiledirpicklist>
+          <compiledirpicklistitem>.</compiledirpicklistitem>
+          <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
+        </compiledirpicklist>
+        <compiledir>${AUTO_FOLDER}</compiledir>
+        <compilecommandpicklist>
+          <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
+          <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
+        </compilecommandpicklist>
+        <compilecommand>${AUTO_COMPILE}</compilecommand>
+      </compile>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <rundir>.</rundir>
+        <buildfirst>false</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+  </confs>
+</configurationDescriptor>
