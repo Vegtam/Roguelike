@@ -23,10 +23,10 @@ public:
     inline BiomeTile& getBiomeData(){return tile;};
 
     
-    Tile getTile(int xPos, int yPos);
+    Tile getTile(uint16_t xPos, uint16_t yPos);
     
     /* add functions to do stuff with regionMap here */
-    bool fillRegions(int biomeType);
+    bool fillRegions(uint16_t biomeType);
     
     
 };

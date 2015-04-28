@@ -30,7 +30,7 @@ public:
 		  uint32_t xpos, 
 		  uint32_t ypos,
 		  uint32_t sz, 
-		  std::string txt):font(fnt),color(clr), align(alignment), x(xpos),y(ypos),size(sz),text(txt){};;
+		  std::string txt):font(fnt),color(clr), align(alignment), x(xpos),y(ypos),size(sz),text(txt){};
 	inline void setSize(uint32_t sz) {size = sz;};
 	inline void setColor(ALLEGRO_COLOR clr){ color=clr; };
 	inline void setAlign(int32_t algn) { align = algn; };

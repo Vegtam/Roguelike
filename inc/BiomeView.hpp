@@ -29,8 +29,8 @@ private:
     std::vector<Displayable*> drawList;
     int pseudoX;
     int pseudoY;
-    int viewWindowX;
-    int viewWindowY;
+    uint16_t viewWindowX;
+    uint16_t viewWindowY;
 
     virtual DefinedViews handleKeyPress(ALLEGRO_EVENT* ev);
     void redraw(int xPos, int yPos);

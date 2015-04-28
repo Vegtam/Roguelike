@@ -45,6 +45,7 @@ private:
 	
 	TileSet* t_set; /* Tileset from which to get tile bitmaps */
 	ALLEGRO_BITMAP* backing_bmap; /* colored bitmap of current tiles */
+	ALLEGRO_LOCKED_REGION* bmap;
 	std::vector<Tile> tiles; /* set of tiles in tile map */
 	std::map<Tile, ALLEGRO_BITMAP*> coloredTileCache;
 

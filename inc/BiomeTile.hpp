@@ -16,7 +16,7 @@ protected:
     int temperature;
     bool river;
     bool lake;
-    int biomeType;
+    uint8_t biomeType;
 private:
     const float sealevel = 0.0f;// 0.0f sea level
     const float flood = 0.5f; // .5f flood zone
