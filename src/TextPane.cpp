@@ -20,13 +20,13 @@ TextPane::TextPane():font(NULL),
 	foreg=al_map_rgb(255,255,255); //foreground defaults to white
 }
 
-bool TextPane::init(ALLEGRO_FONT* fnt, uint32_t x, uint32_t y, uint32_t w, uint32_t h)
+bool TextPane::init(ALLEGRO_FONT* fnt, int32_t x, int32_t y, int32_t w, int32_t h)
 {
 	bool result = false;
  
 	if( fnt )
 	{
-		uint16_t height = al_get_font_line_height (fnt);
+		int32_t height = al_get_font_line_height (fnt);
 		if(h >= height && w >= height)
 		{
 			font = fnt;
@@ -45,17 +45,17 @@ bool TextPane::write(std::string txt)
 	bool result = false;
 	if(is_init)
 	{
-		uint16_t width = al_get_text_width(font, txt.c_str());
+		int32_t width = al_get_text_width(font, txt.c_str());
 		/* split the text into multiple lines if necessary */
 		if( width > wind_w)
 		{
 			std::string tmp;
-			uint16_t j = 0;
-			for (uint16_t i = 0; i < txt.size(); i+=j)
+			uint32_t j = 0;
+			for (uint32_t i = 0; i < txt.size(); i+=j)
 			{
 				j = txt.size()-i;
 				/* find a chunk of the string that fits in the window */
-				while( uint32_t (al_get_text_width(font, txt.substr(i,j).c_str())) >wind_w  && 
+				while( al_get_text_width(font, txt.substr(i,j).c_str()) >wind_w  && 
 					   j > 0)
 				{
 					j--;
@@ -77,9 +77,9 @@ bool TextPane::write(std::string txt)
 		{
 			text.push_back(txt);
 		}
-		int height = al_get_font_line_height(font);
+		int32_t height = al_get_font_line_height(font);
 		/* erase from the beginning of text until the text fits in the window */
-		while( height * text.size() > wind_h)
+		while( height * int32_t(text.size()) > wind_h)
 		{
 			text.erase(text.begin());
 		}
@@ -103,7 +103,7 @@ bool TextPane::render()
 		if( backing_bmap )
 		{
 			uint32_t y = 0;
-			uint16_t height = al_get_font_line_height(font);
+			uint32_t height = al_get_font_line_height(font);
 
 			al_set_target_bitmap(backing_bmap);
 			al_hold_bitmap_drawing(true);

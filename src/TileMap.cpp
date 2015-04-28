@@ -101,7 +101,7 @@ ALLEGRO_BITMAP* TileMap::getColoredTile(Tile t)
 bool TileMap::render()
 {
 	bool firstTime = false;
-	//ALLEGRO_LOCKED_REGION *bmap, *tl;
+	ALLEGRO_LOCKED_REGION *bmap;
 	ALLEGRO_BITMAP* old_target = al_get_target_bitmap();
 	if (dirty)
 	{

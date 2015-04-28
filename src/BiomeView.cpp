@@ -46,7 +46,7 @@ bool BiomeView::init()
         std::vector<Tile>* tile_array = localeDisplay.getTiles();
         Tile defaultTile(0);
 
-        for (uint16_t i = 0; i< (*tile_array).size(); i++)
+        for (uint32_t i = 0; i< (*tile_array).size(); i++)
         {
             (*tile_array)[i] = defaultTile;
         }
@@ -311,9 +311,9 @@ void BiomeView::redraw(int xPos, int yPos)
 
     
     /* set the map tiles */
-    for (uint16_t i = 0; i < BiomeView::kMapWidth; i++)
+    for (uint32_t i = 0; i < BiomeView::kMapWidth; i++)
     {
-        for (uint16_t j = 0; j <BiomeView::kMapHeight; j++)
+        for (uint32_t j = 0; j <BiomeView::kMapHeight; j++)
         {
             Biome & biome = world.worldMap[(viewWindowX+i)/Biome::kMapWidth][(viewWindowY+j)/Biome::kMapHeight];
             Region & region = biome.regionMap[(viewWindowX+i)%Biome::kMapWidth][(viewWindowY+j)%Biome::kMapHeight];

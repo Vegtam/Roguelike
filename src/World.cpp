@@ -11,7 +11,7 @@
 
 
 
-World::World(uint16_t width, uint16_t height) : 
+World::World(uint32_t width, uint32_t height) : 
         worldMap(width, std::vector<Biome>(height)),
         xSize(width), ySize(height){
     
@@ -63,9 +63,9 @@ bool World::checkMaps(std::vector<std::vector<float> >& elevationMap,
     float humidCount = 0.0f;
     
     
-    for(uint16_t x = 0; x < worldMap.size(); ++x)
+    for(uint32_t x = 0; x < worldMap.size(); ++x)
     {
-        for(uint16_t y = 0; y < worldMap[0].size(); ++y)
+        for(uint32_t y = 0; y < worldMap[0].size(); ++y)
         {
             if(elevationMap[x][y] >= mountain)
             {
@@ -167,8 +167,8 @@ OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISE
     
 	unsigned sgrid=((xSize<ySize) ? xSize : ySize)-1;//whichever is smaller (minus 1)
 	
-	//int	i,j,k,//iterators
-	int	x,y,//location variables
+//	uint32_t i,j,k,//iterators
+	uint32_t x,y,//location variables
 		offset=sgrid;//offset is the width of the square or diamond we are working with
 		
 	
@@ -276,7 +276,7 @@ OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISE
     
 }
 
-void World::printMap(uint16_t mapType, std::vector<std::vector<float> >& fillerMap) {
+void World::printMap(uint32_t mapType, std::vector<std::vector<float> >& fillerMap) {
     
     
     //set up some variables
@@ -288,9 +288,9 @@ void World::printMap(uint16_t mapType, std::vector<std::vector<float> >& fillerM
 	flood*=diff;
 	mount*=diff;
 	
-	int i,j,k;
+	uint32_t i,j,k;
 	
-	//char c;
+	
         
 	//these can be changed for interesting results
          //elevation -Vegtam
@@ -403,7 +403,7 @@ void World::printMap(uint16_t mapType, std::vector<std::vector<float> >& fillerM
 
 }
 
-Tile World::getTile(uint16_t xPos, uint16_t yPos)
+Tile World::getTile(uint32_t xPos, uint32_t yPos)
 {
     Tile tileDisplay = worldMap[xPos][yPos].getBiomeData().getTile();
     
@@ -439,9 +439,9 @@ void World::buildBiomes()
 
     generateRiverSource(elevationMap,rainfallMap,drainageMap);
     //std::cout << "Generated Erosion, Lakes,  and Rivers" << std::endl;
-    for(uint16_t x = 0; x < worldMap.size(); x++)
+    for(uint32_t x = 0; x < worldMap.size(); x++)
     {
-        for(uint16_t y = 0; y < worldMap[x].size(); y++)
+        for(uint32_t y = 0; y < worldMap[x].size(); y++)
         {
             BiomeTile& biome = worldMap[x][y].getBiomeData();
             biome.setElevation(elevationMap[x][y]);
@@ -460,9 +460,9 @@ void World::buildBiomes()
 
 void World::generateBaseTemperature(std::vector<std::vector<int> >& temperatureMap)
 {
-    uint8_t northPole = 0;
-    int16_t equator = temperatureMap.size()/2;
-    int16_t southPole = temperatureMap.size();
+    int8_t northPole = 0;
+    int32_t equator = temperatureMap.size()/2;
+    int32_t southPole = temperatureMap.size();
     
     int8_t northPoleTemp = 0;
     int8_t equatorTemp = 90;
@@ -472,10 +472,10 @@ void World::generateBaseTemperature(std::vector<std::vector<int> >& temperatureM
     int8_t temp = northPoleTemp;
     
     int8_t diff = equatorTemp/equator;
-    for(uint16_t y = northPole; y < southPole; ++y)
+    for(int32_t y = northPole; y < southPole; ++y)
     {
         
-        for(uint16_t x = 0; x < temperatureMap.size(); ++x)
+        for(int32_t x = northPole; x < southPole; ++x)
         {
             temperatureMap[x][y] = temp;
         }
@@ -513,9 +513,9 @@ void World::generateRiverSource(std::vector<std::vector<float> >& elevationMap,
     float semihumid = 2.0f;
     //float arid = -1.0f;
     
-    for(uint16_t x = 0; x < elevationMap.size(); ++x)
+    for(uint32_t x = 0; x < elevationMap.size(); ++x)
     {
-        for(uint16_t y = 0; y < elevationMap[0].size(); ++y)
+        for(uint32_t y = 0; y < elevationMap[0].size(); ++y)
         {   
             
             if(elevationMap[x][y] >= mountain and rainfallMap[x][y] >= semihumid)
@@ -528,8 +528,8 @@ void World::generateRiverSource(std::vector<std::vector<float> >& elevationMap,
     }
 }
 
-void World::generateRiverPath(uint16_t x, 
-                              uint16_t y,
+void World::generateRiverPath(uint32_t x, 
+                              uint32_t y,
                               std::vector<std::vector<float> >& elevationMap,
                               std::vector<std::vector<bool> >& drainageMap)
 {
@@ -541,8 +541,8 @@ void World::generateRiverPath(uint16_t x,
         if(x > 1 and x < worldMap.size() - 1 and y > 1 and y < worldMap[0].size() - 1)
         {
             //std::cout << "Starting river flow at X: " << x << " Y: " << y << std::endl;
-            uint16_t curX = x;
-            uint16_t curY = y;
+            uint32_t curX = x;
+            uint32_t curY = y;
 
             fillRiver(curX, curY, elevationMap, drainageMap);
         }
@@ -553,17 +553,17 @@ void World::generateRiverPath(uint16_t x,
     }
 }
 
-void World::fillRiver(uint16_t x, 
-                      uint16_t y,
+void World::fillRiver(uint32_t x, 
+                      uint32_t y,
                       std::vector<std::vector<float> >& elevationMap,
                       std::vector<std::vector<bool> >& drainageMap)
 {
-    uint16_t north = x - 1;
-    uint16_t west = y - 1;
-    uint16_t south = x + 1;
-    uint16_t east = y + 1;
-    uint16_t newX = 0;
-    uint16_t newY = 0;
+    uint32_t north = x - 1;
+    uint32_t west = y - 1;
+    uint32_t south = x + 1;
+    uint32_t east = y + 1;
+    uint32_t newX = 0;
+    uint32_t newY = 0;
     
     
     float lowest = elevationMap[x][y];
@@ -657,17 +657,17 @@ void World::fillRiver(uint16_t x,
     
 }
 
-void World::generateErosion(uint16_t x, 
-                            uint16_t y,
+void World::generateErosion(uint32_t x, 
+                            uint32_t y,
                             std::vector<std::vector<float> >& elevationMap,
                             std::vector<std::vector<bool> >& drainageMap)
 {
-    uint16_t north = x - 1;
-    uint16_t west = y - 1;
-    uint16_t south = x + 1;
-    uint16_t east = y + 1;
-    uint16_t newX = x;
-    uint16_t newY = y;
+    uint32_t north = x - 1;
+    uint32_t west = y - 1;
+    uint32_t south = x + 1;
+    uint32_t east = y + 1;
+    uint32_t newX = x;
+    uint32_t newY = y;
     
     float currentElevation = elevationMap[x][y];
     

@@ -9,7 +9,7 @@
 #include "TextEntry.hpp"
 #include "TextPane.hpp"
 
-bool TextEntry::init(ALLEGRO_FONT* fnt, uint32_t x, uint32_t y, uint32_t w)
+bool TextEntry::init(ALLEGRO_FONT* fnt, int32_t x, int32_t y, int32_t w)
 {
 	bool result = false;
 	if(fnt)
@@ -18,7 +18,7 @@ bool TextEntry::init(ALLEGRO_FONT* fnt, uint32_t x, uint32_t y, uint32_t w)
 		if (result)
 		{
 			std::string tmp = "_";
-			while(uint32_t (al_get_text_width(fnt, tmp.c_str())) <= w)
+			while( al_get_text_width(fnt, tmp.c_str()) <= w)
 			{
 				tmp += "_";
 			}
@@ -114,6 +114,7 @@ void TextEntry::handleKeyPress(ALLEGRO_EVENT* ev)
 		}
 		curr[current.size()+1] = 0;
 		write(std::string(curr));
+		delete [] curr;
 	}
 }
 

@@ -69,7 +69,6 @@ ALLEGRO_BITMAP* TileSet::get(uint32_t index)
 		if(tiles.find(index) == tiles.end())
 		{
 			int32_t base_w = al_get_bitmap_width(tileset);
-			//int32_t base_h = al_get_bitmap_height(tileset);
 			
 			/*
 			base_w = width in pixels of the parent bitmap

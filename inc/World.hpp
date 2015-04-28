@@ -14,23 +14,23 @@
 class World {
     
 private:
-    const uint16_t xSize;
-    const uint16_t ySize;
-    uint16_t prevX;
-    uint16_t prevY;
+    const uint32_t xSize;
+    const uint32_t ySize;
+    uint32_t prevX;
+    uint32_t prevY;
     float min, max;
     uint32_t worldsCount = 0;
     bool firstTime;
     
 public:
     
-    World(uint16_t width, uint16_t height);
+    World(uint32_t width, uint32_t height);
     virtual ~World();
-    inline uint16_t getXSize() {return xSize;};
-    inline uint16_t getYSize() {return ySize;};
+    inline uint32_t getXSize() {return xSize;};
+    inline uint32_t getYSize() {return ySize;};
     inline bool getFirstTime(){bool t = firstTime; firstTime= false; return t;} 
     std::vector <std::vector<Biome> > worldMap;
-    Tile getTile(uint16_t xPos, uint16_t yPos);
+    Tile getTile(uint32_t xPos, uint32_t yPos);
 
     void buildBiomes();
 protected:    
@@ -39,17 +39,17 @@ protected:
     void generateRiverSource(std::vector<std::vector<float> >& elevationMap, 
                                 std::vector<std::vector<float> >& rainfallMap,
                                 std::vector<std::vector<bool> > drainageMap );
-    void generateRiverPath(uint16_t x, uint16_t y,
+    void generateRiverPath(uint32_t x, uint32_t y,
                       std::vector<std::vector<float> >& elevationMap,
                       std::vector<std::vector<bool> >& drainageMap);
-    void generateErosion(uint16_t x, uint16_t y,
+    void generateErosion(uint32_t x, uint32_t y,
                       std::vector<std::vector<float> >& elevationMap,
                       std::vector<std::vector<bool> >& drainageMap);
-    void fillRiver(uint16_t x, uint16_t y,
+    void fillRiver(uint32_t x, uint32_t y,
                       std::vector<std::vector<float> >& elevationMap,
                       std::vector<std::vector<bool> >& drainageMap);
     //float random(float max);
-    void printMap(uint16_t mapType, std::vector<std::vector<float> >& fillerMap);
+    void printMap(uint32_t mapType, std::vector<std::vector<float> >& fillerMap);
     bool checkMaps(std::vector<std::vector<float> >& elevationMap, 
                    std::vector<std::vector<float> >& rainfallMap);
    
