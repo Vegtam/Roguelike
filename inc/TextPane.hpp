@@ -26,17 +26,20 @@ private:
 	int32_t wind_w; // unscaled width in pixels of pane
 	int32_t wind_h; // unscaled height in pixels of pane
 	
-	ALLEGRO_BITMAP* backing_bmap; /* Colored bitmap of current text */
-
-	bool dirty;
 	bool is_init;
+	bool dirty;
+	
+	ALLEGRO_BITMAP* backing_bmap; /* Colored bitmap of current text */
+	
+
+	
 protected:
 	inline bool isInit() {return is_init;};
 	inline ALLEGRO_COLOR getFore() {return foreg;};
 	inline ALLEGRO_COLOR getBack() {return backg;};
 public:
 	TextPane();
-	virtual bool init(ALLEGRO_FONT* fnt, int32_t x, int32_t y, int32_t w, int32_t h);
+	bool init(ALLEGRO_FONT* fnt, int32_t x, int32_t y, int32_t w, int32_t h);
 	bool write(std::string);
 
 	inline void setFore(ALLEGRO_COLOR clr) {dirty = true; foreg = clr;};

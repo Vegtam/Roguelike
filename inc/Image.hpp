@@ -11,8 +11,9 @@
 class Image: public Displayable
 {
 private:
-	ALLEGRO_BITMAP* img;
 	ALLEGRO_PATH* img_path;
+	ALLEGRO_BITMAP* img;
+	
 	uint32_t x; /* x coordinate of TileMap draw location (upper left, unscaled) */
 	uint32_t y; /* y coordinate of TileMap draw location (upper left, unscaled) */
 

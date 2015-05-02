@@ -188,13 +188,13 @@ void BiomeView::redraw(int xPos, int yPos)
     
     Player & player = model->getPlayer(); 
     World & world = model->getWorld();
-    uint32_t pWorldX = bound?player.getWorldX():pseudoX/Biome::kMapWidth;
-    uint32_t pWorldY = bound?player.getWorldY():pseudoY/Biome::kMapHeight;
+    int32_t pWorldX = bound?player.getWorldX():pseudoX/Biome::kMapWidth;
+    int32_t pWorldY = bound?player.getWorldY():pseudoY/Biome::kMapHeight;
     //int i, j;
 
 
-    uint32_t pRegionX = bound?player.getRegionX():pseudoX;
-    uint32_t pRegionY = bound?player.getRegionY():pseudoY;
+    int32_t pRegionX = bound?player.getRegionX():pseudoX;
+    int32_t pRegionY = bound?player.getRegionY():pseudoY;
 
     /*
     viewWindow changes

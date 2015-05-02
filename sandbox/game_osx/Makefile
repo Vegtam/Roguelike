@@ -1,5 +1,7 @@
-LIB_CODE = ../..
-CPP_FLAGS = -std=c++11 -stdlib=libc++ 
+LIB_CODE = ../../src
+INC_PATH = ../../inc
+BIN_PATH = ../../bin
+CPP_FLAGS = -std=c++11 -stdlib=libc++ -Wall -pedantic
 
 INCLUDE = -I/Library/Frameworks/Allegro-5.0.framework/Versions/Current/Headers \
 	-I/Library/Frameworks/AllegroMain-5.0.framework/Versions/Current/Headers \
@@ -13,7 +15,7 @@ INCLUDE = -I/Library/Frameworks/Allegro-5.0.framework/Versions/Current/Headers \
 	-I/Library/Frameworks/AllegroMemfile-5.0.framework/Versions/Current/Headers \
 	-I/Library/Frameworks/AllegroPrimitives-5.0.framework/Versions/Current/Headers \
 	-I/Library/Frameworks/AllegroTTF-5.0.framework/Versions/Current/Headers \
-	-I$(LIB_CODE)
+	-I$(INC_PATH)
 
 FRAMEWORKS = -framework Allegro-5.0 \
 	-framework AllegroMain-5.0 \
@@ -35,7 +37,6 @@ LIB_SRC = $(LIB_CODE)/Allegro.cpp \
 	$(LIB_CODE)/Player.cpp \
 	$(LIB_CODE)/Creature.cpp \
 	$(LIB_CODE)/Object.cpp \
-	$(LIB_CODE)/TerrainGenerator.cpp \
 	$(LIB_CODE)/World.cpp \
 	$(LIB_CODE)/Model.cpp \
 	$(LIB_CODE)/BiomeTile.cpp \
@@ -49,4 +50,4 @@ LIB_SRC = $(LIB_CODE)/Allegro.cpp \
 	$(LIB_CODE)/main.cpp \
 
 game: $(LIB_SRC)
-	clang++ $(CPP_FLAGS) $(FRAMEWORKS) $(INCLUDE) -o ../../game $(LIB_SRC)
+	clang++ $(CPP_FLAGS) $(FRAMEWORKS) $(INCLUDE) -o $(BIN_PATH)/game $(LIB_SRC)

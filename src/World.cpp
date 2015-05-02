@@ -12,8 +12,8 @@
 
 
 World::World(uint32_t width, uint32_t height) : 
-        worldMap(width, std::vector<Biome>(height)),
-        xSize(width), ySize(height){
+        xSize(width), ySize(height),
+        worldMap(width, std::vector<Biome>(height)){
     
 }
 
@@ -288,7 +288,7 @@ void World::printMap(uint32_t mapType, std::vector<std::vector<float> >& fillerM
 	flood*=diff;
 	mount*=diff;
 	
-	uint32_t i,j,k;
+	int32_t i,j,k;
 	
 	
         

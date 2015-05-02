@@ -37,15 +37,12 @@ private:
 	uint32_t wind_w; /* Unscaled width in pixels that this tilemap can take up on a window */
 	uint32_t wind_h; /* Unscaled height in pixels that this tilemap can take up on a window */
 
-	uint32_t back_w; /* width of backing bitmap in pixels */
-	uint32_t back_h; /* height of backing bitmap in pixels */
-
 	uint32_t map_w; /* width of map in tiles */
 	uint32_t map_h; /* height of map in tiles */
 	
 	TileSet* t_set; /* Tileset from which to get tile bitmaps */
 	ALLEGRO_BITMAP* backing_bmap; /* colored bitmap of current tiles */
-	//ALLEGRO_LOCKED_REGION* bmap;
+	
 	std::vector<Tile> tiles; /* set of tiles in tile map */
 	std::map<Tile, ALLEGRO_BITMAP*> coloredTileCache;
 
@@ -58,15 +55,13 @@ public:
 	          y(0), 
 	          wind_w(0), 
 	          wind_h(0), 
-	          back_w(0), 
-	          back_h(0), 
 	          map_w(0), 
 	          map_h(0),
-	          backing_bmap(NULL), 
-	          is_init(false),
 	          t_set(NULL), 
-	          dirty(true),
-	          coloredTileCache(){};
+	          backing_bmap(NULL),
+	          coloredTileCache(),
+	          is_init(false),
+	          dirty(true){};
 
 	bool init(uint32_t xpos, 
 		      uint32_t ypos,

@@ -106,10 +106,10 @@ DefinedViews WorldView::handleKeyPress(ALLEGRO_EVENT* ev)
 	uint32_t worldMapHeight = world.worldMap[0].size();
 
 	Player& player = model->getPlayer();
-	uint32_t playerWorldX = player.getWorldX();
-	uint32_t playerWorldY = player.getWorldY();
-	uint32_t newX = playerWorldX;
-	uint32_t newY = playerWorldY;
+	int32_t playerWorldX = player.getWorldX();
+	int32_t playerWorldY = player.getWorldY();
+	int32_t newX = playerWorldX;
+	int32_t newY = playerWorldY;
 	bool move = false;
 	bool switchView = false;
 	
